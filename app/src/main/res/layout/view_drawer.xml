@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/drawer"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:orientation="vertical">
+        
+        <ImageView
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_cross"
+            />
+
+        <com.andreev.skladapp.ui.drawer.DrawerItem
+            android:layout_marginTop="20dp"
+            android:id="@+id/show_all_di"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:d_title="@string/status" />
+
+        <com.andreev.skladapp.ui.drawer.DrawerItem
+            android:id="@+id/search_di"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:d_title="@string/status" />
+
+        <com.andreev.skladapp.ui.drawer.DrawerItem
+            android:id="@+id/plav_search_di"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:d_title="@string/status" />
+
+        <com.andreev.skladapp.ui.drawer.DrawerItem
+            android:id="@+id/unite_di"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:d_title="@string/status" />
+
+        <com.andreev.skladapp.ui.drawer.DrawerItem
+            android:id="@+id/shipment_di"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:d_title="@string/status" />
+
+        <com.andreev.skladapp.ui.drawer.DrawerItem
+            android:id="@+id/shipment_history_di"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:d_title="@string/status" />
+
+        <com.andreev.skladapp.ui.drawer.DrawerItem
+            android:id="@+id/acceptance_di"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:d_title="@string/status" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.andreev.skladapp.ui.drawer.DrawerItem
+                android:id="@+id/logout_di"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:d_dividerBottom="false"
+                app:d_title="@string/status" />
+        </FrameLayout>
+
+    </LinearLayout>
+</layout>
