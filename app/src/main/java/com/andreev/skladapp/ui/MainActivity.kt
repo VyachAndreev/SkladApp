@@ -3,6 +3,7 @@ package com.andreev.skladapp.ui
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -19,6 +20,7 @@ import com.andreev.skladapp.ui.hub.HubFragment
 import com.andreev.skladapp.ui.sign_in.SignInFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     var progressBar: ProgressBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Timber.i("123")
         super.onCreate(savedInstanceState)
         (application as SkladApplication).appComponent.inject(this)
         setContentView(R.layout.activity_main)
@@ -42,7 +45,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun checkUser() {
-        launchFragment(R.id.fragment_container, SignInFragment(), false)
+        Timber.i("user check ${userData.user}")
+        if (userData.user == null) {
+            launchFragment(R.id.fragment_container, SignInFragment(), false)
+            return
+        } else {
+            if (supportFragmentManager.fragments.isEmpty()) {
+                launchFragment(R.id.fragment_container, HubFragment(), false)
+                return
+            }
+        }
     }
 
 
