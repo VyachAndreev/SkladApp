@@ -7,4 +7,8 @@
     <string name="password">Пароль</string>
     <string name="sign_in">Войти</string>
 
+    <!--Fragment Search-->
+    <string name="search">Поиск</string>
+    <string name="search_hint">Введите информацию</string>
+
 </resources>
