@@ -22,4 +22,7 @@
     <string name="comment">Комментарий: </string>
     <string name="status">Статус: </string>
 
+    <!--Item Nothing Found-->
+    <string name="nothing_found">Ничего не найдено</string>
+
 </resources>
