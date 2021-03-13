@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.andreev.skladapp.ui.sign_in.SignInViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
@@ -45,6 +52,7 @@
             app:layout_constraintVertical_bias="0.12">
 
             <EditText
+                android:text="@={viewModel.login}"
                 android:id="@+id/login_et"
                 style="@style/TextNormal"
                 android:layout_width="290dp"
@@ -62,6 +70,7 @@
                 app:layout_constraintTop_toTopOf="@id/layout_et" />
 
             <EditText
+                android:text="@={viewModel.password}"
                 android:id="@+id/password_et"
                 style="@style/TextNormal"
                 android:layout_width="290dp"
@@ -79,6 +88,7 @@
         </LinearLayout>
 
         <Button
+            android:enabled='@{viewModel.isSignInAvailable}'
             android:id="@+id/btn_sign_in"
             style="@style/ButtonTextNormal"
             android:layout_width="wrap_content"

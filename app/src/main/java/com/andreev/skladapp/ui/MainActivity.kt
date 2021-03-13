@@ -15,6 +15,7 @@ import com.andreev.skladapp.databinding.ActivityMainBinding
 import com.andreev.skladapp.stored_data.UserStoredData
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui.hub.HubFragment
+import com.andreev.skladapp.ui.sign_in.SignInFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun checkUser() {
-        launchFragment(R.id.fragment_container, HubFragment(), false)
+        launchFragment(R.id.fragment_container, SignInFragment(), false)
     }
 
 

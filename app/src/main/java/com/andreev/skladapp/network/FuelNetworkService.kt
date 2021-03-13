@@ -7,7 +7,7 @@ import com.github.kittinunf.fuel.coroutines.awaitStringResult
 import com.google.gson.Gson
 import org.json.JSONObject
 
-class FuelNetworkService {
+abstract class FuelNetworkService {
     private val BASE_URL = "http://ferro-trade.ru/"
     private val gson = Gson()
 
