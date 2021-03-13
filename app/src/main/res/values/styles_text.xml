@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextBaseFont">
+        <item name="android:fontFamily">@font/roboto_mono_500</item>
+    </style>
+
+    <style name="ButtonTextNormal" parent="TextBaseFont">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="ButtonTextSmall" parent="ButtonTextNormal">
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="TextSmall" parent="TextNormal">
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="TextSmall.Light" parent="TextSmall">
+        <item name="android:fontFamily">@font/roboto_mono_400</item>
+    </style>
+
+    <style name="TextSmall.Bold" parent="TextSmall">
+        <item name="android:fontFamily">@font/roboto_mono_700</item>
+    </style>
+
+    <style name="TextNormal" parent="TextBaseFont">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextNormal.Light" parent="TextNormal">
+        <item name="android:fontFamily">@font/roboto_mono_400</item>
+    </style>
+
+    <style name="TextNormal.Bold" parent="TextNormal">
+        <item name="android:fontFamily">@font/roboto_mono_700</item>
+    </style>
+
+    <style name="TextMedium" parent="TextBaseFont">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="TextMedium.Transparent" parent="TextBaseFont">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="TextBig" parent="TextNormal">
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="TextBig.Light" parent="TextBig">
+        <item name="android:fontFamily">@font/roboto_mono_400</item>
+    </style>
+
+    <style name="TextBig.Bold" parent="TextBig">
+        <item name="android:fontFamily">@font/roboto_mono_700</item>
+    </style>
+    
+</resources>
