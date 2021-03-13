@@ -5,6 +5,8 @@
         <item name="android:fontFamily">@font/roboto_mono_500</item>
     </style>
 
+    <!--Button Text-->
+
     <style name="ButtonTextNormal" parent="TextBaseFont">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">22sp</item>
@@ -13,6 +15,8 @@
     <style name="ButtonTextSmall" parent="ButtonTextNormal">
         <item name="android:textSize">17sp</item>
     </style>
+
+    <!--Text Black-->
 
     <style name="TextSmall" parent="TextNormal">
         <item name="android:textSize">17sp</item>
@@ -63,6 +67,11 @@
 
     <style name="TextHuge" parent="TextNormal">
         <item name="android:textSize">30sp</item>
+    </style>
+
+    <!--Text Blue-->
+    <style name="TextMedium.Blue" parent="TextMedium">
+        <item name="android:textColor">@color/blue_3B4</item>
     </style>
     
 </resources>
