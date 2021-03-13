@@ -3,6 +3,8 @@ package com.andreev.skladapp.ui.hub
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -11,6 +13,8 @@ import com.andreev.skladapp.databinding.FragmentHubBinding
 import com.andreev.skladapp.databinding.ViewToolbarBinding
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui._base.BaseFragment
+import com.andreev.skladapp.ui.search.SearchFragment
+import com.andreev.skladapp.ui.sign_in.SignInFragment
 import timber.log.Timber
 
 class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
@@ -33,6 +37,22 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
             viewBinding.viewDrawer.drawer
         )
         viewModel.curMenuItem.observe(this, this)
+
+        launchChildFragment(
+            R.id.hub_container,
+            SearchFragment(),
+            replace = true,
+        )
+
+        updateToolbar(R.string.search)
+
+        viewBinding.viewDrawer.searchDi.setOnClickListener {
+            launchChildFragment(SearchFragment())
+        }
+
+        viewBinding.viewDrawer.logoutDi.setOnClickListener {
+            logout()
+        }
     }
 
     private fun loadUserData() {
@@ -68,6 +88,56 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
 
     override fun onChanged(fragment: Fragment?) {
         Timber.i(fragment?.tag)
+        when (fragment) {
+            is SearchFragment -> {
+                updateToolbar(R.string.search)
+            }
+        }
+    }
+
+    private fun updateToolbar(
+        @StringRes titleId: Int
+    ) {
+        toolbarBinding.tvToolbarTitle.setText(titleId)
+    }
+
+    private fun updateToolbar(
+        title: String
+    ) {
+        toolbarBinding.tvToolbarTitle.text = title
+    }
+
+    private fun openDrawer() {
+        viewBinding.toolbar.openDrawer(
+            viewBinding.drawerLayout,
+            viewBinding.viewDrawer.drawer
+        )
+        hideLoading()
+    }
+
+    fun logout() {
+        viewModel.logout()
+        launchFragment(R.id.fragment_container, SignInFragment(), false)
+    }
+
+    fun launchChildFragment(
+        fragment: Fragment,
+        addToBackStack: Boolean = true,
+        extras: Bundle? = null,
+        withAnim: Boolean = false
+    ) {
+        if (childFragmentManager.fragments.last()::class != fragment::class) {
+            super.launchChildFragment(
+                R.id.hub_container,
+                fragment,
+                addToBackStack,
+                extras,
+                true
+            )
+            viewModel.curMenuItem.postValue(fragment)
+        } else {
+            viewBinding.drawerLayout.closeDrawer(Gravity.LEFT)
+        }
     }
 
 }

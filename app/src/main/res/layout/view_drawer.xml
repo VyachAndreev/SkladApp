@@ -32,7 +32,7 @@
             android:id="@+id/search_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:d_title="@string/status" />
+            app:d_title="@string/search" />
 
         <com.andreev.skladapp.ui.drawer.DrawerItem
             android:id="@+id/plav_search_di"

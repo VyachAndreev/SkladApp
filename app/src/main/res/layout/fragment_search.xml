@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.andreev.skladapp.ui.search.SearchViewModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -12,7 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp">
 
-            <EditText
+            <AutoCompleteTextView
+                android:text="@={viewModel.searchedText}"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 style="@style/TextSmall"
