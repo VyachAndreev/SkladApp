@@ -13,6 +13,7 @@ import com.andreev.skladapp.R
 import com.andreev.skladapp.SkladApplication
 import com.andreev.skladapp.databinding.ActivityMainBinding
 import com.andreev.skladapp.stored_data.UserStoredData
+import com.andreev.skladapp.ui._base.BaseFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
@@ -27,11 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
         (application as SkladApplication).appComponent.inject(this)
-        
         setContentView(R.layout.activity_main)
-        
         viewBinding = DataBindingUtil.setContentView(
             this,
             R.layout.activity_main
@@ -42,12 +40,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun checkUser() {
-        if (supportFragmentManager.fragments.isEmpty()) {
-            if (userData.user == null) {
-                return   
-            }
-        }
+
     }
+
+
 
     fun launchFragment(
         @IdRes container: Int,
@@ -79,7 +75,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        (fragment as? BaseFragment<*>)?.apply {
+            if (this.onBackPressed(R.id.fragment_container)) {
+                super.onBackPressed()
+            }
+        }
     }
     
     fun showToast(text: String) {
