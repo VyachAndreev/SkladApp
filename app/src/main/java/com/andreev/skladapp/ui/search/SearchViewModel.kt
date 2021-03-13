@@ -1,5 +1,6 @@
 package com.andreev.skladapp.ui.search
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui._base.BaseViewModel
@@ -14,7 +15,7 @@ class SearchViewModel: BaseViewModel() {
     }
 
     fun getHints() {
-        Timber.i("hints")
+        Log.i("123", "hints")
     }
 
 }

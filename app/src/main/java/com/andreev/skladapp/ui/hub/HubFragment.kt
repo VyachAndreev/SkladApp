@@ -123,8 +123,7 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
     fun launchChildFragment(
         fragment: Fragment,
         addToBackStack: Boolean = true,
-        extras: Bundle? = null,
-        withAnim: Boolean = false
+        extras: Bundle? = null
     ) {
         if (childFragmentManager.fragments.last()::class != fragment::class) {
             super.launchChildFragment(
