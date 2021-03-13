@@ -1,5 +1,6 @@
 package com.andreev.skladapp.ui
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
             this,
             R.layout.activity_main
         )
+        progressBar = viewBinding.progressCircular
         checkUser()
     }
 
