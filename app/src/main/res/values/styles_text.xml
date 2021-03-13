@@ -60,5 +60,9 @@
     <style name="TextBig.Bold" parent="TextBig">
         <item name="android:fontFamily">@font/roboto_mono_700</item>
     </style>
+
+    <style name="TextHuge" parent="TextNormal">
+        <item name="android:textSize">30sp</item>
+    </style>
     
 </resources>

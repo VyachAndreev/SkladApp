@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="325dp"
+        android:layout_height="406dp"
+        android:background="@drawable/sign_in_layout">
+
+        <TextView
+            android:id="@+id/type_tv"
+            style="@style/TextHuge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            tools:text="Позиция" />
+
+        <TextView
+            android:id="@+id/mark_tv"
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/type_tv"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="18dp"
+            android:text="@string/mark" />
+
+        <TextView
+            style="@style/TextNormal"
+            android:layout_toEndOf="@id/mark_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/type_tv"
+            android:layout_marginTop="18dp"
+            tools:text="Позиция" />
+
+        <TextView
+            android:id="@+id/diameter_tv"
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mark_tv"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/diameter" />
+
+        <TextView
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mark_tv"
+            android:layout_toEndOf="@id/diameter_tv"
+            android:layout_marginTop="14dp"
+            tools:text="Позиция" />
+
+        <TextView
+            android:id="@+id/packing_tv"
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/diameter_tv"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/packing" />
+
+        <TextView
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/diameter_tv"
+            android:layout_toEndOf="@id/packing_tv"
+            android:layout_marginTop="14dp"
+            tools:text="Позиция" />
+
+        <TextView
+            android:id="@+id/party_tv"
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/packing_tv"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/party"/>
+
+        <TextView
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/party_tv"
+            android:layout_below="@id/packing_tv"
+            android:layout_marginTop="14dp"
+            tools:text="Позиция" />
+
+        <TextView
+            android:id="@+id/plav_tv"
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/party_tv"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/plav" />
+
+        <TextView
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/party_tv"
+            android:layout_toEndOf="@id/plav_tv"
+            android:layout_marginTop="14dp"
+            tools:text="Позиция" />
+
+        <TextView
+            android:id="@+id/mass_tv"
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/plav_tv"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/mass" />
+
+        <TextView
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/plav_tv"
+            android:layout_toEndOf="@id/mass_tv"
+            android:layout_marginTop="14dp"
+            tools:text="Позиция" />
+
+        <TextView
+            android:id="@+id/comment_tv"
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mass_tv"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/comment" />
+
+        <TextView
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mass_tv"
+            android:layout_toEndOf="@id/comment_tv"
+            android:layout_marginTop="14dp"
+            tools:text="Позиция" />
+
+        <TextView
+            android:id="@+id/status_tv"
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/comment_tv"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/status" />
+
+        <TextView
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/comment_tv"
+            android:layout_toEndOf="@id/status_tv"
+            android:layout_marginTop="14dp"
+            tools:text="Позиция" />
+
+    </RelativeLayout>
+</layout>

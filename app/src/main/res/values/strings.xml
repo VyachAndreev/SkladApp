@@ -11,4 +11,15 @@
     <string name="search">Поиск</string>
     <string name="search_hint">Введите информацию</string>
 
+    <!--Item Plaque-->
+    <string name="position">Позиция</string>
+    <string name="mark">Марка: </string>
+    <string name="diameter">Диаметр: </string>
+    <string name="packing">Упаковка: </string>
+    <string name="party">Партия: </string>
+    <string name="plav">Плавка: </string>
+    <string name="mass">Вес: </string>
+    <string name="comment">Комментарий: </string>
+    <string name="status">Статус: </string>
+
 </resources>
