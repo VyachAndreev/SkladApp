@@ -32,7 +32,8 @@
                 android:hint="@string/search_hint"
                 android:autofillHints="@string/search_hint"
                 android:maxLines="1"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:nextFocusRight="@id/search_btn"/>
 
             <ImageButton
                 android:id="@+id/search_btn"

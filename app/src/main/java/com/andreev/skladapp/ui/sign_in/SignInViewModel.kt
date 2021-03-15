@@ -45,9 +45,9 @@ class SignInViewModel: BaseViewModel() {
             login, password
         )
         response?.let {
-            if (it.user != null) {
+            if (it != null) {
                 Timber.i("save")
-                userData.saveUser(it.user)
+                userData.saveUser(it)
                 return true
             }
         }

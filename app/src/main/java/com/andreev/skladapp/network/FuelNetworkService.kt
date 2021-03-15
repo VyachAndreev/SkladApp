@@ -6,9 +6,10 @@ import com.github.kittinunf.fuel.core.extensions.jsonBody
 import com.github.kittinunf.fuel.coroutines.awaitStringResult
 import com.google.gson.Gson
 import org.json.JSONObject
+import timber.log.Timber
 
 abstract class FuelNetworkService {
-    private val BASE_URL = "http://ferro-trade.ru/"
+    private val BASE_URL = "http://ferro-trade.ru/api/"
     private val gson = Gson()
 
     init {
@@ -44,8 +45,10 @@ abstract class FuelNetworkService {
             return Fuel.post(path, parameters)
                 .awaitStringResult()
                 .fold({ jsonResponse ->
+                    Timber.i("$jsonResponse")
                     return@fold gson.fromJson(jsonResponse, clazz)
                 }) { error ->
+                    Timber.i("$error")
                     return@fold gson.fromJson(error.errorData.toString(Charsets.UTF_8), clazz)
                 }
         } catch (e: Exception) {
