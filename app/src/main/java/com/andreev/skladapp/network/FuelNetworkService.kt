@@ -15,7 +15,7 @@ abstract class FuelNetworkService {
         FuelManager.instance.basePath = BASE_URL
     }
 
-    protected suspend fun <T : NetworkResponse> get(
+    protected suspend fun <T> get(
         path: String,
         clazz: Class<T>,
         parameters: List<Pair<String, Any?>>? = null
@@ -35,7 +35,7 @@ abstract class FuelNetworkService {
         return null
     }
 
-    protected suspend fun <T : NetworkResponse> post(
+    protected suspend fun <T> post(
         path: String,
         clazz: Class<T>,
         parameters: List<Pair<String, Any?>>? = null
@@ -54,7 +54,7 @@ abstract class FuelNetworkService {
         return null
     }
 
-    protected suspend fun <T: NetworkResponse> postWithJson(
+    protected suspend fun <T> postWithJson(
         path: String,
         clazz: Class<T>,
         parameters: Any?
