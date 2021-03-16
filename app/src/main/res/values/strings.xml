@@ -25,6 +25,13 @@
     <string name="search">Поиск</string>
     <string name="search_hint">Введите информацию</string>
 
+    <!--Fragment Show All -->
+    <string name="manufacturer">Производитель: </string>
+    <string name="print_code">Распечатать штрих-код</string>
+    <string name="print_positions">Распечатать все позиции</string>
+    <string name="show_positions">Показать позиции</string>
+    <string name="ship">Отгрузить</string>
+
     <!--Item Plaque -->
     <string name="position">Позиция</string>
     <string name="mark">Марка: </string>
