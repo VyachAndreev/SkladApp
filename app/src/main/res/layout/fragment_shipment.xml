@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextLMedium.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/ship" />
+
+        <EditText
+            android:id="@+id/ship_et"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="38dp"
+            android:autofillHints="@string/search_hint"
+            android:background="@drawable/bg_edit_text"
+            android:hint="@string/search_hint"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp" />
+
+        <TextView
+            style="@style/TextLMedium.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/except" />
+
+        <EditText
+            android:id="@+id/except_et"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="38dp"
+            android:autofillHints="@string/search_hint"
+            android:background="@drawable/bg_edit_text"
+            android:hint="@string/search_hint"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp" />
+
+        <Button
+            android:id="@+id/btn_ship"
+            style="@style/ButtonTextNormal.Bold"
+            android:layout_width="210dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="33dp"
+            android:background="@drawable/bg_rounded_btn"
+            android:text="@string/ship"
+            android:textAllCaps="false" />
+    </LinearLayout>
+</layout>
