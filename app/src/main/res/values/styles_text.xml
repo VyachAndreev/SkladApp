@@ -18,6 +18,22 @@
 
     <!--Text Black-->
 
+    <style name="TextMicro" parent="TextNormal">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextMicro.Light" parent="TextMicro">
+        <item name="android:fontFamily">@font/roboto_mono_400</item>
+    </style>
+
+    <style name="TextSSmall" parent="TextNormal">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextSSmall.Light" parent="TextSSmall">
+        <item name="android:fontFamily">@font/roboto_mono_400</item>
+    </style>
+
     <style name="TextSmall" parent="TextNormal">
         <item name="android:textSize">17sp</item>
     </style>
@@ -27,6 +43,14 @@
     </style>
 
     <style name="TextSmall.Bold" parent="TextSmall">
+        <item name="android:fontFamily">@font/roboto_mono_700</item>
+    </style>
+
+    <style name="TextLSmall" parent="TextNormal">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextLSmall.Bold" parent="TextLSmall">
         <item name="android:fontFamily">@font/roboto_mono_700</item>
     </style>
 
@@ -55,6 +79,15 @@
 
     <style name="TextBig" parent="TextNormal">
         <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="TextLMedium" parent="TextBaseFont">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextLMedium.Bold" parent="TextLMedium">
+        <item name="android:fontFamily">@font/roboto_mono_700</item>
     </style>
 
     <style name="TextBig.Light" parent="TextBig">

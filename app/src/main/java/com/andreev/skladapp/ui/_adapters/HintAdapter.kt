@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter
 import com.andreev.skladapp.R
 import timber.log.Timber
 
-class HintAdapter(context: Context, val stringList: ArrayList<String>, val listener: ClickListener)
+class HintAdapter(context: Context, stringList: ArrayList<String>, val listener: ClickListener)
     : ArrayAdapter<String>(context, R.layout.item_search_hint, stringList) {
 
     interface ClickListener {

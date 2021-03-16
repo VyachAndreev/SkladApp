@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">SkladApp</string>
 
+    <!-- History Dialog-->
+    <string name="history">История</string>
+    <string name="number">№</string>
+    <string name="type">Тип</string>
+    <string name="date">Дата</string>
+    <string name="place">Место</string>
+
     <!-- Fragment Sign In-->
     <string name="auth">Авторизация</string>
     <string name="login">Логин</string>
