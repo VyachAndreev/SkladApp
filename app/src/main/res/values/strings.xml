@@ -1,24 +1,31 @@
 <resources>
     <string name="app_name">SkladApp</string>
 
-    <!-- History Dialog-->
+    <!-- History Dialog -->
     <string name="history">История</string>
     <string name="number">№</string>
     <string name="type">Тип</string>
     <string name="date">Дата</string>
     <string name="place">Место</string>
 
-    <!-- Fragment Sign In-->
+    <!-- Filter Dialog -->
+    <string name="filter">Фильтр</string>
+    <string name="from">От</string>
+    <string name="to">до</string>
+    <string name="to_filter">Отфильтровать</string>
+    <string name="clear_filter">Очистить фильтр</string>
+
+    <!-- Fragment Sign In -->
     <string name="auth">Авторизация</string>
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
     <string name="sign_in">Войти</string>
 
-    <!--Fragment Search-->
+    <!--Fragment Search -->
     <string name="search">Поиск</string>
     <string name="search_hint">Введите информацию</string>
 
-    <!--Item Plaque-->
+    <!--Item Plaque -->
     <string name="position">Позиция</string>
     <string name="mark">Марка: </string>
     <string name="diameter">Диаметр: </string>
@@ -29,7 +36,7 @@
     <string name="comment">Комментарий: </string>
     <string name="status">Статус: </string>
 
-    <!--Item Nothing Found-->
+    <!--Item Nothing Found -->
     <string name="nothing_found">Ничего не найдено</string>
 
 </resources>

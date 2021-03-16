@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:background="@drawable/bg_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextBig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="26dp"
+            android:gravity="center"
+            android:text="@string/filter"
+            tools:text="Фильтр" />
+
+        <TextView
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="@string/mark"
+            tools:text="Марка:" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mark_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="33dp"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_filter" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="33dp"
+            android:background="@color/gray_C4C" />
+
+        <TextView
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="@string/diameter"
+            tools:text="Диаметр:" />
+
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/rangeSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="33dp"
+            android:stepSize="0.1"
+            android:valueFrom="0.8"
+            android:valueTo="6.0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="33dp"
+                android:gravity="center"
+                tools:text="От" />
+
+            <EditText
+                style="@style/TextNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_filter_et"
+                android:gravity="center"
+                tools:text="123" />
+
+            <TextView
+                style="@style/TextNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="6dp"
+                android:gravity="center"
+                tools:text="до" />
+
+            <EditText
+                style="@style/TextNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_filter_et"
+                android:gravity="center"
+                tools:text="123" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="33dp"
+            android:background="@color/gray_C4C" />
+
+        <TextView
+            style="@style/TextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="@string/packing"
+            tools:text="Упаковка:" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/packing_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="33dp"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_filter" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="22dp">
+
+            <Button
+                android:textAllCaps="false"
+                style="@style/TextLSmall"
+                android:id="@+id/filter_btn"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:text="@string/to_filter"
+                android:background="@drawable/bg_button_filter" />
+
+            <Button
+                android:textAllCaps="false"
+                style="@style/TextLSmall"
+                android:id="@+id/clear_filter"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="13dp"
+                android:layout_weight="1"
+                android:text="@string/clear_filter"
+                android:background="@drawable/bg_button_filter" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
