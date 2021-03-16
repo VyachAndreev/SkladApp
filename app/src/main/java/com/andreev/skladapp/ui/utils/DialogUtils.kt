@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.andreev.skladapp.R
 import com.andreev.skladapp.data.HistoryPiece
 import com.andreev.skladapp.databinding.DialogHistoryBinding
+import com.andreev.skladapp.databinding.ItemTextViewBinding
 import com.andreev.skladapp.ui._item.HistoryItem
+import com.andreev.skladapp.ui._item.TextViewItem
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
@@ -50,9 +52,13 @@ object DialogUtils {
             adapter = recyclerAdapter
         }
 
-        recyclerAdapter.addAll(historyPieces.map {
-            HistoryItem(it)
-        })
+        if (historyPieces.size > 0) {
+            recyclerAdapter.addAll(historyPieces.map {
+                HistoryItem(it)
+            })
+        } else {
+            recyclerAdapter.add(TextViewItem("Данные отсутствуют"))
+        }
 
         dialog =
             baseDialog(dialogBinding.root)
