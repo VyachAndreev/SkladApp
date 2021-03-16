@@ -30,6 +30,10 @@
         <item name="android:fontFamily">@font/roboto_mono_400</item>
     </style>
 
+    <style name="TextMicro.Bold" parent="TextMicro">
+        <item name="android:fontFamily">@font/roboto_mono_700</item>
+    </style>
+
     <style name="TextSSmall" parent="TextNormal">
         <item name="android:textSize">16sp</item>
     </style>

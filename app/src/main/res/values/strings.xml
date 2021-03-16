@@ -21,21 +21,21 @@
     <string name="password">Пароль</string>
     <string name="sign_in">Войти</string>
 
-    <!--Fragment Search -->
+    <!-- Fragment Search -->
     <string name="search">Поиск</string>
     <string name="search_hint">Введите информацию</string>
 
-    <!--Fragment Shipment -->
+    <!-- Fragment Shipment -->
     <string name="except">Исключить</string>
 
-    <!--Fragment Show All -->
+    <!-- Fragment Show All -->
     <string name="manufacturer">Производитель: </string>
     <string name="print_code">Распечатать штрих-код</string>
     <string name="print_positions">Распечатать все позиции</string>
     <string name="show_positions">Показать позиции</string>
     <string name="ship">Отгрузить</string>
 
-    <!--Item Plaque -->
+    <!-- Item Plaque -->
     <string name="position">Позиция</string>
     <string name="mark">Марка: </string>
     <string name="diameter">Диаметр: </string>
@@ -46,7 +46,13 @@
     <string name="comment">Комментарий: </string>
     <string name="status">Статус: </string>
 
-    <!--Item Nothing Found -->
+    <!-- Item Shipment History -->
+    <string name="mark_">Марка</string>
+    <string name="diameter_">Диаметр</string>
+    <string name="packing_">Упаковка</string>
+    <string name="mass_">Масса</string>
+
+    <!-- Item Nothing Found -->
     <string name="nothing_found">Ничего не найдено</string>
 
 </resources>
