@@ -8,59 +8,72 @@
             type="com.andreev.skladapp.ui.search.SearchViewModel" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/white">
 
         <LinearLayout
+            android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp">
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="14dp"
+            android:background="@color/blue_3B4"
+            android:paddingTop="21dp"
+            android:paddingBottom="21dp">
 
-            <AutoCompleteTextView
-                android:text="@={viewModel.searchedText}"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                style="@style/TextSmall"
+            <EditText
                 android:id="@+id/search_et"
+                style="@style/TextSmall"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="17dp"
+                android:autofillHints="@string/search_hint"
                 android:background="@drawable/bg_edit_text"
                 android:hint="@string/search_hint"
-                android:autofillHints="@string/search_hint"
-                android:maxLines="1"
                 android:inputType="text"
-                android:nextFocusRight="@id/search_btn"/>
+                android:maxLines="1"
+                android:nextFocusRight="@id/search_btn"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@={viewModel.searchedText}" />
 
             <ImageButton
                 android:id="@+id/search_btn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/bg_rounded_btn"
-                android:src="@drawable/ic_search"
-                android:contentDescription="@string/search" />
+                android:background="@drawable/bg_rounded_btn_gray"
+                android:contentDescription="@string/search"
+                android:src="@drawable/ic_search" />
         </LinearLayout>
 
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:layout_marginTop="60dp"
             android:id="@+id/swipe_layout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear"
+            android:layout_marginTop="60dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_height="wrap_content" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_hints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp" />
+
+    </RelativeLayout>
 
 
 </layout>
