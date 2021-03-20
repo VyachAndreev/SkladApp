@@ -25,7 +25,7 @@ open class SearchViewModel: BaseViewModel() {
         applicationComponent.inject(this)
     }
 
-    fun getHints(tag: String?) {
+    open fun getHints(tag: String?) {
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
                 itemsRepository.getHints(tag)

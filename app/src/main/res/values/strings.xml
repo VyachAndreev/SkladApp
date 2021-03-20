@@ -42,6 +42,7 @@
     <string name="print_positions">Распечатать все позиции</string>
     <string name="show_positions">Показать позиции</string>
     <string name="ship">Отгрузить</string>
+    <string name="open_filter">Открыть фильтр</string>
     <string name="ship_semi">Отгрузить:</string>
     <string name="except_semi">Исключить:</string>
 

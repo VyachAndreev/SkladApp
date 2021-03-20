@@ -7,6 +7,7 @@ import com.andreev.skladapp.ui.hub.HubFragment
 import com.andreev.skladapp.ui.hub.HubViewModel
 import com.andreev.skladapp.ui.information.InformationViewModel
 import com.andreev.skladapp.ui.search.SearchViewModel
+import com.andreev.skladapp.ui.show_all.ShowAllViewModel
 import com.andreev.skladapp.ui.sign_in.SignInViewModel
 import dagger.Component
 import javax.inject.Singleton
@@ -25,4 +26,6 @@ interface ApplicationComponent {
     fun inject(searchViewModel: SearchViewModel)
 
     fun inject(informationViewModel: InformationViewModel)
+
+    fun inject(showAllViewModel: ShowAllViewModel)
 }
