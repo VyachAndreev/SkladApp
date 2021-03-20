@@ -16,6 +16,7 @@ import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.HintItem
 import com.andreev.skladapp.ui._item.PlaqueItem
+import com.andreev.skladapp.ui._item.TextViewItem
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import timber.log.Timber
@@ -116,10 +117,14 @@ class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<String> {
         hideLoading()
         viewBinding.swipeLayout.isRefreshing = false
         itemsAdapter.clear()
-        itemsAdapter.addAll(
-           positions.map {
-               PlaqueItem(it)
-           }
-        )
+        if (positions.isNotEmpty()) {
+            itemsAdapter.addAll(
+                positions.map {
+                    PlaqueItem(it)
+                }
+            )
+        } else {
+            itemsAdapter.add(TextViewItem("Ничего не найдено"))
+        }
     }
 }
