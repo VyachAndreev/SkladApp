@@ -52,6 +52,7 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
 
         viewBinding.viewDrawer.searchDi.setOnClickListener {
             launchChildFragment(SearchFragment())
+            closeDrawer()
         }
 
         viewBinding.viewDrawer.logoutDi.setOnClickListener {

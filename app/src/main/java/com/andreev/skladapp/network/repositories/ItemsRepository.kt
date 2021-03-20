@@ -16,6 +16,13 @@ class ItemsRepository : FuelNetworkService(){
         )
     }
 
+    suspend fun getPackage(text: String?): Position? {
+        return get(
+            PACKAGE_PATH + text,
+            Position::class.java
+        )
+    }
+
     suspend fun getPositions(text: String?): Array<Position>? {
         return get(
             SEARCH_PATH + text,
@@ -27,6 +34,7 @@ class ItemsRepository : FuelNetworkService(){
         const val TAGS_PATH = "search/tag/"
         const val SEARCH_PATH = "search/"
         const val POSITION_PATH = "position/"
+        const val PACKAGE_PATH = "package?id="
     }
 }
 

@@ -9,6 +9,7 @@ import android.widget.TextView.OnEditorActionListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.andreev.skladapp.Constants
 import com.andreev.skladapp.R
 import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.databinding.FragmentSearchBinding
@@ -17,6 +18,8 @@ import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.HintItem
 import com.andreev.skladapp.ui._item.PlaqueItem
 import com.andreev.skladapp.ui._item.TextViewItem
+import com.andreev.skladapp.ui.hub.HubFragment
+import com.andreev.skladapp.ui.information.InformationFragment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import timber.log.Timber
@@ -62,6 +65,24 @@ class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<String> {
 
     private fun initItemsRecycler() {
         itemsAdapter = GroupAdapter()
+        itemsAdapter.setOnItemClickListener { item, view ->
+            when (item) {
+                is PlaqueItem -> {
+                    val args = Bundle()
+                    item.pos.id?.let { args.putLong(Constants.ID, it) }
+                    Timber.i(item.pos.type)
+                    args.putBoolean(Constants.ISPACKAGE, item.pos.type == "POSITION")
+                    (parentFragment as HubFragment).apply {
+                        launchChildFragment(
+                            InformationFragment(),
+                            true,
+                            args,
+                        )
+                    }
+                }
+                else -> {}
+            }
+        }
         viewBinding.apply {
             recycler.apply {
                 adapter = itemsAdapter
@@ -71,6 +92,7 @@ class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<String> {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        hideLoading()
         viewBinding.viewModel = viewModel
 
         initRecyclers()

@@ -5,6 +5,7 @@ import com.andreev.skladapp.ui.MainActivity
 import com.andreev.skladapp.di.modules.SettingsModule
 import com.andreev.skladapp.ui.hub.HubFragment
 import com.andreev.skladapp.ui.hub.HubViewModel
+import com.andreev.skladapp.ui.information.InformationViewModel
 import com.andreev.skladapp.ui.search.SearchViewModel
 import com.andreev.skladapp.ui.sign_in.SignInViewModel
 import dagger.Component
@@ -21,6 +22,7 @@ interface ApplicationComponent {
 
     fun inject(signInViewModel: SignInViewModel)
 
-
     fun inject(searchViewModel: SearchViewModel)
+
+    fun inject(informationViewModel: InformationViewModel)
 }
