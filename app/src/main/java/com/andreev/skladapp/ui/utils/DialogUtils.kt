@@ -11,8 +11,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andreev.skladapp.R
 import com.andreev.skladapp.data.HistoryPiece
+import com.andreev.skladapp.databinding.DialogFilterBinding
 import com.andreev.skladapp.databinding.DialogHistoryBinding
 import com.andreev.skladapp.databinding.ItemTextViewBinding
+import com.andreev.skladapp.ui._item.FilterItem
 import com.andreev.skladapp.ui._item.HistoryItem
 import com.andreev.skladapp.ui._item.TextViewItem
 import com.xwray.groupie.GroupAdapter
@@ -58,6 +60,56 @@ object DialogUtils {
             })
         } else {
             recyclerAdapter.add(TextViewItem("Данные отсутствуют"))
+        }
+
+        dialog =
+            baseDialog(dialogBinding.root)
+
+        dialog.show()
+    }
+
+    fun showFilterDialog(
+        context: Context?,
+        marks: Array<String>?,
+        diameters: Array<String>?,
+        packings: Array<String>?,
+    ) {
+        lateinit var dialog: AlertDialog
+        val dialogBinding = DataBindingUtil.inflate<DialogFilterBinding>(
+            LayoutInflater.from(context),
+            R.layout.dialog_filter,
+            null,
+            false
+        )
+        val markAdapter = GroupAdapter<GroupieViewHolder>()
+        val packingAdapter = GroupAdapter<GroupieViewHolder>()
+        dialogBinding.apply {
+            markRecycler.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = markAdapter
+            }
+
+            rangeSlider.setValues(diameters?.get(0)?.toFloat(), diameters?.get(1)?.toFloat())
+
+            packingRecycler.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = packingAdapter
+            }
+        }
+
+        marks?.map {
+            FilterItem(it)
+        }?.let {
+            markAdapter.addAll(
+                it
+            )
+        }
+        packings?.map {
+            FilterItem(it)
+        }?.let {
+            markAdapter.addAll(
+                it
+            )
         }
 
         dialog =

@@ -49,6 +49,20 @@ class ItemsRepository : FuelNetworkService(){
         )
     }
 
+    suspend fun getMarks(): Array<String>? {
+        return get(
+            MARKS,
+            Array<String>::class.java,
+        )
+    }
+
+    suspend fun getDiameter(): Array<String>? {
+        return get(
+            DIAMETER,
+            Array<String>::class.java,
+        )
+    }
+
     companion object {
         const val TAGS_PATH = "search/tag/"
         const val SEARCH_PATH = "search/"
@@ -57,6 +71,8 @@ class ItemsRepository : FuelNetworkService(){
         const val POSITION_PATH = "position/"
         const val PACKAGE_PATH = "package?id="
         const val ALL_POSIOTIONS = "positions"
+        const val MARKS = "position/marks"
+        const val DIAMETER = "position/diameter"
 
     }
 }

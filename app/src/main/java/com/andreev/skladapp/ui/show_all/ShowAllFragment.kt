@@ -13,6 +13,7 @@ import com.andreev.skladapp.ui._adapter.SelectionAdapter
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.PlaqueItem
 import com.andreev.skladapp.ui._item.TextViewItem
+import com.andreev.skladapp.ui.utils.DialogUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
@@ -34,6 +35,16 @@ class ShowAllFragment: BaseFragment<FragmentShowAllBinding>() {
         showLoading()
         viewModel.positions.observe(this, positionListener)
         viewModel.getPositions()
+        viewModel.getMarks()
+        viewModel.getDiameter()
+        viewBinding.openFilter.setOnClickListener {
+            DialogUtils.showFilterDialog(
+                context,
+                viewModel.marks.value,
+                viewModel.diameter.value,
+                viewModel.packings.value,
+            )
+        }
     }
 
     private val positionListener = Observer<Array<Position>> {

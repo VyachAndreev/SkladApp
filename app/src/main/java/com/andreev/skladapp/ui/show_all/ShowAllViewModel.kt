@@ -11,11 +11,24 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
-class ShowAllViewModel: BaseViewModel() {
+class ShowAllViewModel : BaseViewModel() {
     @Inject
     lateinit var itemRepository: ItemsRepository
 
     val positions = MutableLiveData<Array<Position>>()
+    val diameter = MutableLiveData<Array<String>>()
+    val marks = MutableLiveData<Array<String>>()
+    val packings = MutableLiveData<Array<String>>()
+
+    init {
+        packings.value = arrayOf(
+            "Моток",
+            "К300",
+            "Д300",
+            "К415",
+            "Д415"
+        )
+    }
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
         applicationComponent.inject(this)
@@ -28,6 +41,30 @@ class ShowAllViewModel: BaseViewModel() {
             }
             if (response != null) {
                 positions.value = response
+                Timber.i("${positions.value}")
+            }
+        }
+    }
+
+    fun getDiameter() {
+        scopeMain.launch {
+            val response = withContext(Dispatchers.IO) {
+                itemRepository.getDiameter()
+            }
+            if (response != null) {
+                diameter.value = response
+                Timber.i("${positions.value}")
+            }
+        }
+    }
+
+    fun getMarks() {
+        scopeMain.launch {
+            val response = withContext(Dispatchers.IO) {
+                itemRepository.getMarks()
+            }
+            if (response != null) {
+                marks.value = response
                 Timber.i("${positions.value}")
             }
         }
