@@ -27,7 +27,7 @@
             android:id="@+id/show_all_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:d_title="@string/status" />
+            app:d_title="@string/see_all" />
 
         <com.andreev.skladapp.ui.drawer.DrawerItem
             android:id="@+id/search_di"
@@ -39,31 +39,31 @@
             android:id="@+id/plav_search_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:d_title="@string/status" />
+            app:d_title="@string/search_plav" />
 
         <com.andreev.skladapp.ui.drawer.DrawerItem
             android:id="@+id/unite_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:d_title="@string/status" />
+            app:d_title="@string/unite" />
 
         <com.andreev.skladapp.ui.drawer.DrawerItem
             android:id="@+id/shipment_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:d_title="@string/status" />
+            app:d_title="@string/ship" />
 
         <com.andreev.skladapp.ui.drawer.DrawerItem
             android:id="@+id/shipment_history_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:d_title="@string/status" />
+            app:d_title="@string/shipment_history" />
 
         <com.andreev.skladapp.ui.drawer.DrawerItem
             android:id="@+id/acceptance_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:d_title="@string/status" />
+            app:d_title="@string/get" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 app:d_dividerBottom="false"
-                app:d_title="@string/status" />
+                app:d_title="@string/exit" />
         </FrameLayout>
 
     </LinearLayout>

@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">SkladApp</string>
 
+    <!--Drawer-->
+    <string name="see_all">Посмотреть все</string>
+    <string name="search_plav">Поиск по плавке</string>
+    <string name="unite">Объединить</string>
+    <string name="shipment_history">История отгрузок</string>
+    <string name="get">Приёмка</string>
+    <string name="exit">Выйти</string>
+
     <!-- History Dialog -->
     <string name="history">История</string>
     <string name="number">№</string>
