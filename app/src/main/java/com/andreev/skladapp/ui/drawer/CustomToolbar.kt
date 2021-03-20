@@ -23,11 +23,18 @@ class CustomToolbar(context: Context, attributeSet: AttributeSet)
     fun setUpDrawer(drawer: DrawerLayout, drawerView: View) {
         viewBinding.ivToolbarMenu.setOnClickListener {
             openDrawer(drawer, drawerView)
+
         }
     }
 
     fun openDrawer(drawer: DrawerLayout, drawerView: View) {
         if (!drawer.isDrawerOpen(drawerView)) drawer.openDrawer(
+            Gravity.LEFT
+        )
+    }
+
+    fun closeDrawer(drawer: DrawerLayout, drawerView: View) {
+        if (drawer.isDrawerOpen(drawerView)) drawer.closeDrawer(
             Gravity.LEFT
         )
     }

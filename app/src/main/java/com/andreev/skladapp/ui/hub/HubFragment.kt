@@ -46,6 +46,10 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
 
         updateToolbar(R.string.search)
 
+        viewBinding.viewDrawer.cross.setOnClickListener {
+            closeDrawer()
+        }
+
         viewBinding.viewDrawer.searchDi.setOnClickListener {
             launchChildFragment(SearchFragment())
         }
@@ -137,6 +141,13 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
         } else {
             viewBinding.drawerLayout.closeDrawer(Gravity.LEFT)
         }
+    }
+
+    private fun closeDrawer() {
+        viewBinding.toolbar.closeDrawer(
+            viewBinding.drawerLayout,
+            viewBinding.viewDrawer.drawer
+        )
     }
 
 }

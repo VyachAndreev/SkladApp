@@ -29,6 +29,7 @@ class SignInFragment: BaseFragment<FragmentSignInBinding>(), Observer<String> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewBinding.viewModel = viewModel
         viewBinding.btnSignIn.setOnClickListener {
+            hideKeyBoard()
             signInUser()
         }
 
