@@ -30,11 +30,20 @@ class ItemsRepository : FuelNetworkService(){
         )
     }
 
+    suspend fun getPlavPositions(text: String?): Array<Position>? {
+        return get(
+            SEARCH_PLAV_PATH + text,
+            Array<Position>::class.java
+        )
+    }
+
     companion object {
         const val TAGS_PATH = "search/tag/"
         const val SEARCH_PATH = "search/"
+        const val SEARCH_PLAV_PATH = "search/plavka?plav="
         const val POSITION_PATH = "position/"
         const val PACKAGE_PATH = "package?id="
+
     }
 }
 

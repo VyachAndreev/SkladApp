@@ -24,7 +24,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import timber.log.Timber
 
-class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<String> {
+open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<String> {
 
     override fun getLayoutRes(): Int = R.layout.fragment_search
 

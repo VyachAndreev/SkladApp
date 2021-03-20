@@ -14,6 +14,7 @@ import com.andreev.skladapp.databinding.ViewToolbarBinding
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui.search.SearchFragment
+import com.andreev.skladapp.ui.search_plav.SearchPlavFragment
 import com.andreev.skladapp.ui.sign_in.SignInFragment
 import timber.log.Timber
 
@@ -52,6 +53,13 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
 
         viewBinding.viewDrawer.searchDi.setOnClickListener {
             launchChildFragment(SearchFragment())
+            updateToolbar(R.string.search)
+            closeDrawer()
+        }
+
+        viewBinding.viewDrawer.plavSearchDi.setOnClickListener {
+            launchChildFragment(SearchPlavFragment())
+            updateToolbar(R.string.search_plav)
             closeDrawer()
         }
 

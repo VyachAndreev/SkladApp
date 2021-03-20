@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
-class SearchViewModel: BaseViewModel() {
+open class SearchViewModel: BaseViewModel() {
     @Inject
     lateinit var itemsRepository: ItemsRepository
 
@@ -19,7 +19,7 @@ class SearchViewModel: BaseViewModel() {
     val hints = MutableLiveData<Array<String>>()
     val positions = MutableLiveData<Array<Position>>()
 
-    private var lastSearched :String? = String()
+    protected var lastSearched :String? = String()
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
         applicationComponent.inject(this)
@@ -40,7 +40,7 @@ class SearchViewModel: BaseViewModel() {
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
                 lastSearched = searchedText.value
-                itemsRepository.getPositions(lastSearched)
+                loadPositions()
             }
             if (response != null) {
                 positions.value = response
@@ -52,13 +52,17 @@ class SearchViewModel: BaseViewModel() {
     fun refreshPositions() {
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
-                itemsRepository.getPositions(lastSearched)
+                loadPositions()
             }
             if (response != null) {
                 positions.value = response
                 Timber.i("${positions.value}")
             }
         }
+    }
+
+    protected open suspend fun loadPositions(): Array<Position>? {
+        return itemsRepository.getPositions(lastSearched)
     }
 
 }
