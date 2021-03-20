@@ -105,6 +105,12 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
         }
     }
 
+    protected fun hideKeyBoard() {
+        (activity as MainActivity).apply {
+            hideKeyboard()
+        }
+    }
+
     protected fun showLoading() {
         (activity as? MainActivity)?.apply {
             this.showLoading()

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.IdRes
@@ -57,7 +58,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    fun hideKeyboard() {
+        this.currentFocus?.let { view ->
+            val imm: InputMethodManager =
+                getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
 
     fun launchFragment(
         @IdRes container: Int,

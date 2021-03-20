@@ -2,10 +2,24 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="position"
+            type="com.andreev.skladapp.data.Position" />
+    </data>
+    
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
     <RelativeLayout
         android:layout_width="325dp"
-        android:layout_height="406dp"
-        android:background="@drawable/sign_in_layout">
+        android:layout_height="wrap_content"
+        android:background="@drawable/sign_in_layout"
+        android:layout_marginTop="33dp">
 
         <TextView
             android:id="@+id/type_tv"
@@ -14,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="14dp"
+            android:text='@{position.type == "PACKAGE"? "Поддон" : "Позиция"}'
             tools:text="Позиция" />
 
         <TextView
@@ -33,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/type_tv"
             android:layout_marginTop="18dp"
+            android:text='@{position.mark}'
             tools:text="Позиция" />
 
         <TextView
@@ -52,6 +68,7 @@
             android:layout_below="@id/mark_tv"
             android:layout_toEndOf="@id/diameter_tv"
             android:layout_marginTop="14dp"
+            android:text='@{position.diameter}'
             tools:text="Позиция" />
 
         <TextView
@@ -71,6 +88,7 @@
             android:layout_below="@id/diameter_tv"
             android:layout_toEndOf="@id/packing_tv"
             android:layout_marginTop="14dp"
+            android:text='@{position.packing}'
             tools:text="Позиция" />
 
         <TextView
@@ -90,6 +108,7 @@
             android:layout_toEndOf="@id/party_tv"
             android:layout_below="@id/packing_tv"
             android:layout_marginTop="14dp"
+            android:text='@{position.part}'
             tools:text="Позиция" />
 
         <TextView
@@ -109,6 +128,7 @@
             android:layout_below="@id/party_tv"
             android:layout_toEndOf="@id/plav_tv"
             android:layout_marginTop="14dp"
+            android:text='@{position.plav}'
             tools:text="Позиция" />
 
         <TextView
@@ -128,6 +148,7 @@
             android:layout_below="@id/plav_tv"
             android:layout_toEndOf="@id/mass_tv"
             android:layout_marginTop="14dp"
+            android:text='@{position.mass.toString()}'
             tools:text="Позиция" />
 
         <TextView
@@ -147,6 +168,7 @@
             android:layout_below="@id/mass_tv"
             android:layout_toEndOf="@id/comment_tv"
             android:layout_marginTop="14dp"
+            android:text='@{position.comment}'
             tools:text="Позиция" />
 
         <TextView
@@ -157,6 +179,7 @@
             android:layout_below="@id/comment_tv"
             android:layout_marginStart="28dp"
             android:layout_marginTop="14dp"
+            android:layout_marginBottom="25dp"
             android:text="@string/status" />
 
         <TextView
@@ -166,7 +189,9 @@
             android:layout_below="@id/comment_tv"
             android:layout_toEndOf="@id/status_tv"
             android:layout_marginTop="14dp"
+            android:text='@{position.status}'
             tools:text="Позиция" />
 
     </RelativeLayout>
+    </LinearLayout>
 </layout>

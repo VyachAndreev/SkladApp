@@ -14,10 +14,5 @@ class HintItem(val hint: String) : BindableItem<ItemSearchHintBinding>() {
 
     override fun initializeViewBinding(view: View): ItemSearchHintBinding =
         ItemSearchHintBinding.bind(view)
-
-
-    interface OnHintClickedListener {
-        fun onHintClick(hint: String)
-    }
 }
 

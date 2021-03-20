@@ -34,8 +34,9 @@
                 android:background="@drawable/bg_edit_text"
                 android:hint="@string/search_hint"
                 android:inputType="text"
-                android:maxLines="1"
+                android:singleLine="true"
                 android:nextFocusRight="@id/search_btn"
+                android:imeOptions="actionDone"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@={viewModel.searchedText}" />

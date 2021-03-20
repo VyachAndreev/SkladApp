@@ -25,9 +25,11 @@ abstract class FuelNetworkService {
             return Fuel.get(path, parameters)
                 .awaitStringResult()
                 .fold({ jsonResponse ->
+                    Timber.i("get jsonResponse is $jsonResponse")
                     return@fold gson.fromJson(jsonResponse, clazz)
                 }, { error ->
-                    return@fold gson.fromJson(error.errorData.toString(Charsets.UTF_8), clazz)
+                    Timber.i("$error")
+                    return null
                 })
         } catch (e: Exception) {
             e.printStackTrace()
@@ -49,7 +51,7 @@ abstract class FuelNetworkService {
                     return@fold gson.fromJson(jsonResponse, clazz)
                 }) { error ->
                     Timber.i("$error")
-                    return@fold gson.fromJson(error.errorData.toString(Charsets.UTF_8), clazz)
+                    return null
                 }
         } catch (e: Exception) {
             e.printStackTrace()

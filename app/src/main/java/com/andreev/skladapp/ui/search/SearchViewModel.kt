@@ -1,7 +1,7 @@
 package com.andreev.skladapp.ui.search
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.network.repositories.ItemsRepository
 import com.andreev.skladapp.ui._base.BaseViewModel
@@ -16,7 +16,10 @@ class SearchViewModel: BaseViewModel() {
     lateinit var itemsRepository: ItemsRepository
 
     val searchedText = MutableLiveData<String>()
-    val hints = MutableLiveData<ArrayList<String>>()
+    val hints = MutableLiveData<Array<String>>()
+    val positions = MutableLiveData<Array<Position>>()
+
+    private var lastSearched :String? = String()
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
         applicationComponent.inject(this)
@@ -29,6 +32,31 @@ class SearchViewModel: BaseViewModel() {
             }
             if (response != null) {
                 hints.value = response
+            }
+        }
+    }
+
+    fun getPositions() {
+        scopeMain.launch {
+            val response = withContext(Dispatchers.IO) {
+                lastSearched = searchedText.value
+                itemsRepository.getPositions(lastSearched)
+            }
+            if (response != null) {
+                positions.value = response
+                Timber.i("${positions.value}")
+            }
+        }
+    }
+
+    fun refreshPositions() {
+        scopeMain.launch {
+            val response = withContext(Dispatchers.IO) {
+                itemsRepository.getPositions(lastSearched)
+            }
+            if (response != null) {
+                positions.value = response
+                Timber.i("${positions.value}")
             }
         }
     }
