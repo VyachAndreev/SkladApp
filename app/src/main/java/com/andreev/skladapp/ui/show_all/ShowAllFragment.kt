@@ -43,7 +43,9 @@ class ShowAllFragment: BaseFragment<FragmentShowAllBinding>() {
                 viewModel.marks.value,
                 viewModel.diameter.value,
                 viewModel.packings.value,
-            )
+            ) {
+
+            }
         }
     }
 

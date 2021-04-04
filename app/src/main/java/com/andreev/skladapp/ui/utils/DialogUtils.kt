@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.StyleRes
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andreev.skladapp.R
 import com.andreev.skladapp.data.HistoryPiece
@@ -17,6 +18,8 @@ import com.andreev.skladapp.databinding.ItemTextViewBinding
 import com.andreev.skladapp.ui._item.FilterItem
 import com.andreev.skladapp.ui._item.HistoryItem
 import com.andreev.skladapp.ui._item.TextViewItem
+import com.google.android.material.slider.LabelFormatter
+import com.google.android.material.tabs.TabLayout
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
@@ -73,6 +76,7 @@ object DialogUtils {
         marks: Array<String>?,
         diameters: Array<String>?,
         packings: Array<String>?,
+        onFilterPressed: (Array<Array<String>>) -> (Unit),
     ) {
         lateinit var dialog: AlertDialog
         val dialogBinding = DataBindingUtil.inflate<DialogFilterBinding>(
@@ -88,12 +92,41 @@ object DialogUtils {
                 layoutManager = LinearLayoutManager(context)
                 adapter = markAdapter
             }
-
-            rangeSlider.setValues(diameters?.get(0)?.toFloat(), diameters?.get(1)?.toFloat())
-
+            var valueFrom = diameters?.get(0)?.toFloat()
+            var valueTo = diameters?.get(1)?.toFloat()
+            fromEt.setText(valueFrom.toString().substring(
+                0, valueFrom.toString().indexOf(".") + 2
+            ))
+            toEt.setText(valueTo.toString().substring(
+                0, valueFrom.toString().indexOf(".") + 2
+            ))
+            rangeSlider.valueTo = Float.MAX_VALUE
+            rangeSlider.valueFrom = Float.MIN_VALUE
+            if (valueTo != null) {
+                rangeSlider.valueTo = valueTo
+            }
+            if (valueFrom != null) {
+                rangeSlider.valueFrom = valueFrom
+            }
+            rangeSlider.setValues(valueFrom, valueTo)
+            rangeSlider.stepSize = 0.1f
+            rangeSlider.addOnChangeListener { slider, value, fromUser ->
+                valueFrom = rangeSlider.values[0]
+                valueTo = rangeSlider.values[1]
+                fromEt.setText(valueFrom.toString().substring(
+                    0, valueFrom.toString().indexOf(".") + 3
+                ))
+                toEt.setText(valueTo.toString().substring(
+                    0, valueFrom.toString().indexOf(".") + 3
+                ))
+            }
             packingRecycler.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = packingAdapter
+            }
+
+            filterBtn.setOnClickListener {
+                dialog.dismiss()
             }
         }
 
@@ -116,5 +149,6 @@ object DialogUtils {
             baseDialog(dialogBinding.root)
 
         dialog.show()
+
     }
 }
