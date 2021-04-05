@@ -19,29 +19,20 @@ class ShowAllViewModel : BaseViewModel() {
     val diameter = MutableLiveData<Array<String>>()
     val marks = MutableLiveData<Array<String>>()
     val packings = MutableLiveData<Array<String>>()
-
-    init {
-        packings.value = arrayOf(
-            "Моток",
-            "К300",
-            "Д300",
-            "К415",
-            "Д415"
-        )
-    }
+    var filterData: ArrayList<ArrayList<String>>? = null
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
         applicationComponent.inject(this)
     }
 
     fun getPositions() {
+        filterData = null
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
                 itemRepository.getAll()
             }
             if (response != null) {
                 positions.value = response
-                Timber.i("${positions.value}")
             }
         }
     }
@@ -53,7 +44,6 @@ class ShowAllViewModel : BaseViewModel() {
             }
             if (response != null) {
                 diameter.value = response
-                Timber.i("${positions.value}")
             }
         }
     }
@@ -65,7 +55,25 @@ class ShowAllViewModel : BaseViewModel() {
             }
             if (response != null) {
                 marks.value = response
-                Timber.i("${positions.value}")
+            }
+        }
+    }
+
+    fun getPackings() {
+        packings.value = itemRepository.getPackings()
+        packings.value?.forEach {
+            Timber.i(it)
+        }
+    }
+
+    fun filter(arrayList: ArrayList<ArrayList<String>>) {
+        filterData = arrayList
+        scopeMain.launch {
+            val response = withContext(Dispatchers.IO) {
+                itemRepository.filter(arrayList)
+            }
+            if (response != null) {
+                positions.value = response
             }
         }
     }

@@ -3,6 +3,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:layout_marginTop="26dp"
@@ -62,13 +67,14 @@
             android:id="@+id/btn_ship"
             style="@style/ButtonTextNormal.Bold"
             android:layout_width="210dp"
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="33dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/bg_rounded_btn_gray"
-            android:text="@string/ship"
+            android:background="@color/gray_C4C"
             android:textAllCaps="false"
-            android:textColor="@color/blue_3B4" />
+            android:text="@string/ship"/>
+    </LinearLayout>
+
     </LinearLayout>
 </layout>

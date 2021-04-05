@@ -32,7 +32,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mark_recycler"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="100dp"
             android:layout_marginStart="33dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="33dp"
@@ -81,7 +81,7 @@
                 android:text="@string/from"
                 tools:text="От" />
 
-            <EditText
+            <TextView
                 android:id="@+id/from_et"
                 style="@style/TextNormal"
                 android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
                 android:text="@string/to"
                 tools:text="до" />
 
-            <EditText
+            <TextView
                 android:id="@+id/to_et"
                 style="@style/TextNormal"
                 android:layout_width="wrap_content"
@@ -135,7 +135,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/packing_recycler"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="100dp"
             android:layout_marginStart="33dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="33dp"
@@ -151,20 +151,22 @@
             android:layout_marginBottom="22dp">
 
             <Button
+                android:layout_gravity="center"
                 android:id="@+id/filter_btn"
                 style="@style/TextLSmall"
                 android:layout_width="0dp"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/bg_button_filter"
                 android:text="@string/to_filter"
                 android:textAllCaps="false" />
 
             <Button
+                android:layout_gravity="center"
                 android:id="@+id/clear_filter"
                 style="@style/TextLSmall"
                 android:layout_width="0dp"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_button_filter"

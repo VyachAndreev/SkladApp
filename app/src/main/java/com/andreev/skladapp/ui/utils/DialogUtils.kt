@@ -15,6 +15,7 @@ import com.andreev.skladapp.data.HistoryPiece
 import com.andreev.skladapp.databinding.DialogFilterBinding
 import com.andreev.skladapp.databinding.DialogHistoryBinding
 import com.andreev.skladapp.databinding.ItemTextViewBinding
+import com.andreev.skladapp.ui._adapter.MultiSelectionAdapter
 import com.andreev.skladapp.ui._item.FilterItem
 import com.andreev.skladapp.ui._item.HistoryItem
 import com.andreev.skladapp.ui._item.TextViewItem
@@ -76,7 +77,7 @@ object DialogUtils {
         marks: Array<String>?,
         diameters: Array<String>?,
         packings: Array<String>?,
-        onFilterPressed: (Array<Array<String>>) -> (Unit),
+        onFilterPressed: (ArrayList<ArrayList<String>>) -> (Unit),
     ) {
         lateinit var dialog: AlertDialog
         val dialogBinding = DataBindingUtil.inflate<DialogFilterBinding>(
@@ -85,8 +86,10 @@ object DialogUtils {
             null,
             false
         )
-        val markAdapter = GroupAdapter<GroupieViewHolder>()
-        val packingAdapter = GroupAdapter<GroupieViewHolder>()
+        val markAdapter = MultiSelectionAdapter()
+        markAdapter.setHasStableIds(true)
+        val packingAdapter = MultiSelectionAdapter()
+        packingAdapter.setHasStableIds(true)
         dialogBinding.apply {
             markRecycler.apply {
                 layoutManager = LinearLayoutManager(context)
@@ -114,10 +117,10 @@ object DialogUtils {
                 valueFrom = rangeSlider.values[0]
                 valueTo = rangeSlider.values[1]
                 fromEt.setText(valueFrom.toString().substring(
-                    0, valueFrom.toString().indexOf(".") + 3
+                    0, valueFrom.toString().indexOf(".") + 2
                 ))
                 toEt.setText(valueTo.toString().substring(
-                    0, valueFrom.toString().indexOf(".") + 3
+                    0, valueFrom.toString().indexOf(".") + 2
                 ))
             }
             packingRecycler.apply {
@@ -125,8 +128,22 @@ object DialogUtils {
                 adapter = packingAdapter
             }
 
+
             filterBtn.setOnClickListener {
+                onFilterPressed(
+                    arrayListOf(
+                        markAdapter.getSelectedNames(),
+                        arrayListOf(fromEt.text.toString(), toEt.text.toString()),
+                        packingAdapter.getSelectedNames(),
+                    )
+                )
                 dialog.dismiss()
+            }
+
+            clearFilter.setOnClickListener {
+                markAdapter.clearSelectedItems()
+                packingAdapter.clearSelectedItems()
+                rangeSlider.setValues(valueFrom, valueTo)
             }
         }
 
@@ -140,7 +157,7 @@ object DialogUtils {
         packings?.map {
             FilterItem(it)
         }?.let {
-            markAdapter.addAll(
+            packingAdapter.addAll(
                 it
             )
         }

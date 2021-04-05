@@ -5,7 +5,7 @@ import com.andreev.skladapp.R
 import com.andreev.skladapp.databinding.ItemFilterBinding
 import com.xwray.groupie.viewbinding.BindableItem
 
-class FilterItem(private val name: String) : BindableItem<ItemFilterBinding>() {
+class FilterItem(val name: String) : BindableItem<ItemFilterBinding>() {
     override fun getLayout(): Int = R.layout.item_filter
 
     override fun bind(viewBinding: ItemFilterBinding, position: Int) {

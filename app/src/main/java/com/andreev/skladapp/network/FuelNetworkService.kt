@@ -38,6 +38,7 @@ abstract class FuelNetworkService {
         return null
     }
 
+
     protected suspend fun <T> post(
         path: String,
         clazz: Class<T>,

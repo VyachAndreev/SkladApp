@@ -105,12 +105,12 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
             viewModel.getPositions()
         }
 
-        viewBinding.searchEt.setOnEditorActionListener(OnEditorActionListener { v: TextView?, actionId: Int, event: KeyEvent? ->
+        viewBinding.searchEt.setOnEditorActionListener { _: TextView?, actionId: Int, _: KeyEvent? ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 viewBinding.searchBtn.callOnClick()
             }
             false
-        })
+        }
 
         viewModel.searchedText.observe(this, this)
         viewModel.hints.observe(this, hintsListener)

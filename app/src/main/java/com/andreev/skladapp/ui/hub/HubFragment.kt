@@ -13,10 +13,14 @@ import com.andreev.skladapp.databinding.FragmentHubBinding
 import com.andreev.skladapp.databinding.ViewToolbarBinding
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui._base.BaseFragment
+import com.andreev.skladapp.ui.get.GetFragment
 import com.andreev.skladapp.ui.search.SearchFragment
 import com.andreev.skladapp.ui.search_plav.SearchPlavFragment
+import com.andreev.skladapp.ui.shipment.ShipmentFragment
 import com.andreev.skladapp.ui.show_all.ShowAllFragment
 import com.andreev.skladapp.ui.sign_in.SignInFragment
+import com.andreev.skladapp.ui.unite.UniteFragment
+import kotlinx.android.synthetic.main.view_drawer.view.*
 import timber.log.Timber
 
 class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
@@ -67,6 +71,24 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
         viewBinding.viewDrawer.plavSearchDi.setOnClickListener {
             launchChildFragment(SearchPlavFragment())
             updateToolbar(R.string.search_plav)
+            closeDrawer()
+        }
+
+        viewBinding.drawerLayout.unite_di.setOnClickListener {
+            launchChildFragment(UniteFragment())
+            updateToolbar(R.string.unite)
+            closeDrawer()
+        }
+
+        viewBinding.drawerLayout.acceptance_di.setOnClickListener {
+            launchChildFragment(GetFragment())
+            updateToolbar(R.string.get)
+            closeDrawer()
+        }
+
+        viewBinding.drawerLayout.shipment_di.setOnClickListener {
+            launchChildFragment(ShipmentFragment())
+            updateToolbar(R.string.ship)
             closeDrawer()
         }
 

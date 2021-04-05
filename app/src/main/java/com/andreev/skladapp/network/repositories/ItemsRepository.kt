@@ -63,6 +63,38 @@ class ItemsRepository : FuelNetworkService(){
         )
     }
 
+    fun getPackings(): Array<String>? {
+        return arrayOf(
+            "Моток",
+            "К300",
+            "Д300",
+            "К415",
+            "Д415",
+        )
+    }
+
+    suspend fun filter(arrayList: ArrayList<ArrayList<String>>): Array<Position>? {
+        return postWithJson(
+            FILTER,
+            Array<Position>::class.java,
+            FilterClass(
+                arrayList[0],
+                arrayList[2],
+                arrayList[1][0].toDouble(),
+                arrayList[1][1].toDouble(),
+                true,
+            )
+        )
+    }
+
+    data class FilterClass(
+        val mark: ArrayList<String>,
+        val packing: ArrayList<String>,
+        val DL: Double,
+        val DM: Double,
+        val table: Boolean,
+    )
+
     companion object {
         const val TAGS_PATH = "search/tag/"
         const val SEARCH_PATH = "search/"
@@ -73,7 +105,8 @@ class ItemsRepository : FuelNetworkService(){
         const val ALL_POSIOTIONS = "positions"
         const val MARKS = "position/marks"
         const val DIAMETER = "position/diameter"
-
+        const val FILTER = "filter"
+        const val HISTORY = "history/all"
     }
 }
 
