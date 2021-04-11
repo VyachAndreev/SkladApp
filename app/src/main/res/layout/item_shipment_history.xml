@@ -2,6 +2,29 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="number"
+            type="String" />
+
+        <variable
+            name="mark"
+            type="String" />
+
+        <variable
+            name="diameter"
+            type="String" />
+
+        <variable
+            name="packing"
+            type="String" />
+
+        <variable
+            name="mass"
+            type="String" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +44,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                tools:text="@string/number" />
+                tools:text='@{number != null? number : "№"}' />
 
             <TextView
                 style="@style/TextMicro.Bold"
@@ -30,7 +53,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="5"
                 android:gravity="center"
-                tools:text="@string/mark_" />
+                tools:text='@{mark != null? mark: "Марка"}' />
 
             <TextView
                 style="@style/TextMicro.Bold"
@@ -39,7 +62,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="3"
                 android:gravity="center"
-                tools:text="@string/diameter_" />
+                tools:text='@{diameter != null? diameter: "Диаметр"}' />
 
             <TextView
                 style="@style/TextMicro.Bold"
@@ -47,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:gravity="center"
-                tools:text="@string/packing_" />
+                tools:text='@{packing != null? packing: "Упаковка"}' />
 
             <TextView
                 style="@style/TextMicro.Bold"
@@ -56,7 +79,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="3"
                 android:gravity="center"
-                tools:text="@string/mass_" />
+                tools:text='@{mass != null? mass: "Масса"}' />
         </LinearLayout>
 
         <View
