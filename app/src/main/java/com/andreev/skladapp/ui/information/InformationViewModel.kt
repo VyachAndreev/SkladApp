@@ -22,6 +22,7 @@ class InformationViewModel : BaseViewModel(){
     }
 
     fun getPosition(id: Long?) {
+        Timber.i("position ID is $id")
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
                 itemsRepository.getPosition(id.toString())
@@ -34,6 +35,7 @@ class InformationViewModel : BaseViewModel(){
     }
 
     fun getPackage(id: Long?) {
+        Timber.i("package ID is $id")
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
                 itemsRepository.getPackage(id.toString())

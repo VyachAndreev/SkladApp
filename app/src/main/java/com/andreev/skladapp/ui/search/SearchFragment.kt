@@ -71,7 +71,7 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
                     val args = Bundle()
                     item.pos.id?.let { args.putLong(Constants.ID, it) }
                     Timber.i(item.pos.type)
-                    args.putBoolean(Constants.ISPACKAGE, item.pos.type == "POSITION")
+                    args.putBoolean(Constants.ISPACKAGE, item.pos.type == "PACKAGE")
                     (parentFragment as HubFragment).apply {
                         launchChildFragment(
                             InformationFragment(),
@@ -92,6 +92,9 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewBinding.root.setOnClickListener {
+            viewBinding.recyclerHints.visibility = View.GONE
+        }
         hideLoading()
         viewBinding.viewModel = viewModel
 

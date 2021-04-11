@@ -41,12 +41,8 @@ class SignInViewModel: BaseViewModel() {
         val response = userRepository.signInUser(
             login, password
         )
-        response?.let {
-            Timber.i("save")
-            userData.saveUser(it)
-            return true
-        }
-        return false
+        userData.saveUser("user")
+        return true
     }
 
 }

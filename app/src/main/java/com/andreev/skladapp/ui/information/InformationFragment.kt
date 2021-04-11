@@ -15,11 +15,12 @@ import com.andreev.skladapp.ui._item.PlaqueItem
 import com.andreev.skladapp.ui._item.TextViewItem
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import timber.log.Timber
 
 class InformationFragment: BaseFragment<FragmentInformationBinding>() {
     var adapter = GroupAdapter<GroupieViewHolder>()
     lateinit var viewModel: InformationViewModel
-    private var isPosition: Boolean? = null
+    private var isPackage: Boolean? = null
     private var id: Long? = null
 
     override fun getLayoutRes(): Int = R.layout.fragment_information
@@ -31,16 +32,17 @@ class InformationFragment: BaseFragment<FragmentInformationBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.let {
-            isPosition = it.getBoolean(Constants.ISPACKAGE)
+            isPackage = it.getBoolean(Constants.ISPACKAGE)
             id = it.getLong(Constants.ID)
+            Timber.i("$arguments")
         }
 
         viewModel.item.observe(this, itemListener)
 
         showLoading()
 
-        isPosition?.let {
-            if (it) {
+        isPackage?.let {
+            if (!it) {
                 setPositionLayout()
                 showLoading()
                 viewModel.getPosition(id)
@@ -81,8 +83,8 @@ class InformationFragment: BaseFragment<FragmentInformationBinding>() {
     private val itemListener = Observer<Position> {
         hideLoading()
         viewBinding.position = viewModel.item.value
-        isPosition?.let {
-            if (!it) {
+        isPackage?.let {
+            if (it) {
                 if (viewModel.item.value?.positionsList?.size!! > 0) {
                     viewModel.item.value?.positionsList?.map { position ->
                         PlaqueItem(
