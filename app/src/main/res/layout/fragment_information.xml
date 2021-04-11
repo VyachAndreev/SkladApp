@@ -25,33 +25,6 @@
 
             <Button
                 android:padding="1dp"
-                android:id="@+id/print_code_btn"
-                android:textAllCaps="false"
-                android:layout_gravity="center_vertical"
-                android:text="@string/print_code"
-                style="@style/ButtonTextSmall"
-                android:textSize="12sp"
-                android:layout_width="0dp"
-                android:layout_height="70dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg_rounded_btn" />
-
-            <Button
-                android:padding="1dp"
-                android:id="@+id/print_positions_btn"
-                android:text="@string/print_positions"
-                android:textAllCaps="false"
-                android:layout_gravity="center_vertical"
-                style="@style/ButtonTextSmall"
-                android:textSize="12sp"
-                android:layout_width="0dp"
-                android:layout_height="70dp"
-                android:layout_marginStart="14dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg_rounded_btn" />
-
-            <Button
-                android:padding="1dp"
                 android:id="@+id/ship_btn"
                 android:text="@string/ship"
                 android:textAllCaps="false"

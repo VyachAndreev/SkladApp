@@ -56,7 +56,6 @@ class InformationFragment: BaseFragment<FragmentInformationBinding>() {
     private fun setPositionLayout() {
         viewBinding.apply {
             showPositions.visibility = View.GONE
-            printPositionsBtn.visibility = View.GONE
         }
     }
 
