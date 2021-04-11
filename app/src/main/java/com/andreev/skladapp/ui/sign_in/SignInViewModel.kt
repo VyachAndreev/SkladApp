@@ -1,13 +1,10 @@
 package com.andreev.skladapp.ui.sign_in
 
-import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
-import com.andreev.skladapp.data.User
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.network.repositories.UserRepository
 import com.andreev.skladapp.stored_data.UserStoredData
 import com.andreev.skladapp.ui._base.BaseViewModel
-import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -45,11 +42,9 @@ class SignInViewModel: BaseViewModel() {
             login, password
         )
         response?.let {
-            if (it != null) {
-                Timber.i("save")
-                userData.saveUser(it)
-                return true
-            }
+            Timber.i("save")
+            userData.saveUser(it)
+            return true
         }
         return false
     }

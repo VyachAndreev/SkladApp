@@ -5,10 +5,8 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.andreev.skladapp.R
-import com.andreev.skladapp.data.User
 import com.andreev.skladapp.databinding.FragmentSignInBinding
 import com.andreev.skladapp.di.ApplicationComponent
-import com.andreev.skladapp.ui.MainActivity
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui.hub.HubFragment
 import kotlinx.coroutines.Dispatchers
