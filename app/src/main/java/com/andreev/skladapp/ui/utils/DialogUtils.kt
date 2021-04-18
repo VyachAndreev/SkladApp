@@ -14,6 +14,7 @@ import com.andreev.skladapp.R
 import com.andreev.skladapp.data.HistoryPiece
 import com.andreev.skladapp.databinding.DialogFilterBinding
 import com.andreev.skladapp.databinding.DialogHistoryBinding
+import com.andreev.skladapp.databinding.DialogShipmentBinding
 import com.andreev.skladapp.databinding.ItemTextViewBinding
 import com.andreev.skladapp.ui._adapter.MultiSelectionAdapter
 import com.andreev.skladapp.ui._item.FilterItem
@@ -167,5 +168,26 @@ object DialogUtils {
 
         dialog.show()
 
+    }
+
+    fun showShipDialog(
+        context: Context?,
+        onShip: (ArrayList<ArrayList<String>>) -> (Unit),
+    ) {
+        lateinit var dialog: AlertDialog
+        val dialogBinding = DataBindingUtil.inflate<DialogShipmentBinding>(
+            LayoutInflater.from(context),
+            R.layout.dialog_shipment,
+            null,
+            false
+        )
+        dialogBinding.apply {
+
+        }
+
+        dialog =
+            baseDialog(dialogBinding.root)
+
+        dialog.show()
     }
 }

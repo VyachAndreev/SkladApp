@@ -13,6 +13,7 @@ import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.PlaqueItem
 import com.andreev.skladapp.ui._item.TextViewItem
+import com.andreev.skladapp.ui.utils.DialogUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import timber.log.Timber
@@ -38,6 +39,12 @@ class InformationFragment: BaseFragment<FragmentInformationBinding>() {
         }
 
         viewModel.item.observe(this, itemListener)
+
+        viewBinding.shipBtn.setOnClickListener {
+            DialogUtils.showShipDialog(context) {
+
+            }
+        }
 
         showLoading()
 

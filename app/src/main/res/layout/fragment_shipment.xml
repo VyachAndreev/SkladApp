@@ -63,17 +63,22 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp" />
 
+        <FrameLayout
+            android:layout_gravity="center"
+            android:layout_marginTop="33dp"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:padding="5dp"
+            android:background="@color/white">
         <Button
+            android:layout_gravity="center"
             android:id="@+id/btn_ship"
             style="@style/ButtonTextNormal.Bold"
             android:layout_width="210dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="33dp"
-            android:layout_marginBottom="20dp"
-            android:background="@color/gray_C4C"
+            android:layout_height="60dp"
             android:textAllCaps="false"
             android:text="@string/ship"/>
+        </FrameLayout>
     </LinearLayout>
 
     </LinearLayout>
