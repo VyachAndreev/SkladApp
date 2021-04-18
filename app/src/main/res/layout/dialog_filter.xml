@@ -1,178 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_dialog"
-        android:orientation="vertical">
-
-        <TextView
-            style="@style/TextBig"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="26dp"
-            android:gravity="center"
-            android:text="@string/filter"
-            tools:text="Фильтр" />
-
-        <TextView
-            style="@style/TextNormal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="@string/mark"
-            tools:text="Марка:" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mark_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="33dp"
-            tools:itemCount="3"
-            tools:listitem="@layout/item_filter" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="33dp"
-            android:background="@color/gray_C4C" />
-
-        <TextView
-            style="@style/TextNormal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:text="@string/diameter"
-            tools:text="Диаметр:" />
-
-        <com.google.android.material.slider.RangeSlider
-            android:id="@+id/rangeSlider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="33dp"/>
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
+            android:background="@drawable/bg_dialog"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextBig"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="13dp"
+                android:gravity="center"
+                android:text="@string/filter"
+                tools:text="Фильтр" />
 
             <TextView
                 style="@style/TextNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginStart="33dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="@string/from"
-                tools:text="От" />
+                android:text="@string/mark"
+                tools:text="Марка:" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mark_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="33dp"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_filter" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="33dp"
+                android:background="@color/gray_C4C" />
 
             <TextView
-                android:id="@+id/from_et"
                 style="@style/TextNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/bg_filter_et"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
-                tools:text="123" />
+                android:text="@string/diameter"
+                tools:text="Диаметр:" />
+
+            <com.google.android.material.slider.RangeSlider
+                android:id="@+id/rangeSlider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="33dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="33dp"
+                    android:gravity="center"
+                    android:text="@string/from"
+                    tools:text="От" />
+
+                <TextView
+                    android:id="@+id/from_et"
+                    style="@style/TextNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_filter_et"
+                    android:gravity="center"
+                    tools:text="123" />
+
+                <TextView
+                    style="@style/TextNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="6dp"
+                    android:gravity="center"
+                    android:text="@string/to"
+                    tools:text="до" />
+
+                <TextView
+                    android:id="@+id/to_et"
+                    style="@style/TextNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_filter_et"
+                    android:gravity="center"
+                    tools:text="123" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="33dp"
+                android:background="@color/gray_C4C" />
 
             <TextView
                 style="@style/TextNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="@string/to"
-                tools:text="до" />
+                android:text="@string/packing"
+                tools:text="Упаковка:" />
 
-            <TextView
-                android:id="@+id/to_et"
-                style="@style/TextNormal"
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/packing_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="33dp"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_filter" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/bg_filter_et"
-                android:gravity="center"
-                tools:text="123" />
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="22dp">
+
+                <Button
+                    android:id="@+id/filter_btn"
+                    style="@style/TextLSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button_filter"
+                    android:text="@string/to_filter"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/clear_filter"
+                    style="@style/TextLSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="13dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button_filter"
+                    android:text="@string/clear_filter"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="33dp"
-            android:background="@color/gray_C4C" />
-
-        <TextView
-            style="@style/TextNormal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="@string/packing"
-            tools:text="Упаковка:" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/packing_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="33dp"
-            tools:itemCount="3"
-            tools:listitem="@layout/item_filter" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="22dp">
-
-            <Button
-                android:layout_gravity="center"
-                android:id="@+id/filter_btn"
-                style="@style/TextLSmall"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/bg_button_filter"
-                android:text="@string/to_filter"
-                android:textAllCaps="false" />
-
-            <Button
-                android:layout_gravity="center"
-                android:id="@+id/clear_filter"
-                style="@style/TextLSmall"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="13dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg_button_filter"
-                android:text="@string/clear_filter"
-                android:textAllCaps="false" />
-        </LinearLayout>
-
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

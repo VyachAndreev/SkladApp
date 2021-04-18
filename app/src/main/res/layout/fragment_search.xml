@@ -8,13 +8,15 @@
             type="com.andreev.skladapp.ui.search.SearchViewModel" />
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:background="@color/white">
 
         <LinearLayout
+            android:layout_gravity="center"
             android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,12 +25,14 @@
             android:layout_marginEnd="14dp"
             android:background="@color/blue_3B4"
             android:paddingTop="21dp"
-            android:paddingBottom="21dp">
+            android:paddingBottom="21dp"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/search_et"
                 style="@style/TextSmall"
-                android:layout_width="300dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="40dp"
                 android:layout_marginStart="17dp"
                 android:autofillHints="@string/search_hint"
@@ -43,6 +47,7 @@
                 android:text="@={viewModel.searchedText}" />
 
             <ImageButton
+                android:layout_marginEnd="10dp"
                 android:id="@+id/search_btn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -58,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/linear"
-            android:layout_marginTop="60dp">
+            android:layout_marginTop="10dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler"
@@ -76,7 +81,7 @@
             android:layout_marginEnd="14dp"
             android:visibility="gone"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </layout>

@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import com.andreev.skladapp.R
 import com.andreev.skladapp.databinding.ViewToolbarBinding
+import com.andreev.skladapp.ui.MainActivity
 
 class CustomToolbar(context: Context, attributeSet: AttributeSet)
     : FrameLayout(context, attributeSet) {
@@ -20,10 +21,10 @@ class CustomToolbar(context: Context, attributeSet: AttributeSet)
         true
     )
 
-    fun setUpDrawer(drawer: DrawerLayout, drawerView: View) {
+    fun setUpDrawer(drawer: DrawerLayout, drawerView: View, mainActivity: MainActivity) {
         viewBinding.ivToolbarMenu.setOnClickListener {
             openDrawer(drawer, drawerView)
-
+            mainActivity.hideKeyboard()
         }
     }
 

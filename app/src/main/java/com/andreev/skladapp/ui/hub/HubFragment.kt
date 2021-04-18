@@ -12,6 +12,7 @@ import com.andreev.skladapp.R
 import com.andreev.skladapp.databinding.FragmentHubBinding
 import com.andreev.skladapp.databinding.ViewToolbarBinding
 import com.andreev.skladapp.di.ApplicationComponent
+import com.andreev.skladapp.ui.MainActivity
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui.get.GetFragment
 import com.andreev.skladapp.ui.search.SearchFragment
@@ -40,7 +41,8 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
         toolbarBinding = viewBinding.toolbar.viewBinding
         viewBinding.toolbar.setUpDrawer(
             viewBinding.drawerLayout,
-            viewBinding.viewDrawer.drawer
+            viewBinding.viewDrawer.drawer,
+            activity as MainActivity
         )
         viewModel.curMenuItem.observe(this, this)
 
