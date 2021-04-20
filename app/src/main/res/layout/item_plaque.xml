@@ -189,7 +189,7 @@
             android:layout_below="@id/comment_tv"
             android:layout_toEndOf="@id/status_tv"
             android:layout_marginTop="14dp"
-            android:text='@{position.status}'
+            android:text='@{position.status.equals("Departured")? "Отгружен": position.status.equals("In_stock")? "На складе": "Прибывает"}'
             tools:text="Позиция" />
 
     </RelativeLayout>

@@ -72,7 +72,8 @@ abstract class FuelNetworkService {
                 .fold({ jsonResponse ->
                     return@fold gson.fromJson(jsonResponse, clazz)
                 }) { error ->
-                    return@fold gson.fromJson(error.errorData.toString(Charsets.UTF_8), clazz)
+                    Timber.i("$error")
+                    return null
                 }
         } catch (e: Exception) {
             e.printStackTrace()
