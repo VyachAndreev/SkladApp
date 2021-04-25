@@ -27,9 +27,9 @@ import timber.log.Timber
 class ShowAllFragment: BaseFragment<FragmentShowAllBinding>() {
 
     private var adapter = GroupAdapter<GroupieViewHolder>()
-    private var tableAdapter = GroupAdapter<GroupieViewHolder>()
     private lateinit var spinnerAdapter: SelectionAdapter<String>
     lateinit var viewModel: ShowAllViewModel
+    private var isTable = false
 
     override fun getLayoutRes(): Int = R.layout.fragment_show_all
 
@@ -75,7 +75,12 @@ class ShowAllFragment: BaseFragment<FragmentShowAllBinding>() {
                 viewModel.diameter.value,
                 viewModel.packings.value,
             ) {
-                viewModel.filter(it)
+                showLoading()
+                if (isTable) {
+                    viewModel.filterTable(it)
+                } else {
+                    viewModel.filter(it)
+                }
             }
         }
 
@@ -88,9 +93,17 @@ class ShowAllFragment: BaseFragment<FragmentShowAllBinding>() {
         viewBinding.swipeLayout.setColorSchemeColors(resources.getColor(R.color.blue_3B4))
         viewBinding.swipeLayout.setOnRefreshListener {
             if (viewModel.filterData != null) {
-                viewModel.filter(viewModel.filterData!!)
+                if (isTable) {
+                    viewModel.filterTable(viewModel.filterData!!)
+                } else {
+                    viewModel.filter(viewModel.filterData!!)
+                }
             } else {
-                viewModel.getPositions()
+                if (isTable) {
+                    viewModel.getTable()
+                } else {
+                    viewModel.getPositions()
+                }
             }
         }
     }
@@ -116,10 +129,14 @@ class ShowAllFragment: BaseFragment<FragmentShowAllBinding>() {
             if (userSelect) {
                 userSelect = false
                 spinnerAdapter.selectedItem = pos
+                adapter.clear()
+                showLoading()
                 if (pos == 0) {
-                    viewBinding.recycler.adapter = adapter
+                    isTable = false
+                    viewModel.getPositions()
                 } else {
-                    viewBinding.recycler.adapter = tableAdapter
+                    isTable = true
+                    viewModel.getTable()
                 }
                 spinnerAdapter.notifyDataSetChanged()
             }
@@ -131,24 +148,26 @@ class ShowAllFragment: BaseFragment<FragmentShowAllBinding>() {
         viewBinding.swipeLayout.isRefreshing = false
         hideLoading()
         adapter.clear()
-        tableAdapter.clear()
         if (it.isNotEmpty()) {
-            adapter.addAll(
-                it.map { position ->
-                    PlaqueItem(position)
-                }
-            )
-            tableAdapter.add(
-                ShipmentItem()
-            )
-            var i = 0
-            for (position in it) {
-                i++
-                tableAdapter.add(
-                    ShipmentItem(
-                        i.toString(),
-                        position,
+            if (isTable) {
+                adapter.add(
+                    ShipmentItem()
+                )
+                var i = 0
+                for (position in it) {
+                    i++
+                    adapter.add(
+                        ShipmentItem(
+                            i.toString(),
+                            position,
+                        )
                     )
+                }
+            } else {
+                adapter.addAll(
+                    it.map { position ->
+                        PlaqueItem(position)
+                    }
                 )
             }
         } else {

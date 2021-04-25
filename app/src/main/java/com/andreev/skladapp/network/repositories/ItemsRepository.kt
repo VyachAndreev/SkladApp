@@ -88,6 +88,20 @@ class ItemsRepository : FuelNetworkService(){
         )
     }
 
+    suspend fun filterTable(arrayList: ArrayList<ArrayList<String>>): Array<Position>? {
+        return postWithJson(
+            TABLE,
+            Array<Position>::class.java,
+            FilterClass(
+                arrayList[0],
+                arrayList[2],
+                arrayList[1][0].toDouble(),
+                arrayList[1][1].toDouble(),
+                true,
+            )
+        )
+    }
+
     data class FilterClass(
         val mark: ArrayList<String>,
         val packing: ArrayList<String>,
@@ -103,6 +117,13 @@ class ItemsRepository : FuelNetworkService(){
         )
     }
 
+    suspend fun getTable(): Array<Position>? {
+        return get(
+            TABLE,
+            Array<Position>::class.java
+        )
+    }
+
     companion object {
         const val TAGS_PATH = "search/tag/"
         const val SEARCH_PATH = "search/"
@@ -115,6 +136,7 @@ class ItemsRepository : FuelNetworkService(){
         const val DIAMETER = "position/diameter"
         const val FILTER = "filter"
         const val HISTORY = "history/all"
+        const val TABLE = "table"
     }
 }
 

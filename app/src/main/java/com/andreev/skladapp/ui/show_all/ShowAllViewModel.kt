@@ -37,6 +37,18 @@ class ShowAllViewModel : BaseViewModel() {
         }
     }
 
+    fun getTable() {
+        filterData = null
+        scopeMain.launch {
+            val response = withContext(Dispatchers.IO) {
+                itemRepository.getTable()
+            }
+            if (response != null) {
+                positions.value = response
+            }
+        }
+    }
+
     fun getDiameter() {
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
@@ -77,4 +89,19 @@ class ShowAllViewModel : BaseViewModel() {
             }
         }
     }
+
+
+
+    fun filterTable(arrayList: ArrayList<ArrayList<String>>) {
+        filterData = arrayList
+        scopeMain.launch {
+            val response = withContext(Dispatchers.IO) {
+                itemRepository.filterTable(arrayList)
+            }
+            if (response != null) {
+                positions.value = response
+            }
+        }
+    }
+
 }
