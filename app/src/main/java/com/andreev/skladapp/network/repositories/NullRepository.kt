@@ -30,7 +30,7 @@ class NullRepository : FuelNetworkService() {
     }
 
     companion object {
-        const val UNITE = "union?ids="
-        const val GET = "union?ids="
+        const val UNITE = "api/union?ids="
+        const val GET = "api/union?ids="
     }
 }

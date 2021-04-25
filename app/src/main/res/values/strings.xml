@@ -23,6 +23,11 @@
     <string name="to_filter">Отфильтровать</string>
     <string name="clear_filter">Очистить фильтр</string>
 
+    <!-- Ship Dialog -->
+    <string name="weight_of_ship">Вес отгрузки</string>
+    <string name="contr_agent">Контр. агент</string>
+    <string name="bill">Счет</string>
+
     <!-- Fragment Sign In -->
     <string name="auth">Авторизация</string>
     <string name="login">Логин</string>

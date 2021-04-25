@@ -1,6 +1,8 @@
 package com.andreev.skladapp.ui
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -102,6 +104,16 @@ class MainActivity : AppCompatActivity() {
                 super.onBackPressed()
             }
         }
+    }
+
+    fun openUrl(url: String) {
+        Timber.i(url)
+        if (!url.startsWith("http://")) {
+            openUrl("http://$url")
+            return
+        }
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
     }
     
     fun showToast(text: String) {

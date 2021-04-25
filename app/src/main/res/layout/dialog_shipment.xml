@@ -13,11 +13,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="10dp"
-                android:text="@string/ship_semi"
+                android:text="@string/weight_of_ship"
                 android:textColor="@color/white" />
 
             <EditText
-                android:id="@+id/weight_et"
+                android:id="@+id/et_ship"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="24dp"
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="12dp"
-                android:text="@string/except_semi"
+                android:text="@string/contr_agent"
                 android:textColor="@color/white" />
 
             <EditText
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="12dp"
-                android:text="@string/except_semi"
+                android:text="@string/bill"
                 android:textColor="@color/white" />
 
             <EditText

@@ -125,18 +125,18 @@ class ItemsRepository : FuelNetworkService(){
     }
 
     companion object {
-        const val TAGS_PATH = "search/tag/"
-        const val SEARCH_PATH = "search/"
+        const val TAGS_PATH = "api/search/tag/"
+        const val SEARCH_PATH = "api/search/"
         const val TAGS_PLAV_PATH = "api/search/plavka/tags?plav="
-        const val SEARCH_PLAV_PATH = "search/plavka?plav="
-        const val POSITION_PATH = "position/"
-        const val PACKAGE_PATH = "package?id="
-        const val ALL_POSIOTIONS = "positions"
-        const val MARKS = "position/marks"
-        const val DIAMETER = "position/diameter"
-        const val FILTER = "filter"
-        const val HISTORY = "history/all"
-        const val TABLE = "table"
+        const val SEARCH_PLAV_PATH = "api/search/plavka?plav="
+        const val POSITION_PATH = "api/position/"
+        const val PACKAGE_PATH = "api/package?id="
+        const val ALL_POSIOTIONS = "api/positions"
+        const val MARKS = "api/position/marks"
+        const val DIAMETER = "api/position/diameter"
+        const val FILTER = "api/filter"
+        const val HISTORY = "api/history/all"
+        const val TABLE = "api/table"
     }
 }
 

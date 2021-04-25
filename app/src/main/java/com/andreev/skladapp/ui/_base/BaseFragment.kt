@@ -141,4 +141,10 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
         )
         viewBinding.lifecycleOwner = this
     }
+
+    protected fun openUrl(url: String) {
+        (activity as? MainActivity)?.apply {
+            this.openUrl(url)
+        }
+    }
 }

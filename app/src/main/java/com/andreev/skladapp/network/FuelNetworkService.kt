@@ -9,7 +9,7 @@ import org.json.JSONObject
 import timber.log.Timber
 
 abstract class FuelNetworkService {
-    private val BASE_URL = "http://ferro-trade.ru/api/"
+    private val BASE_URL = "http://ferro-trade.ru/"
     private val gson = Gson()
 
     init {
@@ -48,7 +48,7 @@ abstract class FuelNetworkService {
             return Fuel.post(path, parameters)
                 .awaitStringResult()
                 .fold({ jsonResponse ->
-                    Timber.i("$jsonResponse")
+                    Timber.i("post jsonResponse is $jsonResponse")
                     return@fold gson.fromJson(jsonResponse, clazz)
                 }) { error ->
                     Timber.i("$error")

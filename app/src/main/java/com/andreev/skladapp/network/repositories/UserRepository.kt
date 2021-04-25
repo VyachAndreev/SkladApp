@@ -11,7 +11,7 @@ class UserRepository : FuelNetworkService() {
 
     suspend fun signInUser(login: String, password: String) : String? {
         return postWithJson(
-            "/login?username=$login&password=$password",
+            LOGIN,
             String::class.java,
             User(login, password),
         )
