@@ -19,7 +19,6 @@ import com.andreev.skladapp.ui.history.HistoryFragment
 import com.andreev.skladapp.ui.search.SearchFragment
 import com.andreev.skladapp.ui.search_plav.SearchPlavFragment
 import com.andreev.skladapp.ui.shipment.ShipmentFragment
-import com.andreev.skladapp.ui.shipment_history.ShipmentHistoryFragment
 import com.andreev.skladapp.ui.show_all.ShowAllFragment
 import com.andreev.skladapp.ui.sign_in.SignInFragment
 import com.andreev.skladapp.ui.unite.UniteFragment
@@ -85,6 +84,12 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
             closeDrawer()
         }
 
+        viewBinding.drawerLayout.shipment_history_di.setOnClickListener {
+            launchChildFragment(HistoryFragment())
+            updateToolbar(R.string.shipment_history)
+            closeDrawer()
+        }
+
         viewBinding.drawerLayout.acceptance_di.setOnClickListener {
             launchChildFragment(GetFragment())
             updateToolbar(R.string.get)
@@ -143,16 +148,13 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
                 updateToolbar(R.string.see_all)
             }
             is HistoryFragment -> {
-                updateToolbar(R.string.history)
+                updateToolbar(R.string.shipment_history)
             }
             is SearchPlavFragment -> {
                 updateToolbar(R.string.search_plav)
             }
             is ShipmentFragment -> {
                 updateToolbar(R.string.ship)
-            }
-            is ShipmentHistoryFragment -> {
-                updateToolbar(R.string.shipment_history)
             }
         }
     }

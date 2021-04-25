@@ -10,7 +10,6 @@ import com.andreev.skladapp.ui.hub.HubViewModel
 import com.andreev.skladapp.ui.information.InformationViewModel
 import com.andreev.skladapp.ui.search.SearchViewModel
 import com.andreev.skladapp.ui.shipment.ShipmentViewModel
-import com.andreev.skladapp.ui.shipment_history.ShipmentHistoryViewModel
 import com.andreev.skladapp.ui.show_all.ShowAllViewModel
 import com.andreev.skladapp.ui.sign_in.SignInViewModel
 import com.andreev.skladapp.ui.unite.UniteViewModel
@@ -39,8 +38,6 @@ interface ApplicationComponent {
     fun inject(getViewModel: GetViewModel)
 
     fun inject(shipmentViewModel: ShipmentViewModel)
-
-    fun inject(shipmentHistoryViewModel: ShipmentHistoryViewModel)
 
     fun inject(historyViewModel: HistoryViewModel)
 }

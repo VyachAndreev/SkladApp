@@ -28,6 +28,7 @@ class HistoryViewModel: BaseViewModel() {
             }
             if (response != null) {
                 historyPiecesData.value = response
+                Timber.i("history pieces is ${historyPiecesData.value}")
             }
         }
     }

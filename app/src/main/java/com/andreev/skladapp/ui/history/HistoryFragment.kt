@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.andreev.skladapp.R
 import com.andreev.skladapp.data.HistoryPiece
 import com.andreev.skladapp.databinding.FragmentSearchBinding
@@ -26,7 +27,10 @@ class HistoryFragment : BaseFragment<FragmentSearchBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         adapter.setHasStableIds(true)
         viewBinding.linear.visibility = View.GONE
-
+        viewBinding.recycler.apply {
+            adapter = this@HistoryFragment.adapter
+            layoutManager = LinearLayoutManager(context)
+        }
         viewModel.historyPiecesData.observe(this, historyObserver)
         showLoading()
         viewModel.getHistory()
