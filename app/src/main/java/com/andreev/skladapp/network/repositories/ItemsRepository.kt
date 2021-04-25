@@ -1,5 +1,6 @@
 package com.andreev.skladapp.network.repositories
 
+import com.andreev.skladapp.data.HistoryPiece
 import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.network.FuelNetworkService
 
@@ -94,6 +95,13 @@ class ItemsRepository : FuelNetworkService(){
         val DM: Double,
         val table: Boolean,
     )
+
+    suspend fun getHistory(): Array<HistoryPiece>? {
+        return get(
+            HISTORY,
+            Array<HistoryPiece>::class.java,
+        )
+    }
 
     companion object {
         const val TAGS_PATH = "search/tag/"

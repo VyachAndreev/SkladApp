@@ -15,9 +15,11 @@ import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui.MainActivity
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui.get.GetFragment
+import com.andreev.skladapp.ui.history.HistoryFragment
 import com.andreev.skladapp.ui.search.SearchFragment
 import com.andreev.skladapp.ui.search_plav.SearchPlavFragment
 import com.andreev.skladapp.ui.shipment.ShipmentFragment
+import com.andreev.skladapp.ui.shipment_history.ShipmentHistoryFragment
 import com.andreev.skladapp.ui.show_all.ShowAllFragment
 import com.andreev.skladapp.ui.sign_in.SignInFragment
 import com.andreev.skladapp.ui.unite.UniteFragment
@@ -49,6 +51,7 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
         launchChildFragment(
             R.id.hub_container,
             SearchFragment(),
+            false,
             replace = true,
         )
 
@@ -135,6 +138,21 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
         when (fragment) {
             is SearchFragment -> {
                 updateToolbar(R.string.search)
+            }
+            is ShowAllFragment -> {
+                updateToolbar(R.string.see_all)
+            }
+            is HistoryFragment -> {
+                updateToolbar(R.string.history)
+            }
+            is SearchPlavFragment -> {
+                updateToolbar(R.string.search_plav)
+            }
+            is ShipmentFragment -> {
+                updateToolbar(R.string.ship)
+            }
+            is ShipmentHistoryFragment -> {
+                updateToolbar(R.string.shipment_history)
             }
         }
     }

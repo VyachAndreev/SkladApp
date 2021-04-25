@@ -8,20 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.StyleRes
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andreev.skladapp.R
-import com.andreev.skladapp.data.HistoryPiece
+import com.andreev.skladapp.data.TablePiece
 import com.andreev.skladapp.databinding.DialogFilterBinding
 import com.andreev.skladapp.databinding.DialogHistoryBinding
 import com.andreev.skladapp.databinding.DialogShipmentBinding
-import com.andreev.skladapp.databinding.ItemTextViewBinding
 import com.andreev.skladapp.ui._adapter.MultiSelectionAdapter
 import com.andreev.skladapp.ui._item.FilterItem
-import com.andreev.skladapp.ui._item.HistoryItem
+import com.andreev.skladapp.ui._item.TableItem
 import com.andreev.skladapp.ui._item.TextViewItem
-import com.google.android.material.slider.LabelFormatter
-import com.google.android.material.tabs.TabLayout
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
@@ -44,7 +40,7 @@ object DialogUtils {
 
     fun showHistoryDialog(
         context: Context?,
-        historyPieces: ArrayList<HistoryPiece>,
+        tablePieces: ArrayList<TablePiece>,
     ) {
         lateinit var dialog: AlertDialog
         val dialogBinding = DataBindingUtil.inflate<DialogHistoryBinding>(
@@ -59,9 +55,9 @@ object DialogUtils {
             adapter = recyclerAdapter
         }
 
-        if (historyPieces.size > 0) {
-            recyclerAdapter.addAll(historyPieces.map {
-                HistoryItem(it)
+        if (tablePieces.size > 0) {
+            recyclerAdapter.addAll(tablePieces.map {
+                TableItem(it)
             })
         } else {
             recyclerAdapter.add(TextViewItem("Данные отсутствуют"))

@@ -9,6 +9,10 @@ import com.xwray.groupie.viewbinding.BindableItem
 class ShipmentItem(
     val number: String? = null,
     val mPosition: Position? = null,
+    val mark: String? = null,
+    val diameter: String? = null,
+    val packing: String? = null,
+    val mass: String? = null,
 ): BindableItem<ItemShipmentHistoryBinding>() {
     override fun bind(viewBinding: ItemShipmentHistoryBinding, position: Int) {
         viewBinding.number = number
@@ -18,10 +22,10 @@ class ShipmentItem(
             viewBinding.packing = mPosition.packing
             viewBinding.mass = mPosition.mass.toString()
         } else {
-            viewBinding.mark = null
-            viewBinding.diameter = null
-            viewBinding.packing = null
-            viewBinding.mass = null
+            viewBinding.mark = mark
+            viewBinding.diameter = diameter
+            viewBinding.packing = packing
+            viewBinding.mass = mass
         }
     }
 

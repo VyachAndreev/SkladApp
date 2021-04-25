@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="historyPiece"
-            type="com.andreev.skladapp.data.HistoryPiece" />
+            name="tablePiece"
+            type="com.andreev.skladapp.data.TablePiece" />
     </data>
 
     <LinearLayout
@@ -25,7 +25,7 @@
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@{historyPiece.number}"
+                android:text="@{tablePiece.number}"
                 tools:text="1" />
 
             <TextView
@@ -35,7 +35,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
-                android:text="@{historyPiece.type}"
+                android:text="@{tablePiece.type}"
                 tools:text="Добавление" />
 
             <TextView
@@ -45,7 +45,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
-                android:text="@{historyPiece.date}"
+                android:text="@{tablePiece.date}"
                 tools:text="10.11.2020" />
 
             <TextView
@@ -55,7 +55,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
-                android:text="@{historyPiece.place}"
+                android:text="@{tablePiece.place}"
                 tools:text="Солнечногорск" />
 
         </LinearLayout>

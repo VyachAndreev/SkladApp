@@ -4,6 +4,7 @@ import com.andreev.skladapp.di.modules.RepositoryModule
 import com.andreev.skladapp.ui.MainActivity
 import com.andreev.skladapp.di.modules.SettingsModule
 import com.andreev.skladapp.ui.get.GetViewModel
+import com.andreev.skladapp.ui.history.HistoryViewModel
 import com.andreev.skladapp.ui.hub.HubFragment
 import com.andreev.skladapp.ui.hub.HubViewModel
 import com.andreev.skladapp.ui.information.InformationViewModel
@@ -40,4 +41,6 @@ interface ApplicationComponent {
     fun inject(shipmentViewModel: ShipmentViewModel)
 
     fun inject(shipmentHistoryViewModel: ShipmentHistoryViewModel)
+
+    fun inject(historyViewModel: HistoryViewModel)
 }
