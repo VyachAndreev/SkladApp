@@ -72,9 +72,13 @@ class ShowAllViewModel : BaseViewModel() {
     }
 
     fun getPackings() {
-        packings.value = itemRepository.getPackings()
-        packings.value?.forEach {
-            Timber.i(it)
+        scopeMain.launch {
+            val response = withContext(Dispatchers.IO) {
+                itemRepository.getPackings()
+            }
+            if (response != null) {
+                packings.value = response
+            }
         }
     }
 

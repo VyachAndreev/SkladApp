@@ -2,6 +2,7 @@ package com.andreev.skladapp.network
 
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.FuelManager
+import com.github.kittinunf.fuel.core.extensions.authentication
 import com.github.kittinunf.fuel.core.extensions.jsonBody
 import com.github.kittinunf.fuel.coroutines.awaitStringResult
 import com.google.gson.Gson
@@ -11,6 +12,8 @@ import timber.log.Timber
 abstract class FuelNetworkService {
     private val BASE_URL = "http://ferro-trade.ru/"
     private val gson = Gson()
+    private val login = "sergey"
+    private val password = "vAlAvin2002"
 
     init {
         FuelManager.instance.basePath = BASE_URL
@@ -23,6 +26,8 @@ abstract class FuelNetworkService {
     ): T? {
         try {
             return Fuel.get(path, parameters)
+                .authentication()
+                .basic(login, password)
                 .awaitStringResult()
                 .fold({ jsonResponse ->
                     Timber.i("get jsonResponse is $jsonResponse")
@@ -46,6 +51,8 @@ abstract class FuelNetworkService {
     ): T? {
         try {
             return Fuel.post(path, parameters)
+                .authentication()
+                .basic(login, password)
                 .awaitStringResult()
                 .fold({ jsonResponse ->
                     Timber.i("post jsonResponse is $jsonResponse")
@@ -68,6 +75,8 @@ abstract class FuelNetworkService {
         try {
             return Fuel.post(path)
                 .jsonBody(JSONObject(gson.toJson(parameters)).toString(), Charsets.UTF_8)
+                .authentication()
+                .basic(login, password)
                 .awaitStringResult()
                 .fold({ jsonResponse ->
                     return@fold gson.fromJson(jsonResponse, clazz)

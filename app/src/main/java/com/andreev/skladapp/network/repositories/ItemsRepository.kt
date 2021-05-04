@@ -32,12 +32,12 @@ class ItemsRepository : FuelNetworkService(){
     }
 
     suspend fun getPlavHints(tag: String?): Array<String>? {
-        return get(TAGS_PLAV_PATH + tag, Array<String>::class.java)
+        return post(TAGS_PLAV_PATH + tag, Array<String>::class.java)
     }
 
 
     suspend fun getPlavPositions(text: String?): Array<Position>? {
-        return get(
+        return post(
             SEARCH_PLAV_PATH + text,
             Array<Position>::class.java,
         )
@@ -64,13 +64,10 @@ class ItemsRepository : FuelNetworkService(){
         )
     }
 
-    fun getPackings(): Array<String>? {
-        return arrayOf(
-            "Моток",
-            "К300",
-            "Д300",
-            "К415",
-            "Д415",
+    suspend fun getPackings(): Array<String>? {
+        return get(
+            PACKS,
+            Array<String>::class.java,
         )
     }
 
@@ -137,6 +134,7 @@ class ItemsRepository : FuelNetworkService(){
         const val FILTER = "api/filter"
         const val HISTORY = "api/history/all"
         const val TABLE = "api/table"
+        const val PACKS = "api/packings"
     }
 }
 
