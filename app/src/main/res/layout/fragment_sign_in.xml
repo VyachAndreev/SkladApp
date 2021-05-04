@@ -1,13 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-        <WebView
-            android:id="@+id/web_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-    </LinearLayout>
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.andreev.skladapp.ui.sign_in.SignInViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/auth_tv"
+            style="@style/TextBig.Light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/auth"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Авторизация" />
+
+        <LinearLayout
+            android:id="@+id/layout_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/auth_tv"
+            app:layout_constraintVertical_bias="0.12">
+
+            <EditText
+                android:id="@+id/login_et"
+                style="@style/TextNormal"
+                android:layout_width="290dp"
+                android:layout_height="45dp"
+                android:autofillHints="@string/login"
+                android:background="@drawable/login_et"
+                android:hint="@string/login"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="@={viewModel.login}"
+                app:layout_constraintEnd_toEndOf="@id/layout_et"
+                app:layout_constraintStart_toStartOf="@id/layout_et"
+                app:layout_constraintTop_toTopOf="@id/layout_et" />
+
+            <EditText
+                android:id="@+id/password_et"
+                style="@style/TextNormal"
+                android:layout_width="290dp"
+                android:layout_height="45dp"
+                android:autofillHints="@string/password"
+                android:background="@drawable/password_et"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="@={viewModel.password}"
+                app:layout_constraintBottom_toBottomOf="@id/layout_et"
+                app:layout_constraintEnd_toEndOf="@+id/login_et"
+                app:layout_constraintStart_toStartOf="@+id/login_et" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_sign_in"
+            style="@style/ButtonTextNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_btn"
+            android:enabled='@{viewModel.isSignInAvailable}'
+            android:minWidth="126dp"
+            android:minHeight="46dp"
+            android:text="@string/sign_in"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_et"
+            app:layout_constraintVertical_bias="0.16" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
