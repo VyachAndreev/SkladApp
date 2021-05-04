@@ -4,7 +4,14 @@ import com.andreev.skladapp.network.FuelNetworkService
 
 class UserRepository : FuelNetworkService() {
 
-    suspend fun signInUser() : Boolean {
-        return loginUser()
+    suspend fun login() : String? {
+        return get(
+            AUTH,
+            String::class.java
+        )
+    }
+
+    companion object {
+        const val AUTH = "authTest"
     }
 }

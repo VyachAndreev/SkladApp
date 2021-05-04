@@ -47,9 +47,9 @@ class SignInViewModel: BaseViewModel() {
         userData.saveUser(User(login, password))
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
-                userRepository.signInUser()
+                userRepository.login()
             }
-            isLoginSuccessful.value = response
+            isLoginSuccessful.value = response != null
         }
     }
 
