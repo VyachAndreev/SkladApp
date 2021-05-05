@@ -11,6 +11,7 @@ import com.andreev.skladapp.databinding.FragmentSearchBinding
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.ShipmentItem
+import com.andreev.skladapp.ui.hub.HubFragment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
@@ -25,6 +26,7 @@ class HistoryFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        (parentFragment as HubFragment).viewModel.curMenuItem.value = this
         adapter.setHasStableIds(true)
         viewBinding.linear.visibility = View.GONE
         viewBinding.recycler.apply {

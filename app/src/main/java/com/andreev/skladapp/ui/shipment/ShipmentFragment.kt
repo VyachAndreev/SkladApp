@@ -8,6 +8,7 @@ import com.andreev.skladapp.databinding.FragmentSearchBinding
 import com.andreev.skladapp.databinding.FragmentShipmentBinding
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui._base.BaseFragment
+import com.andreev.skladapp.ui.hub.HubFragment
 import kotlinx.android.synthetic.main.fragment_information.*
 import kotlinx.android.synthetic.main.fragment_shipment.*
 
@@ -23,6 +24,7 @@ class ShipmentFragment: BaseFragment<FragmentShipmentBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        (parentFragment as HubFragment).viewModel.curMenuItem.value = this
         viewBinding.btnShip.setOnClickListener {
                 viewModel.departure(
                     viewBinding.shipEt.text.toString(),

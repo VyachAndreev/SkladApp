@@ -40,6 +40,7 @@ class ShowAllFragment: BaseFragment<FragmentShowAllBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        (parentFragment as HubFragment).viewModel.curMenuItem.value = this
         adapter.setOnItemClickListener { item, view ->
             when (item) {
                 is PlaqueItem -> {

@@ -98,6 +98,7 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        (parentFragment as HubFragment).viewModel.curMenuItem.value = this
         viewBinding.root.setOnClickListener {
             viewBinding.recyclerHints.visibility = View.GONE
         }

@@ -7,6 +7,7 @@ import com.andreev.skladapp.R
 import com.andreev.skladapp.databinding.FragmentSearchBinding
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui._base.BaseFragment
+import com.andreev.skladapp.ui.hub.HubFragment
 
 class UniteFragment: BaseFragment<FragmentSearchBinding>() {
     lateinit var viewModel: UniteViewModel
@@ -19,6 +20,7 @@ class UniteFragment: BaseFragment<FragmentSearchBinding>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        (parentFragment as HubFragment).viewModel.curMenuItem.value = this
         viewBinding.searchBtn.setImageResource(R.drawable.ic_arrow_right)
         viewBinding.searchBtn.setOnClickListener {
             viewModel.unite(viewBinding.searchEt.text.toString())

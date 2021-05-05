@@ -39,13 +39,13 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Timber.i("onViewCreated")
+        viewModel.curMenuItem.observe(this, this)
         toolbarBinding = viewBinding.toolbar.viewBinding
         viewBinding.toolbar.setUpDrawer(
             viewBinding.drawerLayout,
             viewBinding.viewDrawer.drawer,
             activity as MainActivity
         )
-        viewModel.curMenuItem.observe(this, this)
 
         launchChildFragment(
             R.id.hub_container,
@@ -62,53 +62,42 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
 
         viewBinding.viewDrawer.showAllDi.setOnClickListener {
             launchChildFragment(ShowAllFragment())
-            updateToolbar(R.string.see_all)
             closeDrawer()
         }
 
         viewBinding.viewDrawer.searchDi.setOnClickListener {
             launchChildFragment(SearchFragment())
-            updateToolbar(R.string.search)
             closeDrawer()
         }
 
         viewBinding.viewDrawer.plavSearchDi.setOnClickListener {
             launchChildFragment(SearchPlavFragment())
-            updateToolbar(R.string.search_plav)
             closeDrawer()
         }
 
         viewBinding.drawerLayout.unite_di.setOnClickListener {
             launchChildFragment(UniteFragment())
-            updateToolbar(R.string.unite)
             closeDrawer()
         }
 
         viewBinding.drawerLayout.shipment_history_di.setOnClickListener {
             launchChildFragment(HistoryFragment())
-            updateToolbar(R.string.shipment_history)
             closeDrawer()
         }
 
         viewBinding.drawerLayout.acceptance_di.setOnClickListener {
             launchChildFragment(GetFragment())
-            updateToolbar(R.string.get)
             closeDrawer()
         }
 
         viewBinding.drawerLayout.shipment_di.setOnClickListener {
             launchChildFragment(ShipmentFragment())
-            updateToolbar(R.string.ship)
             closeDrawer()
         }
 
         viewBinding.viewDrawer.logoutDi.setOnClickListener {
             logout()
         }
-    }
-
-    private fun loadUserData() {
-        viewModel.loadUserFromLocal()
     }
 
     override fun onBackPressed(containerId: Int): Boolean {
@@ -121,19 +110,6 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
             false
         } else {
             val f = super.onBackPressed(containerId)
-            if (childFragmentManager.backStackEntryCount > 1) {
-                viewModel.curMenuItem.postValue(
-                    childFragmentManager.findFragmentByTag
-                        (
-                        childFragmentManager.getBackStackEntryAt
-                            (
-                            childFragmentManager.backStackEntryCount - 2
-                        ).name
-                    )
-                )
-            } else {
-                viewModel.curMenuItem.postValue(HubFragment())
-            }
             return f
         }
     }
@@ -197,7 +173,6 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
                 extras,
                 true
             )
-            viewModel.curMenuItem.postValue(fragment)
         } else {
             viewBinding.drawerLayout.closeDrawer(Gravity.LEFT)
         }
