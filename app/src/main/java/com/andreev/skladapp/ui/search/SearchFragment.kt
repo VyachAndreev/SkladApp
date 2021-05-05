@@ -140,7 +140,7 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
         )
     }
 
-    private val positionsListener = Observer<Array<Position>> {positions ->
+    protected open val positionsListener = Observer<Array<Position>> { positions ->
         hideLoading()
         viewBinding.swipeLayout.isRefreshing = false
         itemsAdapter.clear()

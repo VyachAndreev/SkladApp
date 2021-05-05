@@ -141,6 +141,9 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
     override fun onChanged(fragment: Fragment?) {
         Timber.i(fragment?.tag)
         when (fragment) {
+            is SearchPlavFragment -> {
+                updateToolbar(R.string.search_plav)
+            }
             is SearchFragment -> {
                 updateToolbar(R.string.search)
             }
@@ -149,9 +152,6 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
             }
             is HistoryFragment -> {
                 updateToolbar(R.string.shipment_history)
-            }
-            is SearchPlavFragment -> {
-                updateToolbar(R.string.search_plav)
             }
             is ShipmentFragment -> {
                 updateToolbar(R.string.ship)
