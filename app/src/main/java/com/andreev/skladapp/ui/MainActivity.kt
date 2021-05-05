@@ -1,17 +1,16 @@
 package com.andreev.skladapp.ui
 
+import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.andreev.skladapp.R
@@ -19,7 +18,6 @@ import com.andreev.skladapp.SkladApplication
 import com.andreev.skladapp.databinding.ActivityMainBinding
 import com.andreev.skladapp.stored_data.UserStoredData
 import com.andreev.skladapp.ui._base.BaseFragment
-import com.andreev.skladapp.ui.hub.HubFragment
 import com.andreev.skladapp.ui.sign_in.SignInFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

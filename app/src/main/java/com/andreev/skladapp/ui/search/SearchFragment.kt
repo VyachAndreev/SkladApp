@@ -14,6 +14,7 @@ import com.andreev.skladapp.R
 import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.databinding.FragmentSearchBinding
 import com.andreev.skladapp.di.ApplicationComponent
+import com.andreev.skladapp.ui.MainActivity
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.HintItem
 import com.andreev.skladapp.ui._item.PlaqueItem
@@ -29,6 +30,8 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
     override fun getLayoutRes(): Int = R.layout.fragment_search
 
     lateinit var viewModel: SearchViewModel
+
+    private var isKeyBoardVisible = false
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
         viewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
@@ -48,9 +51,11 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
         hintAdapter.setOnItemClickListener { item, _ ->
             when (item) {
                 is HintItem -> {
+                    hideKeyBoard()
                     viewModel.searchedText.value = item.hint
                     viewBinding.searchBtn.callOnClick()
-                    viewBinding.recyclerHints.visibility = View.GONE
+                    isKeyBoardVisible = false
+                    hideKeyBoard()
                 }
                 else -> {}
             }
@@ -116,6 +121,10 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
             false
         }
 
+        viewBinding.searchEt.setOnClickListener {
+            isKeyBoardVisible = true
+        }
+
         viewModel.searchedText.observe(this, this)
         viewModel.hints.observe(this, hintsListener)
         viewModel.positions.observe(this, positionsListener)
@@ -131,7 +140,12 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
     }
 
     private val hintsListener = Observer<Array<String>> {hints ->
-        viewBinding.recyclerHints.visibility = View.VISIBLE
+        if (isKeyBoardVisible) {
+            viewBinding.recyclerHints.visibility = View.VISIBLE
+        }
+        else {
+            viewBinding.recyclerHints.visibility = View.GONE
+        }
         hintAdapter.clear()
         hintAdapter.addAll(
             hints.map {
