@@ -15,7 +15,11 @@ class ShipmentItem(
     val mass: String? = null,
 ): BindableItem<ItemShipmentHistoryBinding>() {
     override fun bind(viewBinding: ItemShipmentHistoryBinding, position: Int) {
-        viewBinding.number = number
+        if (number != "null") {
+            viewBinding.number = number
+        } else {
+            viewBinding.tvNumber.visibility = View.GONE
+        }
         if (mPosition != null) {
             viewBinding.mark = mPosition.mark
             viewBinding.diameter = mPosition.diameter

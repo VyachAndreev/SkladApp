@@ -22,14 +22,14 @@ class SearchPlavFragment: SearchFragment() {
         itemsAdapter.clear()
         if (positions.isNotEmpty()) {
             itemsAdapter.add(
-                ShipmentItem()
+                ShipmentItem(number = "null")
             )
             var i = 0
             for (position in positions) {
                 i++
                 itemsAdapter.add(
                     ShipmentItem(
-                        i.toString(),
+                        "null",
                         position,
                     )
                 )
