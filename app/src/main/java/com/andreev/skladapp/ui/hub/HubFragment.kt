@@ -210,9 +210,4 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
         )
     }
 
-    override fun onDestroy() {
-        logout()
-        super.onDestroy()
-    }
-
 }

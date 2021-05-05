@@ -109,9 +109,4 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(applicationContext, getText(text), Toast.LENGTH_SHORT).show()
     }
 
-    override fun onDestroy() {
-        userData.logout()
-        super.onDestroy()
-    }
-
 }
