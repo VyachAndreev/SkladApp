@@ -2,76 +2,85 @@ package com.andreev.skladapp.network.repositories
 
 import com.andreev.skladapp.data.HistoryPiece
 import com.andreev.skladapp.data.Position
+import com.andreev.skladapp.data.User
 import com.andreev.skladapp.network.FuelNetworkService
 
 class ItemsRepository : FuelNetworkService(){
 
-    suspend fun getHints(tag: String?): Array<String>? {
-        return get(TAGS_PATH + tag, Array<String>::class.java)
+    suspend fun getHints(tag: String?, user: User): Array<String>? {
+        return get(TAGS_PATH + tag, Array<String>::class.java, user = user)
     }
 
-    suspend fun getPosition(text: String?): Position? {
+    suspend fun getPosition(text: String?, user: User): Position? {
         return get(
             POSITION_PATH + text,
             Position::class.java,
+            user = user
         )
     }
 
-    suspend fun getPackage(text: String?): Position? {
+    suspend fun getPackage(text: String?, user: User): Position? {
         return get(
             PACKAGE_PATH + text,
             Position::class.java,
+            user = user
         )
     }
 
-    suspend fun getPositions(text: String?): Array<Position>? {
+    suspend fun getPositions(text: String?, user: User): Array<Position>? {
         return get(
             SEARCH_PATH + text,
             Array<Position>::class.java,
+            user = user
         )
     }
 
-    suspend fun getPlavHints(tag: String?): Array<String>? {
-        return post(TAGS_PLAV_PATH + tag, Array<String>::class.java)
+    suspend fun getPlavHints(tag: String?, user: User): Array<String>? {
+        return post(TAGS_PLAV_PATH + tag, Array<String>::class.java, user = user)
     }
 
 
-    suspend fun getPlavPositions(text: String?): Array<Position>? {
+    suspend fun getPlavPositions(text: String?, user: User): Array<Position>? {
         return post(
             SEARCH_PLAV_PATH + text,
             Array<Position>::class.java,
+            user = user
         )
     }
 
-    suspend fun getAll(): Array<Position>? {
+    suspend fun getAll(user: User): Array<Position>? {
         return get(
             ALL_POSIOTIONS,
             Array<Position>::class.java,
+            user = user
         )
     }
 
-    suspend fun getMarks(): Array<String>? {
+    suspend fun getMarks(user: User): Array<String>? {
         return get(
             MARKS,
             Array<String>::class.java,
+            user = user
         )
     }
 
-    suspend fun getDiameter(): Array<String>? {
+    suspend fun getDiameter(user: User): Array<String>? {
         return get(
             DIAMETER,
             Array<String>::class.java,
+            user = user
         )
     }
 
-    suspend fun getPackings(): Array<String>? {
+    suspend fun getPackings(user: User): Array<String>? {
         return get(
             PACKS,
             Array<String>::class.java,
+            user = user
         )
     }
 
-    suspend fun filter(arrayList: ArrayList<ArrayList<String>>): Array<Position>? {
+    suspend fun filter(arrayList: ArrayList<ArrayList<String>>, user: User): Array<Position>? {
         return postWithJson(
             FILTER,
             Array<Position>::class.java,
@@ -81,11 +90,12 @@ class ItemsRepository : FuelNetworkService(){
                 arrayList[1][0].toDouble(),
                 arrayList[1][1].toDouble(),
                 true,
-            )
+            ),
+            user = user
         )
     }
 
-    suspend fun filterTable(arrayList: ArrayList<ArrayList<String>>): Array<Position>? {
+    suspend fun filterTable(arrayList: ArrayList<ArrayList<String>>, user: User): Array<Position>? {
         return postWithJson(
             TABLE,
             Array<Position>::class.java,
@@ -95,7 +105,8 @@ class ItemsRepository : FuelNetworkService(){
                 arrayList[1][0].toDouble(),
                 arrayList[1][1].toDouble(),
                 true,
-            )
+            ),
+            user = user
         )
     }
 
@@ -107,17 +118,19 @@ class ItemsRepository : FuelNetworkService(){
         val table: Boolean,
     )
 
-    suspend fun getHistory(): Array<HistoryPiece>? {
+    suspend fun getHistory(user: User): Array<HistoryPiece>? {
         return get(
             HISTORY,
             Array<HistoryPiece>::class.java,
+            user = user
         )
     }
 
-    suspend fun getTable(): Array<Position>? {
+    suspend fun getTable(user: User): Array<Position>? {
         return get(
             TABLE,
-            Array<Position>::class.java
+            Array<Position>::class.java,
+            user = user
         )
     }
 

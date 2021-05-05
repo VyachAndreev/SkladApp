@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.andreev.skladapp.data.HistoryPiece
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.network.repositories.ItemsRepository
+import com.andreev.skladapp.stored_data.UserStoredData
 import com.andreev.skladapp.ui._base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,6 +16,9 @@ class HistoryViewModel: BaseViewModel() {
     @Inject
     lateinit var itemsRepository: ItemsRepository
 
+    @Inject
+    lateinit var userStoredData: UserStoredData
+
     val historyPiecesData = MutableLiveData<Array<HistoryPiece>>()
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
@@ -24,7 +28,7 @@ class HistoryViewModel: BaseViewModel() {
     fun getHistory() {
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
-                itemsRepository.getHistory()
+                userStoredData.user?.let { itemsRepository.getHistory(it) }
             }
             if (response != null) {
                 historyPiecesData.value = response

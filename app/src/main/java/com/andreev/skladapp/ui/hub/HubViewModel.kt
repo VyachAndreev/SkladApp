@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class HubViewModel : BaseViewModel() {
     @Inject
-    lateinit var authService: UserStoredData
+    lateinit var userStoredData: UserStoredData
 
     var curMenuItem = MutableLiveData<Fragment>()
 
@@ -21,8 +21,8 @@ class HubViewModel : BaseViewModel() {
     }
 
     fun loadUserFromLocal() {
-        user.value = authService.user
+        user.value = userStoredData.user
     }
 
-    fun logout() = authService.logout()
+    fun logout() = userStoredData.logout()
 }

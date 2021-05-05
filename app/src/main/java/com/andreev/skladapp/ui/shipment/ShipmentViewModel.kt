@@ -2,6 +2,7 @@ package com.andreev.skladapp.ui.shipment
 
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.network.repositories.NullRepository
+import com.andreev.skladapp.stored_data.UserStoredData
 import com.andreev.skladapp.ui._base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -12,6 +13,9 @@ class ShipmentViewModel: BaseViewModel() {
     @Inject
     lateinit var nullRepository: NullRepository
 
+    @Inject
+    lateinit var userStoredData: UserStoredData
+
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
         applicationComponent.inject(this)
     }
@@ -19,7 +23,7 @@ class ShipmentViewModel: BaseViewModel() {
     fun departure(include: String, exclude: String) {
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
-                nullRepository.ship(include, exclude)
+                userStoredData.user?.let { nullRepository.ship(include, exclude, it) }
             }
         }
     }

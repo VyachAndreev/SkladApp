@@ -1,31 +1,35 @@
 package com.andreev.skladapp.network.repositories
 
 import com.andreev.skladapp.data.Position
+import com.andreev.skladapp.data.User
 import com.andreev.skladapp.network.FuelNetworkService
 
 class NullRepository : FuelNetworkService() {
 
-    suspend fun unite(text: String?) : String? {
+    suspend fun unite(text: String?, user: User) : String? {
         return post(
             UNITE + text,
-            String::class.java
+            String::class.java,
+            user = user
         )
     }
 
     data class GetParameters(val getToStockValues: String)
 
-    suspend fun get(text: String) : String? {
+    suspend fun get(text: String, user: User) : String? {
         return postWithJson(
             GET,
             String::class.java,
             GetParameters(text),
+            user = user
         )
     }
 
-    suspend fun ship(include: String, exclude: String) : String? {
+    suspend fun ship(include: String, exclude: String, user: User) : String? {
         return post(
             "departure?request=$include&except=$exclude",
-            String::class.java
+            String::class.java,
+            user = user
         )
     }
 

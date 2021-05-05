@@ -3,6 +3,7 @@ package com.andreev.skladapp.ui.sign_in
 import androidx.lifecycle.MutableLiveData
 import com.andreev.skladapp.data.User
 import com.andreev.skladapp.di.ApplicationComponent
+import com.andreev.skladapp.network.FuelNetworkService
 import com.andreev.skladapp.network.repositories.UserRepository
 import com.andreev.skladapp.stored_data.UserStoredData
 import com.andreev.skladapp.ui._base.BaseViewModel
@@ -17,7 +18,7 @@ class SignInViewModel: BaseViewModel() {
     lateinit var userRepository: UserRepository
 
     @Inject
-    lateinit var userData: UserStoredData
+    lateinit var userStoredData: UserStoredData
 
     val isLoginSuccessful = MutableLiveData<Boolean>()
 
@@ -44,10 +45,10 @@ class SignInViewModel: BaseViewModel() {
     fun signUser(){
         val login = login.value ?: return
         val password = password.value ?: return
-        userData.saveUser(User(login, password))
+        userStoredData.saveUser(User(login, password))
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
-                userRepository.login()
+                userStoredData.user?.let { userRepository.login(it) }
             }
             isLoginSuccessful.value = response != null
         }

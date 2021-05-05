@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.network.repositories.ItemsRepository
+import com.andreev.skladapp.stored_data.UserStoredData
 import com.andreev.skladapp.ui._base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,6 +15,9 @@ import javax.inject.Inject
 class ShowAllViewModel : BaseViewModel() {
     @Inject
     lateinit var itemRepository: ItemsRepository
+
+    @Inject
+    lateinit var userStoredData: UserStoredData
 
     val positions = MutableLiveData<Array<Position>>()
     val diameter = MutableLiveData<Array<String>>()
@@ -29,7 +33,7 @@ class ShowAllViewModel : BaseViewModel() {
         filterData = null
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
-                itemRepository.getAll()
+                userStoredData.user?.let { itemRepository.getAll(it) }
             }
             if (response != null) {
                 positions.value = response
@@ -41,7 +45,7 @@ class ShowAllViewModel : BaseViewModel() {
         filterData = null
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
-                itemRepository.getTable()
+                userStoredData.user?.let { itemRepository.getTable(it) }
             }
             if (response != null) {
                 positions.value = response
@@ -52,7 +56,7 @@ class ShowAllViewModel : BaseViewModel() {
     fun getDiameter() {
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
-                itemRepository.getDiameter()
+                userStoredData.user?.let { itemRepository.getDiameter(it) }
             }
             if (response != null) {
                 diameter.value = response
@@ -63,7 +67,7 @@ class ShowAllViewModel : BaseViewModel() {
     fun getMarks() {
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
-                itemRepository.getMarks()
+                userStoredData.user?.let { itemRepository.getMarks(it) }
             }
             if (response != null) {
                 marks.value = response
@@ -74,7 +78,7 @@ class ShowAllViewModel : BaseViewModel() {
     fun getPackings() {
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
-                itemRepository.getPackings()
+                userStoredData.user?.let { itemRepository.getPackings(it) }
             }
             if (response != null) {
                 packings.value = response
@@ -86,7 +90,7 @@ class ShowAllViewModel : BaseViewModel() {
         filterData = arrayList
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
-                itemRepository.filter(arrayList)
+                userStoredData.user?.let { itemRepository.filter(arrayList, it) }
             }
             if (response != null) {
                 positions.value = response
@@ -100,7 +104,7 @@ class ShowAllViewModel : BaseViewModel() {
         filterData = arrayList
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
-                itemRepository.filterTable(arrayList)
+                userStoredData.user?.let { itemRepository.filterTable(arrayList, it) }
             }
             if (response != null) {
                 positions.value = response

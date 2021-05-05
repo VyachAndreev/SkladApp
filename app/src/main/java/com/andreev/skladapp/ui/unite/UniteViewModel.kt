@@ -2,6 +2,7 @@ package com.andreev.skladapp.ui.unite
 
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.network.repositories.NullRepository
+import com.andreev.skladapp.stored_data.UserStoredData
 import com.andreev.skladapp.ui._base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -12,6 +13,9 @@ class UniteViewModel: BaseViewModel() {
     @Inject
     lateinit var nullRepository: NullRepository
 
+    @Inject
+    lateinit var userStoredData: UserStoredData
+
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
         applicationComponent.inject(this)
     }
@@ -19,7 +23,7 @@ class UniteViewModel: BaseViewModel() {
     fun unite(text: String) {
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
-                nullRepository.unite(text)
+                userStoredData.user?.let { nullRepository.unite(text, it) }
             }
         }
     }
