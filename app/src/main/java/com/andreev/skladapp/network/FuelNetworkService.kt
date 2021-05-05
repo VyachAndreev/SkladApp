@@ -80,6 +80,7 @@ abstract class FuelNetworkService {
         parameters: Any?,
         user: User,
     ): T? {
+        Timber.i("parameters are $parameters")
         try {
             return Fuel.post(path)
                 .jsonBody(JSONObject(gson.toJson(parameters)).toString(), Charsets.UTF_8)

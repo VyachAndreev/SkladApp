@@ -100,25 +100,35 @@ object DialogUtils {
             toEt.setText(valueTo.toString().substring(
                 0, valueFrom.toString().indexOf(".") + 2
             ))
-            rangeSlider.valueTo = Float.MAX_VALUE
-            rangeSlider.valueFrom = Float.MIN_VALUE
-            if (valueTo != null) {
-                rangeSlider.valueTo = valueTo
-            }
-            if (valueFrom != null) {
-                rangeSlider.valueFrom = valueFrom
-            }
-            rangeSlider.setValues(valueFrom, valueTo)
-            rangeSlider.stepSize = 0.1f
-            rangeSlider.addOnChangeListener { slider, value, fromUser ->
-                valueFrom = rangeSlider.values[0]
-                valueTo = rangeSlider.values[1]
-                fromEt.setText(valueFrom.toString().substring(
+            if (valueTo == valueFrom) {
+                rangeSlider.visibility = View.GONE
+                fromEt.text = valueFrom.toString().substring(
                     0, valueFrom.toString().indexOf(".") + 2
-                ))
-                toEt.setText(valueTo.toString().substring(
+                )
+                toEt.text = valueTo.toString().substring(
                     0, valueFrom.toString().indexOf(".") + 2
-                ))
+                )
+            } else {
+                rangeSlider.valueTo = Float.MAX_VALUE
+                rangeSlider.valueFrom = Float.MIN_VALUE
+                if (valueTo != null) {
+                    rangeSlider.valueTo = valueTo
+                }
+                if (valueFrom != null) {
+                    rangeSlider.valueFrom = valueFrom
+                }
+                rangeSlider.setValues(valueFrom, valueTo)
+                rangeSlider.stepSize = 0.1f
+                rangeSlider.addOnChangeListener { slider, value, fromUser ->
+                    valueFrom = rangeSlider.values[0]
+                    valueTo = rangeSlider.values[1]
+                    fromEt.text = valueFrom.toString().substring(
+                        0, valueFrom.toString().indexOf(".") + 2
+                    )
+                    toEt.text = valueTo.toString().substring(
+                        0, valueFrom.toString().indexOf(".") + 2
+                    )
+                }
             }
             packingRecycler.apply {
                 layoutManager = LinearLayoutManager(context)

@@ -97,7 +97,7 @@ class ItemsRepository : FuelNetworkService(){
 
     suspend fun filterTable(arrayList: ArrayList<ArrayList<String>>, user: User): Array<Position>? {
         return postWithJson(
-            TABLE,
+            FILTER_TABLE,
             Array<Position>::class.java,
             FilterClass(
                 arrayList[0],
@@ -147,6 +147,7 @@ class ItemsRepository : FuelNetworkService(){
         const val FILTER = "api/filter"
         const val HISTORY = "api/history/all"
         const val TABLE = "api/table"
+        const val FILTER_TABLE = "api/filter/table"
         const val PACKS = "api/packings"
     }
 }
