@@ -50,6 +50,7 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
                 is HintItem -> {
                     viewModel.searchedText.value = item.hint
                     viewBinding.searchBtn.callOnClick()
+                    viewBinding.recyclerHints.visibility = View.GONE
                 }
                 else -> {}
             }
@@ -130,6 +131,7 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
     }
 
     private val hintsListener = Observer<Array<String>> {hints ->
+        viewBinding.recyclerHints.visibility = View.VISIBLE
         hintAdapter.clear()
         hintAdapter.addAll(
             hints.map {

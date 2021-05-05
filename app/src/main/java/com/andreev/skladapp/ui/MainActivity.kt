@@ -44,20 +44,7 @@ class MainActivity : AppCompatActivity() {
             R.layout.activity_main
         )
         progressBar = viewBinding.progressCircular
-        checkUser()
-    }
-
-    fun checkUser() {
-        Timber.i("user check ${userData.user}")
-        if (userData.user == null) {
-            launchFragment(R.id.fragment_container, SignInFragment(), false)
-            return
-        } else {
-            if (supportFragmentManager.fragments.isEmpty()) {
-                launchFragment(R.id.fragment_container, HubFragment(), false)
-                return
-            }
-        }
+        launchFragment(R.id.fragment_container, SignInFragment(), false)
     }
 
     fun hideKeyboard() {
