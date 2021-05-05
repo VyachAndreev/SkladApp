@@ -31,7 +31,7 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
 
     lateinit var viewModel: SearchViewModel
 
-    private var isKeyBoardVisible = false
+    private var isKeyBoardVisible = true
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
         viewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
