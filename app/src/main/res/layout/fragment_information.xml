@@ -172,7 +172,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@{position.mass.toString()}"
+                    android:text="@{position.mass}"
                     tools:text="Св-04Х19Н11М3" />
             </TableRow>
 

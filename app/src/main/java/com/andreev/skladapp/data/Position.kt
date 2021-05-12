@@ -8,7 +8,7 @@ data class Position(
     val id: Long? = null,
     val manufacturer: String? = null,
     val mark: String? = null,
-    val mass: Double? = null,
+    val mass: String? = null,
     val packing: String? = null,
     val part: String? = null,
     val plav: String? = null,

@@ -182,7 +182,7 @@ object DialogUtils {
 
     fun showShipDialog(
         context: Context?,
-        weight: Double?,
+        weight: String?,
         onShip: (Triple<String, String, String>) -> (Unit),
     ) {
         lateinit var dialog: AlertDialog
