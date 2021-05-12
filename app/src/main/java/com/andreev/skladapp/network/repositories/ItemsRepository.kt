@@ -158,6 +158,34 @@ class ItemsRepository : FuelNetworkService(){
         )
     }
 
+    suspend fun ship(include: String, exclude: String, user: User) : Array<Position>? {
+        return post(
+            "api/departure?request=$include&except=$exclude",
+            Array<Position>::class.java,
+            user = user
+        )
+    }
+
+    data class ConfirmResponse(
+        val file: String?
+    )
+
+    private data class ConfirmParameters(
+        val data: Array<String>,
+        val contrAgent: String,
+        val account: String,
+    )
+
+    suspend fun confirm(data: Array<String>, contrAgent: String, account: String, user: User)
+    : ConfirmResponse? {
+        return postWithJson(
+            CONFIRM,
+            ConfirmResponse::class.java,
+            ConfirmParameters(data, contrAgent, account),
+            user = user
+        )
+    }
+
     companion object {
         const val TAGS_PATH = "api/search/tag/"
         const val SEARCH_PATH = "api/search/"
@@ -174,6 +202,7 @@ class ItemsRepository : FuelNetworkService(){
         const val FILTER_TABLE = "api/filter/table"
         const val PACKS = "api/packings"
         const val DEPARTURE = "api/position/departure"
+        const val CONFIRM = "api/departureConfirmation"
     }
 }
 

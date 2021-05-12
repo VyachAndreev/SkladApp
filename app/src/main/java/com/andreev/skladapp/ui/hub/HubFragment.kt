@@ -109,6 +109,11 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
             viewBinding.drawerLayout.closeDrawer(Gravity.LEFT)
             false
         } else {
+            val last = childFragmentManager.fragments.last()
+            if (last is ShipmentFragment && !last.isPred) {
+                last.setPredLayout()
+                return false
+            }
             val f = super.onBackPressed(containerId)
             return f
         }
@@ -117,6 +122,12 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
     override fun onChanged(fragment: Fragment?) {
         Timber.i(fragment?.tag)
         when (fragment) {
+            is UniteFragment -> {
+                updateToolbar(R.string.unite)
+            }
+            is GetFragment -> {
+                updateToolbar(R.string.get)
+            }
             is SearchPlavFragment -> {
                 updateToolbar(R.string.search_plav)
             }

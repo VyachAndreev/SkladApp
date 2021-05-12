@@ -25,14 +25,6 @@ class NullRepository : FuelNetworkService() {
         )
     }
 
-    suspend fun ship(include: String, exclude: String, user: User) : String? {
-        return post(
-            "departure?request=$include&except=$exclude",
-            String::class.java,
-            user = user
-        )
-    }
-
     companion object {
         const val UNITE = "api/union?ids="
         const val GET = "api/union?ids="
