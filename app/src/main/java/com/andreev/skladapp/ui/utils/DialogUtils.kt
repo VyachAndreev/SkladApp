@@ -94,12 +94,16 @@ object DialogUtils {
             }
             var valueFrom = diameters?.get(0)?.toFloat()
             var valueTo = diameters?.get(1)?.toFloat()
-            fromEt.setText(valueFrom.toString().substring(
-                0, valueFrom.toString().indexOf(".") + 2
-            ))
-            toEt.setText(valueTo.toString().substring(
-                0, valueFrom.toString().indexOf(".") + 2
-            ))
+            fromEt.setText(
+                valueFrom.toString().substring(
+                    0, valueFrom.toString().indexOf(".") + 2
+                )
+            )
+            toEt.setText(
+                valueTo.toString().substring(
+                    0, valueFrom.toString().indexOf(".") + 2
+                )
+            )
             if (valueTo == valueFrom) {
                 rangeSlider.visibility = View.GONE
                 fromEt.text = valueFrom.toString().substring(
@@ -178,7 +182,8 @@ object DialogUtils {
 
     fun showShipDialog(
         context: Context?,
-        onShip: (ArrayList<ArrayList<String>>) -> (Unit),
+        weight: Double?,
+        onShip: (Triple<String, String, String>) -> (Unit),
     ) {
         lateinit var dialog: AlertDialog
         val dialogBinding = DataBindingUtil.inflate<DialogShipmentBinding>(
@@ -188,7 +193,17 @@ object DialogUtils {
             false
         )
         dialogBinding.apply {
-
+            if (weight != null)
+                etWeight.setText(weight.toString())
+            btnShip.setOnClickListener {
+                onShip(
+                    Triple(
+                        etWeight.text.toString(),
+                        agentEt.text.toString(),
+                        checkEt.text.toString(),
+                    )
+                )
+            }
         }
 
         dialog =

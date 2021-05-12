@@ -41,8 +41,9 @@ class InformationFragment: BaseFragment<FragmentInformationBinding>() {
         viewModel.item.observe(this, itemListener)
 
         viewBinding.shipBtn.setOnClickListener {
-            DialogUtils.showShipDialog(context) {
-
+            val weight = viewModel.item.value?.mass
+            DialogUtils.showShipDialog(context, weight) {
+                viewModel.departure(it)
             }
         }
 
@@ -68,6 +69,7 @@ class InformationFragment: BaseFragment<FragmentInformationBinding>() {
 
     private fun setPackageLayout() {
         viewBinding.apply {
+            layoutButtons.visibility = View.GONE
             initRecycler()
             showPositions.setOnClickListener {
                 if (recycler.visibility == View.VISIBLE) {

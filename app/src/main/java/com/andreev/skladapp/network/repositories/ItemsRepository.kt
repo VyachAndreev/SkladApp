@@ -134,6 +134,30 @@ class ItemsRepository : FuelNetworkService(){
         )
     }
 
+    private data class DepartureParameters(
+        val data: Data,
+        val contrAgent: String,
+        val account: String,
+    )
+
+    private data class Data(
+        val id: Long,
+        val weight: String,
+    )
+
+    suspend fun departure(
+        id: Long, weight: String, contrAgent: String, account: String, user: User
+    ) : String? {
+        return postWithJson(
+            DEPARTURE,
+            String::class.java,
+            DepartureParameters(
+                Data(id, weight), contrAgent, account
+            ),
+            user = user
+        )
+    }
+
     companion object {
         const val TAGS_PATH = "api/search/tag/"
         const val SEARCH_PATH = "api/search/"
@@ -149,6 +173,7 @@ class ItemsRepository : FuelNetworkService(){
         const val TABLE = "api/table"
         const val FILTER_TABLE = "api/filter/table"
         const val PACKS = "api/packings"
+        const val DEPARTURE = "api/position/departure"
     }
 }
 

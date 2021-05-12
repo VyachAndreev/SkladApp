@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
-class InformationViewModel : BaseViewModel(){
+class InformationViewModel : BaseViewModel() {
     @Inject
     lateinit var itemsRepository: ItemsRepository
 
@@ -47,6 +47,18 @@ class InformationViewModel : BaseViewModel(){
             if (response != null) {
                 item.value = response
                 Timber.i("${item.value}")
+            }
+        }
+    }
+
+    fun departure(triple: Triple<String, String, String>) {
+        scopeMain.launch {
+            val response = withContext(Dispatchers.IO) {
+                userStoredData.user?.let {
+                    item.value?.id?.let { it1 ->
+                        itemsRepository.departure(it1, triple.first, triple.second, triple.third, it)
+                    }
+                }
             }
         }
     }

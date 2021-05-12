@@ -17,7 +17,7 @@
                 android:textColor="@color/white" />
 
             <EditText
-                android:id="@+id/et_ship"
+                android:id="@+id/et_weight"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="24dp"
