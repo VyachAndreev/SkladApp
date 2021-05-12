@@ -53,6 +53,7 @@ class HistoryFragment : BaseFragment<FragmentSearchBinding>() {
                 mass = "Масса",
                 )
         )
+        it.reverse()
         adapter.addAll(
             it.map { piece ->
                 ShipmentItem(
