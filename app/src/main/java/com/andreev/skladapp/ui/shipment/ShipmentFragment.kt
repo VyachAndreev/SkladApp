@@ -39,8 +39,13 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
                     viewBinding.exceptEt.text.toString(),
                 )
             } else {
+                val array: Array<Pair<Long, String>> = arrayOf()
+                viewModel.positions.value?.forEach {
+                    if (it.id != null && it.mass != null)
+                        array.plusElement(it.id to it.mass)
+                }
                 viewModel.confirm(
-                    arrayOf("123"),
+                    array,
                     viewBinding.shipEt.text.toString(),
                     viewBinding.exceptEt.text.toString(),
                 )

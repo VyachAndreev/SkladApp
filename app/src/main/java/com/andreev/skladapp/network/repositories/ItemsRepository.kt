@@ -171,17 +171,24 @@ class ItemsRepository : FuelNetworkService(){
     )
 
     private data class ConfirmParameters(
-        val data: Array<String>,
+        val data: Array<DataConfirm>,
         val contrAgent: String,
         val account: String,
     )
+    private data class DataConfirm(
+        val id: Long,
+        val weight: String,
+    )
 
-    suspend fun confirm(data: Array<String>, contrAgent: String, account: String, user: User)
+    suspend fun confirm(data: Array<Pair<Long, String>>, contrAgent: String, account: String, user: User)
     : ConfirmResponse? {
+        val dataConfirm = data.map {
+            DataConfirm(it.first, it.second)
+        }.toTypedArray()
         return postWithJson(
             CONFIRM,
             ConfirmResponse::class.java,
-            ConfirmParameters(data, contrAgent, account),
+            ConfirmParameters(dataConfirm, contrAgent, account),
             user = user
         )
     }
