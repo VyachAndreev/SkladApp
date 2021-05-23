@@ -19,7 +19,7 @@ import com.xwray.groupie.GroupieViewHolder
 import timber.log.Timber
 
 class InformationFragment : BaseFragment<FragmentInformationBinding>() {
-    var adapter = GroupAdapter<GroupieViewHolder>()
+    private var adapter = GroupAdapter<GroupieViewHolder>()
     lateinit var viewModel: InformationViewModel
     private var isPackage: Boolean? = null
     private var id: Long? = null
