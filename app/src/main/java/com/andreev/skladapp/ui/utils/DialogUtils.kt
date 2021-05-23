@@ -203,6 +203,7 @@ object DialogUtils {
                         checkEt.text.toString(),
                     )
                 )
+                dialog.dismiss()
             }
         }
 
