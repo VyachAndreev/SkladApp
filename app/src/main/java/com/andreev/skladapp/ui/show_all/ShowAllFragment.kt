@@ -145,28 +145,27 @@ class ShowAllFragment: BaseFragment<FragmentShowAllBinding>() {
     }
 
 
-    private val positionListener = Observer<Array<Position>> {
+    private val positionListener = Observer<Array<Position>> { positions ->
         viewBinding.swipeLayout.isRefreshing = false
         hideLoading()
         adapter.clear()
-        if (it.isNotEmpty()) {
+        if (positions.isNotEmpty()) {
             if (isTable) {
                 adapter.add(
-                    ShipmentItem()
+                    ShipmentItem(number = "null")
                 )
                 var i = 0
-                for (position in it) {
-                    i++
-                    adapter.add(
+                adapter.addAll(
+                    positions.map {
                         ShipmentItem(
-                            i.toString(),
-                            position,
+                            "null",
+                            it,
                         )
-                    )
-                }
+                    }
+                )
             } else {
                 adapter.addAll(
-                    it.map { position ->
+                    positions.map { position ->
                         PlaqueItem(position)
                     }
                 )
