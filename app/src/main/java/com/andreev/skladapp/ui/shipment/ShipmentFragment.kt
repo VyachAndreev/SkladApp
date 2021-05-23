@@ -4,18 +4,24 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.andreev.skladapp.R
 import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.databinding.FragmentShipmentBinding
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.network.repositories.ItemsRepository
 import com.andreev.skladapp.ui._base.BaseFragment
+import com.andreev.skladapp.ui._item.PlaqueItem
 import com.andreev.skladapp.ui.hub.HubFragment
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 
 class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
     lateinit var viewModel: ShipmentViewModel
 
     override fun getLayoutRes(): Int = R.layout.fragment_shipment
+
+    val adapter = GroupAdapter<GroupieViewHolder>()
 
     var isPred = true
 
@@ -28,6 +34,11 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
 
         (parentFragment as HubFragment).viewModel.curMenuItem.value = this
 
+        with(viewBinding.recycler) {
+            layoutManager = LinearLayoutManager(context)
+            adapter = adapter
+        }
+
         viewModel.positions.observe(this, positionsObserver)
         viewModel.confirmResponse.observe(this, confirmObserver)
         viewModel.toastText.observe(this, toastObserver)
@@ -39,10 +50,11 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
                     viewBinding.exceptEt.text.toString(),
                 )
             } else {
-                val array: Array<Pair<Long, String>> = arrayOf()
-                viewModel.positions.value?.forEach {
-                    if (it.id != null && it.mass != null)
-                        array.plusElement(it.id to it.mass)
+                val array: Array<Pair<Long?, String?>> = arrayOf()
+                for (i in 0..viewModel.positions.value?.size!!) {
+                    with(adapter.getItem(i) as PlaqueItem) {
+                        array.plusElement(this.pos.id to this.getMass())
+                    }
                 }
                 viewModel.confirm(
                     array,
@@ -59,7 +71,13 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
             setPredLayout()
         }
 
-    private val positionsObserver = Observer<Array<Position>> {
+    private val positionsObserver = Observer<Array<Position>> { positions ->
+        adapter.clear()
+        adapter.addAll(
+            positions.map {
+                PlaqueItem(it, it.mass)
+            }
+        )
         hideLoading()
         if (isPred) {
             setPostLayout()
@@ -72,18 +90,20 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
 
     fun setPostLayout() {
         isPred = false
-        viewBinding.apply {
+        with(viewBinding) {
             tvUpper.setText(R.string.contr_agent)
             tvLower.setText(R.string.bill)
+            recycler.visibility = View.VISIBLE
         }
         clearET()
     }
 
     fun setPredLayout() {
         isPred = true
-        viewBinding.apply {
+        with(viewBinding) {
             tvUpper.setText(R.string.ship_semi)
             tvLower.setText(R.string.except_semi)
+            recycler.visibility = View.GONE
         }
         clearET()
     }

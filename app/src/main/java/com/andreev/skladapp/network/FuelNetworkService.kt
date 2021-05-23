@@ -89,6 +89,7 @@ abstract class FuelNetworkService {
                 .basic(user.login, user.password)
                 .awaitStringResult()
                 .fold({ jsonResponse ->
+                    Timber.i("post jsonResponse is $jsonResponse")
                     return@fold gson.fromJson(jsonResponse, clazz)
                 }) { error ->
                     Timber.i("$error")

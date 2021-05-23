@@ -176,11 +176,11 @@ class ItemsRepository : FuelNetworkService(){
         val account: String,
     )
     private data class DataConfirm(
-        val id: Long,
-        val weight: String,
+        val id: Long?,
+        val weight: String?,
     )
 
-    suspend fun confirm(data: Array<Pair<Long, String>>, contrAgent: String, account: String, user: User)
+    suspend fun confirm(data: Array<Pair<Long?, String?>>, contrAgent: String, account: String, user: User)
     : ConfirmResponse? {
         val dataConfirm = data.map {
             DataConfirm(it.first, it.second)

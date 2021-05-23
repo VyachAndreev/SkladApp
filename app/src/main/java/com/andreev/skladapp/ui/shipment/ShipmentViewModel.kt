@@ -42,7 +42,7 @@ class ShipmentViewModel: BaseViewModel() {
         }
     }
 
-    fun confirm(data: Array<Pair<Long, String>>, contrAgent: String, account: String) {
+    fun confirm(data: Array<Pair<Long?, String?>>, contrAgent: String, account: String) {
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
                 userStoredData.user?.let { itemsRepository.confirm(data, contrAgent, account, it) }
