@@ -18,7 +18,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import timber.log.Timber
 
-class InformationFragment: BaseFragment<FragmentInformationBinding>() {
+class InformationFragment : BaseFragment<FragmentInformationBinding>() {
     var adapter = GroupAdapter<GroupieViewHolder>()
     lateinit var viewModel: InformationViewModel
     private var isPackage: Boolean? = null
@@ -64,9 +64,6 @@ class InformationFragment: BaseFragment<FragmentInformationBinding>() {
     private fun setPositionLayout() {
         viewBinding.apply {
             showPositions.visibility = View.GONE
-            if (viewBinding.position.status == "Departured") {
-                layoutButtons.visibility = View.GONE
-            }
         }
     }
 
@@ -93,7 +90,12 @@ class InformationFragment: BaseFragment<FragmentInformationBinding>() {
 
     private val itemListener = Observer<Position> {
         hideLoading()
-        viewBinding.position = viewModel.item.value
+        with(viewBinding) {
+            position = viewModel.item.value
+            if (viewBinding.position?.status == "Departured") {
+                layoutButtons.visibility = View.GONE
+            }
+        }
         isPackage?.let {
             if (it) {
                 if (viewModel.item.value?.positionsList?.size!! > 0) {
