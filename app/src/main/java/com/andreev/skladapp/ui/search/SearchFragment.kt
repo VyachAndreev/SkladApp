@@ -5,7 +5,6 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import android.widget.TextView.OnEditorActionListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +13,6 @@ import com.andreev.skladapp.R
 import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.databinding.FragmentSearchBinding
 import com.andreev.skladapp.di.ApplicationComponent
-import com.andreev.skladapp.ui.MainActivity
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.HintItem
 import com.andreev.skladapp.ui._item.PlaqueItem
@@ -77,7 +75,7 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
                     val args = Bundle()
                     item.pos.id?.let { args.putLong(Constants.ID, it) }
                     Timber.i(item.pos.type)
-                    args.putBoolean(Constants.ISPACKAGE, item.pos.type == "PACKAGE")
+                    args.putBoolean(Constants.IS_PACKAGE, item.pos.type == "PACKAGE")
                     (parentFragment as HubFragment).apply {
                         launchChildFragment(
                             InformationFragment(),

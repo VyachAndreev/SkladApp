@@ -47,7 +47,7 @@ class ShowAllFragment: BaseFragment<FragmentShowAllBinding>() {
                     val args = Bundle()
                     item.pos.id?.let { args.putLong(Constants.ID, it) }
                     Timber.i(item.pos.type)
-                    args.putBoolean(Constants.ISPACKAGE, item.pos.type == "POSITION")
+                    args.putBoolean(Constants.IS_PACKAGE, item.pos.type == "POSITION")
                     (parentFragment as HubFragment).apply {
                         launchChildFragment(
                             InformationFragment(),

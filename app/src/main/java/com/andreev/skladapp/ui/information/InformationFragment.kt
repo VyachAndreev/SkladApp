@@ -33,7 +33,7 @@ class InformationFragment : BaseFragment<FragmentInformationBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.let {
-            isPackage = it.getBoolean(Constants.ISPACKAGE)
+            isPackage = it.getBoolean(Constants.IS_PACKAGE)
             id = it.getLong(Constants.ID)
             Timber.i("$arguments")
         }
@@ -92,8 +92,8 @@ class InformationFragment : BaseFragment<FragmentInformationBinding>() {
         hideLoading()
         with(viewBinding) {
             position = viewModel.item.value
-            if (viewBinding.position?.status == "Departured") {
-                layoutButtons.visibility = View.GONE
+            if (viewBinding.position?.status != "Departured" && !isPackage!!) {
+                layoutButtons.visibility = View.VISIBLE
             }
         }
         isPackage?.let {

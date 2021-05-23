@@ -22,7 +22,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="26dp"
             android:layout_marginEnd="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility='gone'>
 
             <Button
                 android:padding="1dp"
@@ -199,7 +200,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text='@{position.status.equals("Departured")? "Отгружен": position.status.equals("In_stock")? "На складе": "Прибывает"}'
+                    android:text='@{position != null? position.status.equals("Departured")? "Отгружен": position.status.equals("In_stock")? "На складе": "Прибывает":""}'
                     tools:text="Св-04Х19Н11М3" />
             </TableRow>
 
