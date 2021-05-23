@@ -44,6 +44,7 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
         viewModel.confirmResponse.observe(this, confirmObserver)
         viewModel.toastText.observe(this, toastObserver)
         viewBinding.btnShip.setOnClickListener {
+            hideKeyBoard()
             showLoading()
             if (isPred) {
                 viewModel.departure(
