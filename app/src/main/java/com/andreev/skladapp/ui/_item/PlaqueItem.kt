@@ -7,7 +7,7 @@ import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.databinding.ItemPlaqueBinding
 import com.xwray.groupie.viewbinding.BindableItem
 
-class PlaqueItem(val pos: Position, private val mass: String? = null)
+class PlaqueItem(val pos: Position, private val isShipping: Boolean = false)
     : BindableItem<ItemPlaqueBinding>() {
 
     lateinit var viewBinding: ItemPlaqueBinding
@@ -18,14 +18,14 @@ class PlaqueItem(val pos: Position, private val mass: String? = null)
         with(viewBinding) {
             this@PlaqueItem.viewBinding = this
             this.position = pos
-            this.mass = this@PlaqueItem.mass
+            this.isShipping = this@PlaqueItem.isShipping
         }
     }
 
     override fun initializeViewBinding(view: View): ItemPlaqueBinding =
         ItemPlaqueBinding.bind(view)
 
-    fun getMass(): String? {
-        return viewBinding.mass
+    fun getMass(): String {
+        return viewBinding.weightEt.text.toString()
     }
 }

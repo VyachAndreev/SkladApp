@@ -11,8 +11,8 @@
             type="com.andreev.skladapp.data.Position" />
 
         <variable
-            name="mass"
-            type="String" />
+            name="isShipping"
+            type="Boolean" />
     </data>
     
     <LinearLayout
@@ -207,19 +207,22 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="14dp"
             android:layout_marginBottom="25dp"
-            android:visibility="@{mass != null? View.VISIBLE : View.GONE}"
+            android:visibility="@{isShipping? View.VISIBLE : View.GONE}"
             android:text="@string/mass" />
 
         <EditText
+            android:id="@+id/weight_et"
             style="@style/TextNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/weight"
             android:layout_toEndOf="@id/weight"
             android:layout_marginTop="14dp"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
             android:hint="@string/mass_"
-            android:text = "@={mass}"
-            android:visibility="@{mass != null? View.VISIBLE : View.GONE}"
+            android:text = "@{position.mass}"
+            android:visibility="@{isShipping? View.VISIBLE : View.GONE}"
             tools:text="Позиция" />
 
     </RelativeLayout>

@@ -4,6 +4,7 @@ import com.andreev.skladapp.data.HistoryPiece
 import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.data.User
 import com.andreev.skladapp.network.FuelNetworkService
+import timber.log.Timber
 
 class ItemsRepository : FuelNetworkService(){
 
@@ -176,13 +177,14 @@ class ItemsRepository : FuelNetworkService(){
         val account: String,
     )
     private data class DataConfirm(
-        val id: Long?,
-        val weight: String?,
+        val id: Long,
+        val weight: String,
     )
 
-    suspend fun confirm(data: Array<Pair<Long?, String?>>, contrAgent: String, account: String, user: User)
+    suspend fun confirm(data: Array<Pair<Long, String>>, contrAgent: String, account: String, user: User)
     : ConfirmResponse? {
         val dataConfirm = data.map {
+            Timber.i("first: ${it.first}, second: ${it.second}")
             DataConfirm(it.first, it.second)
         }.toTypedArray()
         return postWithJson(

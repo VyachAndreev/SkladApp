@@ -10,6 +10,7 @@ import com.andreev.skladapp.ui._base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 class ShipmentViewModel: BaseViewModel() {
@@ -42,8 +43,12 @@ class ShipmentViewModel: BaseViewModel() {
         }
     }
 
-    fun confirm(data: Array<Pair<Long?, String?>>, contrAgent: String, account: String) {
+    fun confirm(data: Array<Pair<Long, String>>, contrAgent: String, account: String) {
         scopeMain.launch {
+            Timber.i("viewModel: array is")
+            data.forEach {
+                Timber.i("first: ${it.first}, second: ${it.second}")
+            }
             val response = withContext(Dispatchers.IO) {
                 userStoredData.user?.let { itemsRepository.confirm(data, contrAgent, account, it) }
             }

@@ -15,6 +15,7 @@ import com.andreev.skladapp.ui._item.PlaqueItem
 import com.andreev.skladapp.ui.hub.HubFragment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import timber.log.Timber
 
 class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
     lateinit var viewModel: ShipmentViewModel
@@ -36,7 +37,7 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
 
         with(viewBinding.recycler) {
             layoutManager = LinearLayoutManager(context)
-            adapter = adapter
+            adapter = this@ShipmentFragment.adapter
         }
 
         viewModel.positions.observe(this, positionsObserver)
@@ -50,14 +51,15 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
                     viewBinding.exceptEt.text.toString(),
                 )
             } else {
-                val array: Array<Pair<Long?, String?>> = arrayOf()
-                for (i in 0..viewModel.positions.value?.size!!) {
+                val arrayList: ArrayList<Pair<Long, String>> = arrayListOf()
+                for (i in 0 until viewModel.positions.value?.size!!) {
                     with(adapter.getItem(i) as PlaqueItem) {
-                        array.plusElement(this.pos.id to this.getMass())
+                        Timber.i("id: ${pos.id}, mass: ${getMass()}")
+                        arrayList.add(pos.id!! to getMass())
                     }
                 }
                 viewModel.confirm(
-                    array,
+                    arrayList.toTypedArray(),
                     viewBinding.shipEt.text.toString(),
                     viewBinding.exceptEt.text.toString(),
                 )
@@ -75,7 +77,8 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
         adapter.clear()
         adapter.addAll(
             positions.map {
-                PlaqueItem(it, it.mass)
+                Timber.i("position: $it")
+                PlaqueItem(it, true)
             }
         )
         hideLoading()
