@@ -5,6 +5,8 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -118,6 +120,15 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
                 viewBinding.searchBtn.callOnClick()
             }
             false
+        }
+
+        viewBinding.searchEt.doOnTextChanged { text, _, _, _ ->
+            text?.let {
+                if (it.length - viewModel.searchedSize > 1) {
+                    viewBinding.searchBtn.callOnClick()
+                }
+                viewModel.searchedSize = it.length
+            }
         }
 
         viewBinding.searchEt.setOnClickListener {

@@ -22,6 +22,7 @@ open class SearchViewModel: BaseViewModel() {
     val searchedText = MutableLiveData<String>()
     val hints = MutableLiveData<Array<String>>()
     val positions = MutableLiveData<Array<Position>>()
+    var searchedSize = 0
 
     protected var lastSearched :String? = String()
 
