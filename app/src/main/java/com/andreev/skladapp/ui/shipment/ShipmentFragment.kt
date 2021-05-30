@@ -62,8 +62,7 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
                 }
             }
             fbtn.setOnClickListener {
-                scrollView.fullScroll(View.FOCUS_UP);
-                scrollView.stopNestedScroll()
+                scrollView.fullScroll(View.FOCUS_UP)
             }
             btnShip.setOnClickListener {
                 hideKeyBoard()
