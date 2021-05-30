@@ -16,6 +16,8 @@ import com.andreev.skladapp.ui._item.TextViewItem
 import com.andreev.skladapp.ui.utils.DialogUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class InformationFragment : BaseFragment<FragmentInformationBinding>() {
@@ -39,10 +41,12 @@ class InformationFragment : BaseFragment<FragmentInformationBinding>() {
         }
 
         viewModel.item.observe(this, itemListener)
+        viewModel.departureResponse.observe(this, departureObserver)
 
         viewBinding.shipBtn.setOnClickListener {
             val weight = viewModel.item.value?.mass
             DialogUtils.showShipDialog(context, weight) {
+                showLoading()
                 viewModel.departure(it)
             }
         }
@@ -52,7 +56,6 @@ class InformationFragment : BaseFragment<FragmentInformationBinding>() {
         isPackage?.let {
             if (!it) {
                 setPositionLayout()
-                showLoading()
                 viewModel.getPosition(id)
             } else {
                 setPackageLayout()
@@ -113,6 +116,17 @@ class InformationFragment : BaseFragment<FragmentInformationBinding>() {
                         TextViewItem("В поддоне нет позиций")
                     )
                 }
+            }
+        }
+    }
+
+    private val departureObserver = Observer<String> {
+        viewBinding.layoutButtons.visibility = View.GONE
+        isPackage?.let {
+            if (!it) {
+                viewModel.getPosition(id)
+            } else {
+                viewModel.getPackage(id)
             }
         }
     }

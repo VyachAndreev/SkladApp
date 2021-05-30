@@ -19,7 +19,8 @@ class InformationViewModel : BaseViewModel() {
     @Inject
     lateinit var userStoredData: UserStoredData
 
-    var item = MutableLiveData<Position>()
+    val item = MutableLiveData<Position>()
+    val departureResponse = MutableLiveData<String>()
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
         applicationComponent.inject(this)
@@ -60,6 +61,7 @@ class InformationViewModel : BaseViewModel() {
                     }
                 }
             }
+            departureResponse.value = departureResponse.value + "1"
         }
     }
 }
