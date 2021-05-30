@@ -1,6 +1,8 @@
 package com.andreev.skladapp.ui.shipment
 
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,6 +15,7 @@ import com.andreev.skladapp.network.repositories.ItemsRepository
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.PlaqueItem
 import com.andreev.skladapp.ui.hub.HubFragment
+import com.andreev.skladapp.ui.utils.Extentions.isVisible
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import timber.log.Timber
@@ -43,27 +46,47 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
         viewModel.positions.observe(this, positionsObserver)
         viewModel.confirmResponse.observe(this, confirmObserver)
         viewModel.toastText.observe(this, toastObserver)
-        viewBinding.btnShip.setOnClickListener {
-            hideKeyBoard()
-            showLoading()
-            if (isPred) {
-                viewModel.departure(
-                    viewBinding.shipEt.text.toString(),
-                    viewBinding.exceptEt.text.toString(),
-                )
-            } else {
-                val arrayList: ArrayList<Pair<Long, String>> = arrayListOf()
-                for (i in 0 until viewModel.positions.value?.size!!) {
-                    with(adapter.getItem(i) as PlaqueItem) {
-                        Timber.i("id: ${pos.id}, mass: ${getMass()}")
-                        arrayList.add(pos.id!! to getMass())
-                    }
+
+        with(viewBinding) {
+            scrollView.setOnScrollChangeListener { _, _, _, _, _ ->
+                Timber.i("scroll changed")
+                if (!isPred) {
+                    Timber.i("post")
+                        if (btnShip.isVisible(relative)) {
+                            Timber.i("visible")
+                            fbtn.visibility = View.GONE
+                        } else {
+                            Timber.i("not visible")
+                            fbtn.visibility = View.VISIBLE
+                        }
                 }
-                viewModel.confirm(
-                    arrayList.toTypedArray(),
-                    viewBinding.shipEt.text.toString(),
-                    viewBinding.exceptEt.text.toString(),
-                )
+            }
+            fbtn.setOnClickListener {
+                scrollView.fullScroll(View.FOCUS_UP);
+                scrollView.stopNestedScroll()
+            }
+            btnShip.setOnClickListener {
+                hideKeyBoard()
+                showLoading()
+                if (isPred) {
+                    viewModel.departure(
+                        shipEt.text.toString(),
+                        exceptEt.text.toString(),
+                    )
+                } else {
+                    val arrayList: ArrayList<Pair<Long, String>> = arrayListOf()
+                    for (i in 0 until viewModel.positions.value?.size!!) {
+                        with(adapter.getItem(i) as PlaqueItem) {
+                            Timber.i("id: ${pos.id}, mass: ${getMass()}")
+                            arrayList.add(pos.id!! to getMass())
+                        }
+                    }
+                    viewModel.confirm(
+                        arrayList.toTypedArray(),
+                        shipEt.text.toString(),
+                        exceptEt.text.toString(),
+                    )
+                }
             }
         }
     }
