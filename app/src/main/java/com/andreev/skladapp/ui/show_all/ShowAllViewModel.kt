@@ -1,6 +1,7 @@
 package com.andreev.skladapp.ui.show_all
 
 import androidx.lifecycle.MutableLiveData
+import com.andreev.skladapp.data.MockPosition
 import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.network.repositories.ItemsRepository
@@ -20,6 +21,7 @@ class ShowAllViewModel : BaseViewModel() {
     lateinit var userStoredData: UserStoredData
 
     val positions = MutableLiveData<Array<Position>>()
+    val tablePositions = MutableLiveData<Array<MockPosition>>()
     val diameter = MutableLiveData<Array<String>>()
     val marks = MutableLiveData<Array<String>>()
     val packings = MutableLiveData<Array<String>>()
@@ -48,7 +50,7 @@ class ShowAllViewModel : BaseViewModel() {
                 userStoredData.user?.let { itemRepository.getTable(it) }
             }
             if (response != null) {
-                positions.value = response.map { Position(it) }.toTypedArray()
+                tablePositions.value = response
             }
         }
     }
@@ -107,7 +109,7 @@ class ShowAllViewModel : BaseViewModel() {
                 userStoredData.user?.let { itemRepository.getAdaptiveTable(filter, it) }
             }
             if (response != null) {
-                positions.value = response.map { Position(it) }.toTypedArray()
+                tablePositions.value = response
             }
         }
     }

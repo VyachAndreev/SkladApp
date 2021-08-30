@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andreev.skladapp.Constants
 import com.andreev.skladapp.R
+import com.andreev.skladapp.data.MockPosition
 import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.databinding.FragmentShowAllBinding
 import com.andreev.skladapp.di.ApplicationComponent
@@ -16,15 +17,17 @@ import com.andreev.skladapp.ui._adapter.SelectionAdapter
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.PlaqueItem
 import com.andreev.skladapp.ui._item.ShipmentItem
+import com.andreev.skladapp.ui._item.TableItem
 import com.andreev.skladapp.ui._item.TextViewItem
 import com.andreev.skladapp.ui.hub.HubFragment
 import com.andreev.skladapp.ui.information.InformationFragment
 import com.andreev.skladapp.ui.utils.DialogUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import kotlinx.android.synthetic.main.fragment_information.*
 import timber.log.Timber
 
-class ShowAllFragment: BaseFragment<FragmentShowAllBinding>() {
+class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
 
     private var adapter = GroupAdapter<GroupieViewHolder>()
     private lateinit var spinnerAdapter: SelectionAdapter<String>
@@ -41,7 +44,7 @@ class ShowAllFragment: BaseFragment<FragmentShowAllBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         (parentFragment as HubFragment).viewModel.curMenuItem.value = this
-        adapter.setOnItemClickListener { item, view ->
+        adapter.setOnItemClickListener { item, _ ->
             when (item) {
                 is PlaqueItem -> {
                     val args = Bundle()
@@ -56,13 +59,15 @@ class ShowAllFragment: BaseFragment<FragmentShowAllBinding>() {
                         )
                     }
                 }
-                else -> {}
+                else -> {
+                }
             }
         }
 
         initRecycler()
         showLoading()
         viewModel.positions.observe(this, positionListener)
+        viewModel.tablePositions.observe(this, tablePositionListener)
         viewModel.apply {
             getPositions()
             getMarks()
@@ -134,9 +139,11 @@ class ShowAllFragment: BaseFragment<FragmentShowAllBinding>() {
                 showLoading()
                 if (pos == 0) {
                     isTable = false
+                    viewModel.tablePositions.value = arrayOf()
                     viewModel.getPositions()
                 } else {
                     isTable = true
+                    viewModel.positions.value = arrayOf()
                     viewModel.getTable()
                 }
                 spinnerAdapter.notifyDataSetChanged()
@@ -146,32 +153,42 @@ class ShowAllFragment: BaseFragment<FragmentShowAllBinding>() {
 
 
     private val positionListener = Observer<Array<Position>> { positions ->
-        viewBinding.swipeLayout.isRefreshing = false
-        hideLoading()
-        adapter.clear()
-        if (positions.isNotEmpty()) {
-            if (isTable) {
-                adapter.add(
-                    ShipmentItem(number = "null")
+        if (!isTable) {
+            viewBinding.swipeLayout.isRefreshing = false
+            hideLoading()
+            adapter.clear()
+            if (positions.isNotEmpty()) {
+                adapter.addAll(
+                    positions.map { position ->
+                        PlaqueItem(position)
+                    }
                 )
-                var i = 0
+            } else {
+                adapter.add(TextViewItem("Ничего не найдено"))
+            }
+        }
+    }
+
+    private val tablePositionListener = Observer<Array<MockPosition>> { positions ->
+        if (isTable) {
+            viewBinding.swipeLayout.isRefreshing = false
+            hideLoading()
+            adapter.clear()
+            if (positions.isNotEmpty()) {
+                adapter.add(
+                    TableItem(number = "null")
+                )
                 adapter.addAll(
                     positions.map {
-                        ShipmentItem(
+                        TableItem(
                             "null",
                             it,
                         )
                     }
                 )
             } else {
-                adapter.addAll(
-                    positions.map { position ->
-                        PlaqueItem(position)
-                    }
-                )
+                adapter.add(TextViewItem("Ничего не найдено"))
             }
-        } else {
-            adapter.add(TextViewItem("Ничего не найдено"))
         }
     }
 

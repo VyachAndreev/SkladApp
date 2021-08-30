@@ -6,6 +6,8 @@
         <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/fragment_information.xml" value="0.23072916666666668" />
         <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/fragment_search.xml" value="0.19655521783181357" />
         <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/item_plaque.xml" value="0.23072916666666668" />
+        <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/item_shipment_history.xml" value="0.4041666666666667" />
+        <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/item_table.xml" value="0.4041666666666667" />
       </map>
     </option>
   </component>

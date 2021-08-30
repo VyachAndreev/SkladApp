@@ -39,36 +39,36 @@ object DialogUtils {
         }
     }
 
-    fun showHistoryDialog(
-        context: Context?,
-        tablePieces: ArrayList<TablePiece>,
-    ) {
-        lateinit var dialog: AlertDialog
-        val dialogBinding = DataBindingUtil.inflate<DialogHistoryBinding>(
-            LayoutInflater.from(context),
-            R.layout.dialog_history,
-            null,
-            false
-        )
-        var recyclerAdapter = GroupAdapter<GroupieViewHolder>()
-        dialogBinding.recycler.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = recyclerAdapter
-        }
-
-        if (tablePieces.size > 0) {
-            recyclerAdapter.addAll(tablePieces.map {
-                TableItem(it)
-            })
-        } else {
-            recyclerAdapter.add(TextViewItem("Данные отсутствуют"))
-        }
-
-        dialog =
-            baseDialog(dialogBinding.root)
-
-        dialog.show()
-    }
+//    fun showHistoryDialog(
+//        context: Context?,
+//        tablePieces: ArrayList<TablePiece>,
+//    ) {
+//        lateinit var dialog: AlertDialog
+//        val dialogBinding = DataBindingUtil.inflate<DialogHistoryBinding>(
+//            LayoutInflater.from(context),
+//            R.layout.dialog_history,
+//            null,
+//            false
+//        )
+//        var recyclerAdapter = GroupAdapter<GroupieViewHolder>()
+//        dialogBinding.recycler.apply {
+//            layoutManager = LinearLayoutManager(context)
+//            adapter = recyclerAdapter
+//        }
+//
+//        if (tablePieces.size > 0) {
+//            recyclerAdapter.addAll(tablePieces.map {
+//                TableItem(it)
+//            })
+//        } else {
+//            recyclerAdapter.add(TextViewItem("Данные отсутствуют"))
+//        }
+//
+//        dialog =
+//            baseDialog(dialogBinding.root)
+//
+//        dialog.show()
+//    }
 
     fun showFilterDialog(
         context: Context?,

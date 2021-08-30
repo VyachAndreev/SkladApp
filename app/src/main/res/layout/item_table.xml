@@ -5,12 +5,31 @@
     <data>
 
         <variable
-            name="tablePiece"
-            type="com.andreev.skladapp.data.TablePiece" />
+            name="number"
+            type="String" />
+
+        <variable
+            name="mark"
+            type="String" />
+
+        <variable
+            name="diameter"
+            type="String" />
+
+        <variable
+            name="packing"
+            type="String" />
+
+        <variable
+            name="mass0"
+            type="String" />
+
+        <variable
+            name="mass1"
+            type="String" />
     </data>
 
     <LinearLayout
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -18,51 +37,70 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="10dp">
 
             <TextView
-                style="@style/TextSSmall.Light"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@{tablePiece.number}"
-                tools:text="1" />
-
-            <TextView
-                style="@style/TextSSmall.Light"
+                android:id="@+id/tv_number"
+                style="@style/TextMicro.Bold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="5dp"
                 android:layout_weight="1"
-                android:text="@{tablePiece.type}"
-                tools:text="Добавление" />
+                android:gravity="center"
+                tools:text='@{number != null? number : "№"}' />
 
             <TextView
-                style="@style/TextSSmall.Light"
+                style="@style/TextMicro.Bold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="5dp"
-                android:layout_weight="1"
-                android:text="@{tablePiece.date}"
-                tools:text="10.11.2020" />
+                android:layout_weight="3"
+                android:gravity="center"
+                tools:text='@{mark != null? mark: "Марка"}' />
 
             <TextView
-                style="@style/TextMicro.Light"
+                style="@style/TextMicro.Bold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="5dp"
-                android:layout_weight="1"
-                android:text="@{tablePiece.place}"
-                tools:text="Солнечногорск" />
+                android:layout_weight="2"
+                android:gravity="center"
+                tools:text='@{diameter != null? diameter: "Диаметр"}' />
 
+            <TextView
+                style="@style/TextMicro.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_gravity="center"
+                android:gravity="center"
+                tools:text='@{packing != null? packing: "Упаковка"}' />
+
+            <TextView
+                style="@style/TextMicro.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                tools:text='@{mass0 != null? mass0: "Солнченогорск"}' />
+
+            <TextView
+                style="@style/TextMicro.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                tools:text='@{mass1 != null? mass1: "Белорецк"}' />
         </LinearLayout>
+
         <View
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray_C4C" />
+            android:layout_marginTop="13dp"
+            android:background="@color/blue_3B4" />
     </LinearLayout>
 </layout>
