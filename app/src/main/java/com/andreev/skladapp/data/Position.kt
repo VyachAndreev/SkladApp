@@ -63,4 +63,40 @@ data class Position(
         result = 31 * result + (location?.hashCode() ?: 0)
         return result
     }
+
+    constructor(mockPosition: MockPosition) : this(
+        comment = mockPosition.comment,
+        createdFrom = mockPosition.createdFrom,
+        date = mockPosition.date,
+        diameter = mockPosition.diameter,
+        id = mockPosition.id,
+        manufacturer = mockPosition.manufacturer,
+        mark = mockPosition.mark,
+        mass = mockPosition.mass?.get(0),
+        packing = mockPosition.packing,
+        part = mockPosition.part,
+        plav = mockPosition.plav,
+        status = mockPosition.status,
+        type = mockPosition.type,
+        positionsList = mockPosition.positionsList,
+        location = mockPosition.location
+    )
 }
+
+data class MockPosition(
+    val comment: String? = null,
+    val createdFrom: Long? = null,
+    val date: String? = null,
+    val diameter: String? = null,
+    val id: Long? = null,
+    val manufacturer: String? = null,
+    val mark: String? = null,
+    val mass: Array<String>? = null,
+    val packing: String? = null,
+    val part: String? = null,
+    val plav: String? = null,
+    val status: String? = null,
+    val type: String? = null,
+    val positionsList: Array<Position>? = null,
+    val location: String? = null,
+)

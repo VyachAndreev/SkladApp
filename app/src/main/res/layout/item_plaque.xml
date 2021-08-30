@@ -152,8 +152,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/plav_tv"
-            android:layout_toEndOf="@id/mass_tv"
             android:layout_marginTop="14dp"
+            android:layout_toEndOf="@id/mass_tv"
             android:text='@{position.mass}'
             tools:text="Позиция" />
 

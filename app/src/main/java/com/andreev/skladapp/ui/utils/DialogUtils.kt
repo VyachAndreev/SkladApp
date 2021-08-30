@@ -14,6 +14,7 @@ import com.andreev.skladapp.data.TablePiece
 import com.andreev.skladapp.databinding.DialogFilterBinding
 import com.andreev.skladapp.databinding.DialogHistoryBinding
 import com.andreev.skladapp.databinding.DialogShipmentBinding
+import com.andreev.skladapp.network.repositories.ItemsRepository
 import com.andreev.skladapp.ui._adapter.MultiSelectionAdapter
 import com.andreev.skladapp.ui._item.FilterItem
 import com.andreev.skladapp.ui._item.TableItem
@@ -74,7 +75,7 @@ object DialogUtils {
         marks: Array<String>?,
         diameters: Array<String>?,
         packings: Array<String>?,
-        onFilterPressed: (ArrayList<ArrayList<String>>) -> (Unit),
+        onFilterPressed: (ItemsRepository.FilterClass) -> (Unit),
     ) {
         lateinit var dialog: AlertDialog
         val dialogBinding = DataBindingUtil.inflate<DialogFilterBinding>(
@@ -94,15 +95,11 @@ object DialogUtils {
             }
             var valueFrom = diameters?.get(0)?.toFloat()
             var valueTo = diameters?.get(1)?.toFloat()
-            fromEt.setText(
-                valueFrom.toString().substring(
-                    0, valueFrom.toString().indexOf(".") + 2
-                )
+            fromEt.text = valueFrom.toString().substring(
+                0, valueFrom.toString().indexOf(".") + 2
             )
-            toEt.setText(
-                valueTo.toString().substring(
-                    0, valueFrom.toString().indexOf(".") + 2
-                )
+            toEt.text = valueTo.toString().substring(
+                0, valueFrom.toString().indexOf(".") + 2
             )
             if (valueTo == valueFrom) {
                 rangeSlider.visibility = View.GONE
@@ -123,7 +120,7 @@ object DialogUtils {
                 }
                 rangeSlider.setValues(valueFrom, valueTo)
                 rangeSlider.stepSize = 0.1f
-                rangeSlider.addOnChangeListener { slider, value, fromUser ->
+                rangeSlider.addOnChangeListener { _, _, _ ->
                     valueFrom = rangeSlider.values[0]
                     valueTo = rangeSlider.values[1]
                     fromEt.text = valueFrom.toString().substring(
@@ -142,10 +139,11 @@ object DialogUtils {
 
             filterBtn.setOnClickListener {
                 onFilterPressed(
-                    arrayListOf(
+                    ItemsRepository.FilterClass(
                         markAdapter.getSelectedNames(),
-                        arrayListOf(fromEt.text.toString(), toEt.text.toString()),
                         packingAdapter.getSelectedNames(),
+                        fromEt.text.toString().toDouble(),
+                        toEt.text.toString().toDouble(),
                     )
                 )
                 dialog.dismiss()
@@ -158,23 +156,10 @@ object DialogUtils {
             }
         }
 
-        marks?.map {
-            FilterItem(it)
-        }?.let {
-            markAdapter.addAll(
-                it
-            )
-        }
-        packings?.map {
-            FilterItem(it)
-        }?.let {
-            packingAdapter.addAll(
-                it
-            )
-        }
+        marks?.map { FilterItem(it) }?.let { markAdapter.addAll(it) }
+        packings?.map { FilterItem(it) }?.let { packingAdapter.addAll(it) }
 
-        dialog =
-            baseDialog(dialogBinding.root)
+        dialog = baseDialog(dialogBinding.root)
 
         dialog.show()
 

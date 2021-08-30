@@ -1,6 +1,7 @@
 package com.andreev.skladapp.network.repositories
 
 import com.andreev.skladapp.data.HistoryPiece
+import com.andreev.skladapp.data.MockPosition
 import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.data.User
 import com.andreev.skladapp.network.FuelNetworkService
@@ -37,7 +38,10 @@ class ItemsRepository : FuelNetworkService(){
     }
 
     suspend fun getPlavHints(tag: String?, user: User): Array<String>? {
-        return post(TAGS_PLAV_PATH + tag, Array<String>::class.java, user = user)
+        return post(TAGS_PLAV_PATH + tag,
+            Array<String>::class.java,
+            user = user,
+        )
     }
 
 
@@ -81,32 +85,24 @@ class ItemsRepository : FuelNetworkService(){
         )
     }
 
-    suspend fun filter(arrayList: ArrayList<ArrayList<String>>, user: User): Array<Position>? {
+    suspend fun filter(filter: FilterClass, user: User,
+    ): Array<Position>? {
         return postWithJson(
             FILTER,
             Array<Position>::class.java,
-            FilterClass(
-                arrayList[0],
-                arrayList[2],
-                arrayList[1][0].toDouble(),
-                arrayList[1][1].toDouble(),
-                true,
-            ),
+            filter.apply { table = false },
             user = user
         )
     }
 
-    suspend fun filterTable(arrayList: ArrayList<ArrayList<String>>, user: User): Array<Position>? {
+    suspend fun getAdaptiveTable(
+        filter: FilterClass,
+        user: User,
+    ): Array<MockPosition>? {
         return postWithJson(
-            FILTER_TABLE,
-            Array<Position>::class.java,
-            FilterClass(
-                arrayList[0],
-                arrayList[2],
-                arrayList[1][0].toDouble(),
-                arrayList[1][1].toDouble(),
-                true,
-            ),
+            ADAPTIVE_TABLE,
+            Array<MockPosition>::class.java,
+            filter.apply { table = true },
             user = user
         )
     }
@@ -116,7 +112,7 @@ class ItemsRepository : FuelNetworkService(){
         val packing: ArrayList<String>,
         val DL: Double,
         val DM: Double,
-        val table: Boolean,
+        var table: Boolean? = null,
     )
 
     suspend fun getHistory(user: User): Array<HistoryPiece>? {
@@ -127,10 +123,10 @@ class ItemsRepository : FuelNetworkService(){
         )
     }
 
-    suspend fun getTable(user: User): Array<Position>? {
+    suspend fun getTable(user: User): Array<MockPosition>? {
         return get(
             TABLE,
-            Array<Position>::class.java,
+            Array<MockPosition>::class.java,
             user = user
         )
     }
@@ -207,8 +203,8 @@ class ItemsRepository : FuelNetworkService(){
         const val DIAMETER = "api/position/diameter"
         const val FILTER = "api/filter"
         const val HISTORY = "api/history/all"
-        const val TABLE = "api/table"
-        const val FILTER_TABLE = "api/filter/table"
+        const val TABLE = "api/adaptiveTable"
+        const val ADAPTIVE_TABLE = "api/filter/adaptiveTable"
         const val PACKS = "api/packings"
         const val DEPARTURE = "api/position/departure"
         const val CONFIRM = "api/departureConfirmation"

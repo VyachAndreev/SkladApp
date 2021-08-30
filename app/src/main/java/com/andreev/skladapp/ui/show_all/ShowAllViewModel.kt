@@ -23,7 +23,7 @@ class ShowAllViewModel : BaseViewModel() {
     val diameter = MutableLiveData<Array<String>>()
     val marks = MutableLiveData<Array<String>>()
     val packings = MutableLiveData<Array<String>>()
-    var filterData: ArrayList<ArrayList<String>>? = null
+    var filterData: ItemsRepository.FilterClass? = null
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
         applicationComponent.inject(this)
@@ -48,7 +48,7 @@ class ShowAllViewModel : BaseViewModel() {
                 userStoredData.user?.let { itemRepository.getTable(it) }
             }
             if (response != null) {
-                positions.value = response
+                positions.value = response.map { Position(it) }.toTypedArray()
             }
         }
     }
@@ -86,11 +86,11 @@ class ShowAllViewModel : BaseViewModel() {
         }
     }
 
-    fun filter(arrayList: ArrayList<ArrayList<String>>) {
-        filterData = arrayList
+    fun filter(filter: ItemsRepository.FilterClass) {
+        filterData = filter
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
-                userStoredData.user?.let { itemRepository.filter(arrayList, it) }
+                userStoredData.user?.let { itemRepository.filter(filter, it) }
             }
             if (response != null) {
                 positions.value = response
@@ -100,14 +100,14 @@ class ShowAllViewModel : BaseViewModel() {
 
 
 
-    fun filterTable(arrayList: ArrayList<ArrayList<String>>) {
-        filterData = arrayList
+    fun filterTable(filter: ItemsRepository.FilterClass) {
+        filterData = filter
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
-                userStoredData.user?.let { itemRepository.filterTable(arrayList, it) }
+                userStoredData.user?.let { itemRepository.getAdaptiveTable(filter, it) }
             }
             if (response != null) {
-                positions.value = response
+                positions.value = response.map { Position(it) }.toTypedArray()
             }
         }
     }

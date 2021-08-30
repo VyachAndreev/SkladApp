@@ -26,17 +26,24 @@ abstract class FuelNetworkService {
         parameters: List<Pair<String, Any?>>? = null,
         user: User,
     ): T? {
-        val a = path == "authTest" && clazz == String::class.java
+        Timber.i("""GET call:
+            |path: $path
+        """.trimMargin())
         Timber.i("login is '${user.login}' password is '${user.password}'")
+        val a = path == "authTest" && clazz == String::class.java
         try {
             return Fuel.get(path, parameters)
                 .authentication()
                 .basic(user.login, user.password)
                 .awaitStringResult()
                 .fold({ jsonResponse ->
-                    Timber.i("get jsonResponse is $jsonResponse")
+                    Timber.i(
+                        """GET $path
+                        |jsonResponse is $jsonResponse"""
+                            .trimMargin()
+                    )
                     if (a) {
-                        return@fold "" as T
+                    return@fold "" as T
                     }
                     return@fold gson.fromJson(jsonResponse, clazz)
                 }, { error ->
@@ -57,13 +64,22 @@ abstract class FuelNetworkService {
         parameters: List<Pair<String, Any?>>? = null,
         user: User,
     ): T? {
+        Timber.i("""POST call:
+            |path: $path
+            |parameters are $parameters
+        """.trimMargin())
+        Timber.i("login is '${user.login}' password is '${user.password}'")
         try {
             return Fuel.post(path, parameters)
                 .authentication()
                 .basic(user.login, user.password)
                 .awaitStringResult()
                 .fold({ jsonResponse ->
-                    Timber.i("post jsonResponse is $jsonResponse")
+                    Timber.i(
+                        """POST $path
+                        |jsonResponse is $jsonResponse"""
+                            .trimMargin()
+                    )
                     return@fold gson.fromJson(jsonResponse, clazz)
                 }) { error ->
                     Timber.i("$error")
@@ -81,7 +97,11 @@ abstract class FuelNetworkService {
         parameters: Any?,
         user: User,
     ): T? {
-        Timber.i("parameters are $parameters")
+        Timber.i("""POST call:
+            |path: $path
+            |parameters are $parameters
+        """.trimMargin())
+        Timber.i("login is '${user.login}' password is '${user.password}'")
         try {
             return Fuel.post(path)
                 .jsonBody(JSONObject(gson.toJson(parameters)).toString(), Charsets.UTF_8)
@@ -89,7 +109,11 @@ abstract class FuelNetworkService {
                 .basic(user.login, user.password)
                 .awaitStringResult()
                 .fold({ jsonResponse ->
-                    Timber.i("post jsonResponse is $jsonResponse")
+                    Timber.i(
+                        """POST $path
+                        |jsonResponse is $jsonResponse"""
+                            .trimMargin()
+                    )
                     return@fold gson.fromJson(jsonResponse, clazz)
                 }) { error ->
                     Timber.i("$error")
