@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.AdapterView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,10 +28,18 @@ import kotlinx.android.synthetic.main.fragment_information.*
 import timber.log.Timber
 
 class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
-
-    private var adapter = GroupAdapter<GroupieViewHolder>()
-    private lateinit var spinnerAdapter: SelectionAdapter<String>
-    lateinit var viewModel: ShowAllViewModel
+    private val adapter by lazy { GroupAdapter<GroupieViewHolder>() }
+    private val spinnerAdapter by lazy {
+        context?.let {
+            SelectionAdapter(
+                it,
+                R.layout.item_text_view,
+                resources.getStringArray(R.array.show_all_showing_type).toList(),
+            )
+        }
+    }
+    private val position by lazy { getString(R.string.show_all_position) }
+    private lateinit var viewModel: ShowAllViewModel
     private var isTable = false
 
     override fun getLayoutRes(): Int = R.layout.fragment_show_all
@@ -41,76 +50,20 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         (parentFragment as HubFragment).viewModel.curMenuItem.value = this
-        adapter.setOnItemClickListener { item, _ ->
-            when (item) {
-                is PlaqueItem -> {
-                    val args = Bundle()
-                    item.pos.id?.let { args.putLong(Constants.ID, it) }
-                    Timber.i(item.pos.type)
-                    args.putBoolean(Constants.IS_PACKAGE, item.pos.type == "POSITION")
-                    (parentFragment as HubFragment).apply {
-                        launchChildFragment(
-                            InformationFragment(),
-                            true,
-                            args,
-                        )
-                    }
-                }
-                else -> {
-                }
-            }
-        }
 
         initRecycler()
         showLoading()
-        viewModel.positions.observe(this, positionObserver)
-        viewModel.tablePositions.observe(this, tablePositionObserver)
         viewModel.apply {
+            positions.observe(this@ShowAllFragment, positionObserver)
+            tablePositions.observe(this@ShowAllFragment, tablePositionObserver)
             getPositions()
             getMarks()
             getDiameter()
             getPackings()
         }
-        viewBinding.openFilter.setOnClickListener {
-            DialogUtils.showFilterDialog(
-                context,
-                viewModel.marks.value,
-                viewModel.diameter.value,
-                viewModel.packings.value,
-            ) {
-                showLoading()
-                if (isTable) {
-                    viewModel.filterTable(it)
-                } else {
-                    viewModel.filter(it)
-                }
-            }
-        }
 
-        val listener = SpinnerInteractionListener()
-        viewBinding.spinner.apply {
-            setOnTouchListener(listener)
-            onItemSelectedListener = listener
-        }
-
-        viewBinding.swipeLayout.setColorSchemeColors(resources.getColor(R.color.blue_3B4))
-        viewBinding.swipeLayout.setOnRefreshListener {
-            if (viewModel.filterData != null) {
-                if (isTable) {
-                    viewModel.filterTable(viewModel.filterData!!)
-                } else {
-                    viewModel.filter(viewModel.filterData!!)
-                }
-            } else {
-                if (isTable) {
-                    viewModel.getTable()
-                } else {
-                    viewModel.getPositions()
-                }
-            }
-        }
+        setListeners()
     }
 
     private inner class SpinnerInteractionListener : AdapterView.OnItemSelectedListener,
@@ -118,6 +71,7 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
         var userSelect = false
         override fun onTouch(v: View, event: MotionEvent): Boolean {
             userSelect = true
+            v.performClick()
             return false
         }
 
@@ -133,19 +87,90 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
         ) {
             if (userSelect) {
                 userSelect = false
-                spinnerAdapter.selectedItem = pos
+                spinnerAdapter?.selectedItem = pos
                 adapter.clear()
                 showLoading()
-                if (pos == 0) {
-                    isTable = false
-                    viewModel.tablePositions.value = arrayOf()
-                    viewModel.getPositions()
-                } else {
-                    isTable = true
-                    viewModel.positions.value = arrayOf()
-                    viewModel.getTable()
+                with(viewModel) {
+                    if (pos == 0) {
+                        isTable = false
+                        tablePositions.value = arrayOf()
+                        getPositions()
+                    } else {
+                        isTable = true
+                        positions.value = arrayOf()
+                        getTable()
+                    }
                 }
-                spinnerAdapter.notifyDataSetChanged()
+                spinnerAdapter?.notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun setListeners() {
+        adapter.setOnItemClickListener { item, _ ->
+            when (item) {
+                is PlaqueItem -> {
+                    val args = Bundle()
+                    item.pos.id?.let { args.putLong(Constants.ID, it) }
+                    Timber.i(item.pos.type)
+                    args.putBoolean(Constants.IS_PACKAGE, item.pos.type == position)
+                    (parentFragment as HubFragment).apply {
+                        launchChildFragment(
+                            InformationFragment(),
+                            true,
+                            args,
+                        )
+                    }
+                }
+                else -> {
+                }
+            }
+        }
+
+        with(viewBinding) {
+            openFilter.setOnClickListener {
+                with(this@ShowAllFragment.viewModel) {
+                    DialogUtils.showFilterDialog(
+                        context,
+                        marks.value,
+                        diameter.value,
+                        packings.value,
+                    ) {
+                        showLoading()
+                        if (isTable) {
+                            filterTable(it)
+                        } else {
+                            filter(it)
+                        }
+                    }
+                }
+            }
+
+            val listener = SpinnerInteractionListener()
+            spinner.apply {
+                setOnTouchListener(listener)
+                onItemSelectedListener = listener
+            }
+
+            with(swipeLayout) {
+                setColorSchemeColors(ContextCompat.getColor(context, R.color.blue_3B4))
+                setOnRefreshListener {
+                    with(this@ShowAllFragment.viewModel) {
+                        if (filterData != null) {
+                            if (isTable) {
+                                filterTable(filterData!!)
+                            } else {
+                                filter(filterData!!)
+                            }
+                        } else {
+                            if (isTable) {
+                                getTable()
+                            } else {
+                                getPositions()
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -163,7 +188,7 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
                     }
                 )
             } else {
-                adapter.add(TextViewItem("Ничего не найдено"))
+                adapter.add(TextViewItem(getString(R.string.item_nothing_found)))
             }
         }
     }
@@ -172,34 +197,22 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
         if (isTable) {
             viewBinding.swipeLayout.isRefreshing = false
             hideLoading()
-            adapter.clear()
-            if (positions.isNotEmpty()) {
-                adapter.add(
-                    TableItem(number = "null")
-                )
-                adapter.addAll(
-                    positions.map {
-                        TableItem(
-                            "null",
-                            it,
-                        )
-                    }
-                )
-            } else {
-                adapter.add(TextViewItem("Ничего не найдено"))
+            with(adapter) {
+                clear()
+                if (positions.isNotEmpty()) {
+                    add(TableItem(number = null))
+                    addAll(positions.map { TableItem(null, it) })
+                } else {
+                    add(TextViewItem(getString(R.string.item_nothing_found)))
+                }
             }
         }
     }
 
     private fun initRecycler() {
-        spinnerAdapter = SelectionAdapter(
-            context!!,
-            R.layout.item_text_view,
-            arrayListOf("карточки", "таблица"),
-        )
-        viewBinding.apply {
+        with(viewBinding) {
             spinner.adapter = spinnerAdapter
-            recycler.apply {
+            with(recycler) {
                 adapter = this@ShowAllFragment.adapter
                 layoutManager = LinearLayoutManager(context)
             }

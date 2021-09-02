@@ -48,6 +48,11 @@
     <string name="show_all">Посмотреть все</string>
     <string name="show_all.open_filter">Открыть фильтр</string>
     <string name="show_all.type">Вид: </string>
+    <string-array name="show_all.showing_type">
+        <item>карточки</item>
+        <item>таблица</item>
+    </string-array>
+    <string name="show_all.position">POSITION</string>
 
     <!-- Fragment Search -->
     <string name="search">Поиск</string>
