@@ -4,12 +4,12 @@ import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.network.repositories.NullRepository
 import com.andreev.skladapp.stored_data.UserStoredData
 import com.andreev.skladapp.ui._base.BaseViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class GetViewModel: BaseViewModel() {
+class GetViewModel : BaseViewModel() {
     @Inject
     lateinit var nullRepository: NullRepository
 
@@ -21,10 +21,8 @@ class GetViewModel: BaseViewModel() {
     }
 
     fun get(text: String) {
-        scopeMain.launch {
-            val response = withContext(Dispatchers.IO) {
-                userStoredData.user?.let { nullRepository.get(text, it) }
-            }
+        CoroutineScope(Dispatchers.IO).launch {
+            userStoredData.user?.let { nullRepository.get(text, it) }
         }
     }
 }
