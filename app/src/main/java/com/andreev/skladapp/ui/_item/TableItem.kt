@@ -7,23 +7,23 @@ import com.andreev.skladapp.databinding.ItemTableBinding
 import com.xwray.groupie.viewbinding.BindableItem
 
 class TableItem(
-    val number: String? = null,
-    val mPosition: MockPosition? = null,
-    val mark: String? = null,
-    val diameter: String? = null,
-    val packing: String? = null,
-    val mass0: String? = null,
-    val mass1: String? = null,
-): BindableItem<ItemTableBinding>() {
+    private val number: String? = null,
+    private val mPosition: MockPosition? = null,
+    private val mark: String? = null,
+    private val diameter: String? = null,
+    private val packing: String? = null,
+    private val mass0: String? = null,
+    private val mass1: String? = null,
+) : BindableItem<ItemTableBinding>() {
     override fun getLayout(): Int = R.layout.item_table
 
     override fun bind(viewBinding: ItemTableBinding, position: Int) {
-        if (number != "null") {
-            viewBinding.number = number
-        } else {
-            viewBinding.tvNumber.visibility = View.GONE
-        }
         with(viewBinding) {
+            if (this@TableItem.number != null) {
+                number = this@TableItem.number
+            } else {
+                tvNumber.visibility = View.GONE
+            }
             if (mPosition != null) {
                 mark = mPosition.mark
                 diameter = mPosition.diameter
