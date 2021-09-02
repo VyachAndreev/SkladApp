@@ -5,7 +5,6 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -26,75 +25,16 @@ import com.xwray.groupie.GroupieViewHolder
 import timber.log.Timber
 
 open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<String> {
+    protected lateinit var viewModel: SearchViewModel
+    private val hintAdapter: GroupAdapter<GroupieViewHolder> by lazy { GroupAdapter() }
+    private val itemsAdapter: GroupAdapter<GroupieViewHolder> by lazy { GroupAdapter() }
+    private var isKeyBoardVisible = true
 
     override fun getLayoutRes(): Int = R.layout.fragment_search
-
-    lateinit var viewModel: SearchViewModel
-
-    private var isKeyBoardVisible = true
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
         viewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
         viewModel.injectDependencies(applicationComponent)
-    }
-
-    lateinit var hintAdapter: GroupAdapter<GroupieViewHolder>
-    lateinit var itemsAdapter: GroupAdapter<GroupieViewHolder>
-
-    private fun initRecyclers() {
-        initHintRecycler()
-        initItemsRecycler()
-    }
-
-    private fun initHintRecycler() {
-        hintAdapter = GroupAdapter()
-        hintAdapter.setOnItemClickListener { item, _ ->
-            when (item) {
-                is HintItem -> {
-                    hideKeyBoard()
-                    viewModel.searchedText.value = item.hint
-                    viewBinding.searchBtn.callOnClick()
-                    isKeyBoardVisible = false
-                    hideKeyBoard()
-                }
-                else -> {}
-            }
-        }
-        viewBinding.apply {
-            recyclerHints.visibility = View.VISIBLE
-            recyclerHints.apply {
-                adapter = hintAdapter
-                layoutManager = LinearLayoutManager(context)
-            }
-        }
-    }
-
-    private fun initItemsRecycler() {
-        itemsAdapter = GroupAdapter()
-        itemsAdapter.setOnItemClickListener { item, view ->
-            when (item) {
-                is PlaqueItem -> {
-                    val args = Bundle()
-                    item.pos.id?.let { args.putLong(Constants.ID, it) }
-                    Timber.i(item.pos.type)
-                    args.putBoolean(Constants.IS_PACKAGE, item.pos.type == "PACKAGE")
-                    (parentFragment as HubFragment).apply {
-                        launchChildFragment(
-                            InformationFragment(),
-                            true,
-                            args,
-                        )
-                    }
-                }
-                else -> {}
-            }
-        }
-        viewBinding.apply {
-            recycler.apply {
-                adapter = itemsAdapter
-                layoutManager = LinearLayoutManager(context)
-            }
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -105,7 +45,8 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
         hideLoading()
         viewBinding.viewModel = viewModel
 
-        initRecyclers()
+        initHintRecycler()
+        initItemsRecycler()
 
         viewBinding.searchBtn.setOnClickListener {
             hideKeyBoard()
@@ -142,6 +83,55 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
         viewBinding.swipeLayout.setColorSchemeColors(resources.getColor(R.color.blue_3B4))
         viewBinding.swipeLayout.setOnRefreshListener {
             viewModel.refreshPositions()
+        }
+    }
+
+    private fun initHintRecycler() {
+        hintAdapter.setOnItemClickListener { item, _ ->
+            when (item) {
+                is HintItem -> {
+                    hideKeyBoard()
+                    viewModel.searchedText.value = item.hint
+                    viewBinding.searchBtn.callOnClick()
+                    isKeyBoardVisible = false
+                    hideKeyBoard()
+                }
+                else -> {}
+            }
+        }
+        viewBinding.apply {
+            recyclerHints.visibility = View.VISIBLE
+            recyclerHints.apply {
+                adapter = hintAdapter
+                layoutManager = LinearLayoutManager(context)
+            }
+        }
+    }
+
+    private fun initItemsRecycler() {
+        itemsAdapter.setOnItemClickListener { item, _ ->
+            when (item) {
+                is PlaqueItem -> {
+                    val args = Bundle()
+                    item.pos.id?.let { args.putLong(Constants.ID, it) }
+                    Timber.i(item.pos.type)
+                    args.putBoolean(Constants.IS_PACKAGE, item.pos.type == "PACKAGE")
+                    (parentFragment as HubFragment).apply {
+                        launchChildFragment(
+                            InformationFragment(),
+                            true,
+                            args,
+                        )
+                    }
+                }
+                else -> {}
+            }
+        }
+        viewBinding.apply {
+            recycler.apply {
+                adapter = itemsAdapter
+                layoutManager = LinearLayoutManager(context)
+            }
         }
     }
 
