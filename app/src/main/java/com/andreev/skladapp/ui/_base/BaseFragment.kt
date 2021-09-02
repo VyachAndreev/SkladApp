@@ -10,7 +10,6 @@ import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.andreev.skladapp.R
 import com.andreev.skladapp.SkladApplication
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui.MainActivity
@@ -19,12 +18,20 @@ import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 
 abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
-    lateinit var viewBinding: T
+    protected val fm by lazy { childFragmentManager }
+    protected lateinit var viewBinding: T
     protected val scopeMain = CoroutineScope(Dispatchers.Main)
 
     abstract fun getLayoutRes(): Int
 
     abstract fun injectDependencies(applicationComponent: ApplicationComponent)
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (activity?.application as? SkladApplication)?.let {
+            injectDependencies(it.appComponent)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,12 +42,21 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
         return viewBinding.root
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (activity?.application as? SkladApplication)?.let {
-            injectDependencies(it.appComponent)
-        }
+    private fun inflateView(layoutInflater: LayoutInflater) {
+        viewBinding = DataBindingUtil.inflate(
+            layoutInflater, getLayoutRes(), null, false
+        )
+        viewBinding.lifecycleOwner = this
+    }
 
+    private fun popChildFragment(@IdRes containerId: Int) {
+        with(fm) {
+            val backEntry = getBackStackEntryAt(backStackEntryCount - 1)
+            findFragmentByTag(backEntry.toString())?.let {
+                beginTransaction().replace(containerId, it)
+            }
+            popBackStack()
+        }
     }
 
     protected fun launchFragment(
@@ -61,90 +77,57 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
         extras: Bundle? = null,
         replace: Boolean = false
     ) {
-        val ft = childFragmentManager.beginTransaction()
-        fragment.arguments = extras
+        val ft = fm.beginTransaction()
+        with(fragment) {
+            arguments = extras
+            if (replace)
+                ft.replace(containerId, this, javaClass.simpleName)
+            else
+                ft.add(containerId, this, javaClass.simpleName)
 
-        if (replace)
-            ft.replace(containerId, fragment, fragment.javaClass.simpleName)
-        else
-            ft.add(containerId, fragment, fragment.javaClass.simpleName)
-
-        if (addToStack) {
-            ft.addToBackStack(fragment.javaClass.simpleName)
+            if (addToStack) {
+                ft.addToBackStack(javaClass.simpleName)
+            }
+            Timber.i(tag)
         }
-        Timber.i(fragment.tag)
         ft.commit()
     }
 
-    private fun popChildFragment(
-        @IdRes containerId: Int
-    ) {
-        val backEntry = childFragmentManager.getBackStackEntryAt(
-            childFragmentManager.backStackEntryCount - 1
-        )
-        childFragmentManager.findFragmentByTag(backEntry.toString())?.let {
-            childFragmentManager.beginTransaction().replace(
-                containerId,
-                it
-            )
-        }
-        childFragmentManager.popBackStack()
+    protected fun hideKeyBoard() {
+        (activity as? MainActivity)?.hideKeyboard()
+    }
+
+    protected fun showLoading() {
+        (activity as? MainActivity)?.showLoading()
+    }
+
+    protected fun hideLoading() {
+        (activity as? MainActivity)?.hideLoading()
+    }
+
+    protected fun showToast(text: String) {
+        (activity as? MainActivity)?.showToast(text)
+    }
+
+    protected fun showToast(@StringRes text: Int) {
+        (activity as? MainActivity)?.showToast(text)
+    }
+
+    protected fun openUrl(url: String) {
+        (activity as? MainActivity)?.openUrl(url)
     }
 
     open fun onBackPressed(
         @IdRes containerId: Int
     ): Boolean {
         Timber.i("onBackPressed")
-        return if (childFragmentManager.backStackEntryCount == 0) {
-            Timber.i("0")
+        return if (fm.backStackEntryCount == 0) {
+            Timber.i("stack is empty")
             true
         } else {
-            Timber.i("!=0")
+            Timber.i("stack is not empty")
             popChildFragment(containerId)
             false
-        }
-    }
-
-    protected fun hideKeyBoard() {
-        (activity as MainActivity).apply {
-            hideKeyboard()
-        }
-    }
-
-    protected fun showLoading() {
-        (activity as? MainActivity)?.apply {
-            this.showLoading()
-        }
-    }
-
-    protected fun hideLoading() {
-        (activity as? MainActivity)?.apply {
-            this.hideLoading()
-        }
-    }
-
-    protected fun showToast(text: String) {
-        (activity as? MainActivity)?.apply {
-            this.showToast(text)
-        }
-    }
-
-    protected fun showToast(@StringRes text: Int) {
-        (activity as? MainActivity)?.apply {
-            this.showToast(text)
-        }
-    }
-
-    private fun inflateView(layoutInflater: LayoutInflater) {
-        viewBinding = DataBindingUtil.inflate(
-            layoutInflater, getLayoutRes(), null, false
-        )
-        viewBinding.lifecycleOwner = this
-    }
-
-    protected fun openUrl(url: String) {
-        (activity as? MainActivity)?.apply {
-            this.openUrl(url)
         }
     }
 }
