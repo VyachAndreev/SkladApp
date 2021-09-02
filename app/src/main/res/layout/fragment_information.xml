@@ -26,19 +26,18 @@
             android:visibility='gone'>
 
             <Button
-                android:padding="1dp"
                 android:id="@+id/ship_btn"
-                android:text="@string/info.ship"
-                android:textAllCaps="false"
-                android:layout_gravity="center_vertical"
                 style="@style/ButtonTextSmall"
-                android:textSize="12sp"
-                android:layout_marginStart="14dp"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="14dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_rounded_btn" />
-
+                android:background="@drawable/bg_rounded_btn"
+                android:padding="1dp"
+                android:text="@string/info.ship"
+                android:textAllCaps="false"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <TableLayout
@@ -240,22 +239,20 @@
 
         <TextView
             android:id="@+id/show_positions"
-            android:gravity="center"
-            android:layout_marginTop="19dp"
-            android:text="@string/info.show_positions"
-            android:layout_gravity="center_horizontal"
+            style="@style/TextMedium.Blue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TextMedium.Blue"
-            app:drawableBottomCompat="@drawable/dashed_line"
-            />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="19dp"
+            android:gravity="center"
+            android:text="@string/info.show_positions"
+            app:drawableBottomCompat="@drawable/dashed_line" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
-            android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"/>
+            android:layout_marginTop="40dp"
+            android:visibility="gone" />
     </LinearLayout>
-
 </layout>

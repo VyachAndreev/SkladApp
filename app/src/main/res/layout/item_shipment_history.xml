@@ -44,7 +44,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                tools:text="@string/number"
+                tools:text="Номер"
                 android:text='@{number}'/>
 
             <TextView
@@ -54,7 +54,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="3"
                 android:gravity="center"
-                tools:text="@string/mark_"
+                tools:text="Марка"
                 android:text='@{mark}'/>
 
             <TextView
@@ -64,7 +64,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="2"
                 android:gravity="center"
-                tools:text="@string/diameter_"
+                tools:text="Диаметр"
                 android:text='@{diameter}' />
 
             <TextView
@@ -74,7 +74,7 @@
                 android:layout_weight="2"
                 android:layout_gravity="center"
                 android:gravity="center"
-                tools:text="@string/packing_"
+                tools:text="Упаковка"
                 android:text='@{packing}' />
 
             <TextView
@@ -84,7 +84,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="2"
                 android:gravity="center"
-                tools:text="@string/mass_"
+                tools:text="Вес"
                 android:text='@{mass}'/>
         </LinearLayout>
 

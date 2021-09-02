@@ -176,7 +176,6 @@
                     android:text="@string/filter.clear_filter"
                     android:textAllCaps="false" />
             </LinearLayout>
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

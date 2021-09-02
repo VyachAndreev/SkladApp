@@ -58,7 +58,6 @@
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:text="@string/history_dialog.place" />
-
         </LinearLayout>
 
         <View
@@ -75,6 +74,6 @@
             android:layout_gravity="center"
             android:layout_marginStart="18dp"
             android:layout_marginEnd="18dp"
-            tools:listitem="@layout/item_table"/>
+            tools:listitem="@layout/item_table" />
     </LinearLayout>
 </layout>

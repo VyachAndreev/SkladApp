@@ -3,6 +3,9 @@
 
     <!-- Util -->
     <string name="util.url_start">http://</string>
+    <string name="util.cross">Cross</string>
+    <string name="util.burger">Burger</string>
+    <string name="util.up_btn">Button Up</string>
     <!--Drawer-->
     <string name="drawer.show_all">Посмотреть все</string>
     <string name="drawer.search">Поиск</string>

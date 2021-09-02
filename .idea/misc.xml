@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/projects/Android/SkladApp/app/src/main/res/drawable/bg_button_filter.xml" value="0.246875" />
         <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/activity_main.xml" value="0.16145833333333334" />
         <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/dialog_filter.xml" value="0.17481884057971014" />
         <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/dialog_history.xml" value="0.1" />
@@ -15,9 +16,13 @@
         <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/fragment_sign_in.xml" value="0.12182971014492754" />
         <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/item_filter.xml" value="0.16145833333333334" />
         <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/item_plaque.xml" value="0.23072916666666668" />
+        <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/item_search_hint.xml" value="0.23072916666666668" />
         <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/item_shipment_history.xml" value="0.4041666666666667" />
         <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/item_table.xml" value="0.4041666666666667" />
+        <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/item_text_view.xml" value="0.16145833333333334" />
         <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/view_drawer.xml" value="0.39948453608247425" />
+        <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/view_drawer_item.xml" value="0.16145833333333334" />
+        <entry key="..\:/projects/Android/SkladApp/app/src/main/res/layout/view_toolbar.xml" value="0.16145833333333334" />
       </map>
     </option>
   </component>

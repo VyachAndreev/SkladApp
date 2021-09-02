@@ -16,6 +16,7 @@
             android:background="@color/blue_3B4"
             android:backgroundTint="@color/blue_3B4"
             android:src="@drawable/ic_arrow_up"
+            android:contentDescription="@string/util.up_btn"
             android:visibility="gone" />
 
         <androidx.core.widget.NestedScrollView
@@ -89,7 +90,6 @@
                         android:maxLines="1"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="8dp" />
-
                 </LinearLayout>
 
                 <Button

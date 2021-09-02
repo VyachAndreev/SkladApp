@@ -14,7 +14,7 @@
             name="isShipping"
             type="Boolean" />
     </data>
-    
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -25,7 +25,8 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:background="@drawable/sign_in_layout"
-        android:layout_marginTop="33dp">
+        android:layout_marginTop="33dp"
+        tools:ignore="UselessParent">
 
         <TextView
             android:id="@+id/type_tv"
@@ -219,6 +220,7 @@
             android:layout_toEndOf="@id/weight"
             android:layout_marginTop="14dp"
             android:inputType="numberDecimal"
+            android:autofillHints="@string/plaque.mass"
             android:singleLine="true"
             android:hint="@string/plaque.status"
             android:text = "@{position.mass}"

@@ -4,98 +4,97 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/bg_dialog_ship">
+        android:background="@drawable/bg_dialog_ship"
+        android:orientation="vertical">
 
-            <TextView
-                style="@style/TextSmall.Bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/ship_dialog.weight_of_ship"
-                android:textColor="@color/white" />
+        <TextView
+            style="@style/TextSmall.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/ship_dialog.weight_of_ship"
+            android:textColor="@color/white" />
 
-            <EditText
-                android:id="@+id/et_weight"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="24dp"
-                android:autofillHints="@string/ship_dialog.search_hint"
-                android:background="@drawable/bg_edit_text"
-                android:hint="@string/ship_dialog.search_hint"
-                android:inputType="text"
-                android:maxLines="1"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp" />
+        <EditText
+            android:id="@+id/et_weight"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:autofillHints="@string/ship_dialog.search_hint"
+            android:background="@drawable/bg_edit_text"
+            android:hint="@string/ship_dialog.search_hint"
+            android:inputType="numberDecimal"
+            android:maxLines="1"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp" />
 
-            <TextView
-                style="@style/TextSmall.Bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="12dp"
-                android:text="@string/ship_dialog.contr_agent"
-                android:textColor="@color/white" />
+        <TextView
+            style="@style/TextSmall.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/ship_dialog.contr_agent"
+            android:textColor="@color/white" />
 
-            <EditText
-                android:id="@+id/agent_et"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="24dp"
-                android:autofillHints="@string/ship_dialog.search_hint"
-                android:background="@drawable/bg_edit_text"
-                android:hint="@string/ship_dialog.search_hint"
-                android:inputType="text"
-                android:maxLines="1"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp" />
+        <EditText
+            android:id="@+id/agent_et"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:autofillHints="@string/ship_dialog.search_hint"
+            android:background="@drawable/bg_edit_text"
+            android:hint="@string/ship_dialog.search_hint"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp" />
 
+        <TextView
+            style="@style/TextSmall.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/ship_dialog.bill"
+            android:textColor="@color/white" />
 
-
-            <TextView
-                style="@style/TextSmall.Bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="12dp"
-                android:text="@string/ship_dialog.bill"
-                android:textColor="@color/white" />
-
-            <EditText
-                android:id="@+id/check_et"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="24dp"
-                android:autofillHints="@string/ship_dialog.search_hint"
-                android:background="@drawable/bg_edit_text"
-                android:hint="@string/ship_dialog.search_hint"
-                android:inputType="text"
-                android:maxLines="1"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp" />
+        <EditText
+            android:id="@+id/check_et"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:autofillHints="@string/ship_dialog.search_hint"
+            android:background="@drawable/bg_edit_text"
+            android:hint="@string/ship_dialog.search_hint"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp" />
 
         <FrameLayout
-            android:layout_gravity="center"
-            android:layout_marginTop="33dp"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:padding="5dp"
-            android:background="@color/white">
+            android:layout_gravity="center"
+            android:layout_marginTop="33dp"
+            android:background="@color/white"
+            android:padding="5dp">
+
             <Button
-                android:layout_gravity="center"
                 android:id="@+id/btn_ship"
                 style="@style/ButtonTextNormal.Bold"
                 android:layout_width="210dp"
                 android:layout_height="60dp"
-                android:textAllCaps="false"
-                android:text="@string/ship_dialog.ship"/>
+                android:layout_gravity="center"
+                android:text="@string/ship_dialog.ship"
+                android:textAllCaps="false" />
         </FrameLayout>
-        </LinearLayout>
+    </LinearLayout>
 </layout>
