@@ -2,10 +2,10 @@ package com.andreev.skladapp.ui.drawer
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
+import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import com.andreev.skladapp.R
@@ -18,7 +18,7 @@ class CustomToolbar(context: Context, attributeSet: AttributeSet)
         LayoutInflater.from(context),
         R.layout.view_toolbar,
         this,
-        true
+        true,
     )
 
     fun setUpDrawer(drawer: DrawerLayout, drawerView: View, mainActivity: MainActivity) {
@@ -30,13 +30,13 @@ class CustomToolbar(context: Context, attributeSet: AttributeSet)
 
     fun openDrawer(drawer: DrawerLayout, drawerView: View) {
         if (!drawer.isDrawerOpen(drawerView)) drawer.openDrawer(
-            Gravity.LEFT
+            GravityCompat.START
         )
     }
 
     fun closeDrawer(drawer: DrawerLayout, drawerView: View) {
         if (drawer.isDrawerOpen(drawerView)) drawer.closeDrawer(
-            Gravity.LEFT
+            GravityCompat.START
         )
     }
 }
