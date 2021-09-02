@@ -5,6 +5,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -24,10 +25,10 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import timber.log.Timber
 
-open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<String> {
+open class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     protected lateinit var viewModel: SearchViewModel
     private val hintAdapter: GroupAdapter<GroupieViewHolder> by lazy { GroupAdapter() }
-    private val itemsAdapter: GroupAdapter<GroupieViewHolder> by lazy { GroupAdapter() }
+    protected val itemsAdapter: GroupAdapter<GroupieViewHolder> by lazy { GroupAdapter() }
     private var isKeyBoardVisible = true
 
     override fun getLayoutRes(): Int = R.layout.fragment_search
@@ -39,50 +40,23 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (parentFragment as HubFragment).viewModel.curMenuItem.value = this
-        viewBinding.root.setOnClickListener {
-            viewBinding.recyclerHints.visibility = View.GONE
-        }
-        hideLoading()
-        viewBinding.viewModel = viewModel
-
-        initHintRecycler()
-        initItemsRecycler()
-
-        viewBinding.searchBtn.setOnClickListener {
-            hideKeyBoard()
-            hintAdapter.clear()
-            showLoading()
-            Timber.i("editText text = ${viewBinding.searchEt.text}")
-            viewModel.getPositions()
-        }
-
-        viewBinding.searchEt.setOnEditorActionListener { _: TextView?, actionId: Int, _: KeyEvent? ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                viewBinding.searchBtn.callOnClick()
+        with(viewBinding) {
+            root.setOnClickListener {
+                recyclerHints.visibility = View.GONE
             }
-            false
+            hideLoading()
+            viewModel = this@SearchFragment.viewModel
+
+            initHintRecycler()
+            initItemsRecycler()
         }
 
-        viewBinding.searchEt.doOnTextChanged { text, _, _, _ ->
-            text?.let {
-                if (it.length - viewModel.searchedSize > 1) {
-                    viewBinding.searchBtn.callOnClick()
-                }
-                viewModel.searchedSize = it.length
-            }
-        }
+        setListeners()
 
-        viewBinding.searchEt.setOnClickListener {
-            isKeyBoardVisible = true
-        }
-
-        viewModel.searchedText.observe(this, this)
-        viewModel.hints.observe(this, hintsObserver)
-        viewModel.positions.observe(this, positionsObserver)
-
-        viewBinding.swipeLayout.setColorSchemeColors(resources.getColor(R.color.blue_3B4))
-        viewBinding.swipeLayout.setOnRefreshListener {
-            viewModel.refreshPositions()
+        with(viewModel) {
+            searchedText.observe(this@SearchFragment, searchObserver)
+            hints.observe(this@SearchFragment, hintsObserver)
+            positions.observe(this@SearchFragment, positionsObserver)
         }
     }
 
@@ -96,14 +70,17 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
                     isKeyBoardVisible = false
                     hideKeyBoard()
                 }
-                else -> {}
+                else -> {
+                }
             }
         }
         viewBinding.apply {
-            recyclerHints.visibility = View.VISIBLE
-            recyclerHints.apply {
-                adapter = hintAdapter
-                layoutManager = LinearLayoutManager(context)
+            with(recyclerHints) {
+                visibility = visible
+                apply {
+                    adapter = hintAdapter
+                    layoutManager = LinearLayoutManager(context)
+                }
             }
         }
     }
@@ -124,26 +101,64 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
                         )
                     }
                 }
-                else -> {}
+                else -> {
+                }
             }
         }
-        viewBinding.apply {
-            recycler.apply {
-                adapter = itemsAdapter
-                layoutManager = LinearLayoutManager(context)
+        with(viewBinding.recycler) {
+            adapter = itemsAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+    }
+
+    private fun setListeners() {
+        with(viewBinding) {
+            searchBtn.setOnClickListener {
+                hideKeyBoard()
+                hintAdapter.clear()
+                showLoading()
+                Timber.i("editText text: ${searchEt.text}")
+                this@SearchFragment.viewModel.getPositions()
+            }
+            searchEt.setOnEditorActionListener { _: TextView?, actionId: Int, _: KeyEvent? ->
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    searchBtn.callOnClick()
+                }
+                false
+            }
+
+            searchEt.doOnTextChanged { text, _, _, _ ->
+                text?.let {
+                    if (it.length - this@SearchFragment.viewModel.searchedSize > 1) {
+                        searchBtn.callOnClick()
+                    }
+                    this@SearchFragment.viewModel.searchedSize = it.length
+                }
+            }
+
+            searchEt.setOnClickListener {
+                isKeyBoardVisible = true
+            }
+
+            with(swipeLayout) {
+                setColorSchemeColors(
+                    ContextCompat.getColor(context, R.color.blue_3B4)
+                )
+                setOnRefreshListener {
+                    this@SearchFragment.viewModel.refreshPositions()
+                }
             }
         }
     }
 
-    override fun onChanged(searchedText: String?) {
-        viewModel.getHints(searchedText)
+    private val searchObserver = Observer<String> {
+        viewModel.getHints(it)
     }
 
     private val hintsObserver = Observer<Array<String>> { hints ->
         if (isKeyBoardVisible) {
             viewBinding.recyclerHints.visibility = View.VISIBLE
-        }
-        else {
+        } else {
             viewBinding.recyclerHints.visibility = View.GONE
         }
         hintAdapter.clear()
