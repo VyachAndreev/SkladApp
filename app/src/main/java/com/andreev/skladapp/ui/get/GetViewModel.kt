@@ -12,7 +12,6 @@ import javax.inject.Inject
 class GetViewModel : BaseViewModel() {
     @Inject
     lateinit var nullRepository: NullRepository
-
     @Inject
     lateinit var userStoredData: UserStoredData
 
