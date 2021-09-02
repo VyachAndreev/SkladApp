@@ -77,8 +77,8 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
         }
 
         viewModel.searchedText.observe(this, this)
-        viewModel.hints.observe(this, hintsListener)
-        viewModel.positions.observe(this, positionsListener)
+        viewModel.hints.observe(this, hintsObserver)
+        viewModel.positions.observe(this, positionsObserver)
 
         viewBinding.swipeLayout.setColorSchemeColors(resources.getColor(R.color.blue_3B4))
         viewBinding.swipeLayout.setOnRefreshListener {
@@ -139,7 +139,7 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
         viewModel.getHints(searchedText)
     }
 
-    private val hintsListener = Observer<Array<String>> {hints ->
+    private val hintsObserver = Observer<Array<String>> { hints ->
         if (isKeyBoardVisible) {
             viewBinding.recyclerHints.visibility = View.VISIBLE
         }
@@ -154,7 +154,7 @@ open class SearchFragment: BaseFragment<FragmentSearchBinding>(), Observer<Strin
         )
     }
 
-    protected open val positionsListener = Observer<Array<Position>> { positions ->
+    protected open val positionsObserver = Observer<Array<Position>> { positions ->
         hideLoading()
         viewBinding.swipeLayout.isRefreshing = false
         itemsAdapter.clear()

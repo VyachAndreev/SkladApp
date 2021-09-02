@@ -16,7 +16,6 @@ import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui._adapter.SelectionAdapter
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.PlaqueItem
-import com.andreev.skladapp.ui._item.ShipmentItem
 import com.andreev.skladapp.ui._item.TableItem
 import com.andreev.skladapp.ui._item.TextViewItem
 import com.andreev.skladapp.ui.hub.HubFragment
@@ -66,8 +65,8 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
 
         initRecycler()
         showLoading()
-        viewModel.positions.observe(this, positionListener)
-        viewModel.tablePositions.observe(this, tablePositionListener)
+        viewModel.positions.observe(this, positionObserver)
+        viewModel.tablePositions.observe(this, tablePositionObserver)
         viewModel.apply {
             getPositions()
             getMarks()
@@ -152,7 +151,7 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
     }
 
 
-    private val positionListener = Observer<Array<Position>> { positions ->
+    private val positionObserver = Observer<Array<Position>> { positions ->
         if (!isTable) {
             viewBinding.swipeLayout.isRefreshing = false
             hideLoading()
@@ -169,7 +168,7 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
         }
     }
 
-    private val tablePositionListener = Observer<Array<MockPosition>> { positions ->
+    private val tablePositionObserver = Observer<Array<MockPosition>> { positions ->
         if (isTable) {
             viewBinding.swipeLayout.isRefreshing = false
             hideLoading()

@@ -16,8 +16,6 @@ import com.andreev.skladapp.ui._item.TextViewItem
 import com.andreev.skladapp.ui.utils.DialogUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class InformationFragment : BaseFragment<FragmentInformationBinding>() {
@@ -40,7 +38,7 @@ class InformationFragment : BaseFragment<FragmentInformationBinding>() {
             Timber.i("$arguments")
         }
         with(viewModel) {
-            item.observe(this@InformationFragment, itemListener)
+            item.observe(this@InformationFragment, itemObserver)
             departureResponse.observe(this@InformationFragment, departureObserver)
             viewBinding.shipBtn.setOnClickListener {
                 val weight = item.value?.mass
@@ -89,7 +87,7 @@ class InformationFragment : BaseFragment<FragmentInformationBinding>() {
         }
     }
 
-    private val itemListener = Observer<Position> {
+    private val itemObserver = Observer<Position> {
         hideLoading()
         with(viewBinding) {
             position = viewModel.item.value

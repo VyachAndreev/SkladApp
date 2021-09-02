@@ -16,7 +16,7 @@ class SearchPlavFragment: SearchFragment() {
         viewModel.injectDependencies(applicationComponent)
     }
 
-    override val positionsListener = Observer<Array<Position>> { positions ->
+    override val positionsObserver = Observer<Array<Position>> { positions ->
         hideLoading()
         viewBinding.swipeLayout.isRefreshing = false
         itemsAdapter.clear()
