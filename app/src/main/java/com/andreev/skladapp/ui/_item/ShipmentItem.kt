@@ -8,14 +8,16 @@ import com.xwray.groupie.viewbinding.BindableItem
 
 class ShipmentItem(
     val number: String? = null,
-    val mPosition: Position? = null,
-    val mark: String? = null,
-    val diameter: String? = null,
-    val packing: String? = null,
-    val mass: String? = null,
+    private val mPosition: Position? = null,
+    private val mark: String? = null,
+    private val diameter: String? = null,
+    private val packing: String? = null,
+    private val mass: String? = null,
 ): BindableItem<ItemShipmentHistoryBinding>() {
+    override fun getLayout(): Int = R.layout.item_shipment_history
+
     override fun bind(viewBinding: ItemShipmentHistoryBinding, position: Int) {
-        if (number != "null") {
+        if (number != null) {
             viewBinding.number = number
         } else {
             viewBinding.tvNumber.visibility = View.GONE
@@ -33,9 +35,6 @@ class ShipmentItem(
         }
     }
 
-    override fun getLayout(): Int = R.layout.item_shipment_history
-
     override fun initializeViewBinding(view: View): ItemShipmentHistoryBinding =
         ItemShipmentHistoryBinding.bind(view)
-
 }

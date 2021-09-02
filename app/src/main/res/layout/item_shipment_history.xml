@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="number"
             type="String" />
@@ -45,7 +44,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                tools:text='@{number != null? number : "№"}' />
+                tools:text="@string/number" />
 
             <TextView
                 style="@style/TextMicro.Bold"
@@ -54,7 +53,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="3"
                 android:gravity="center"
-                tools:text='@{mark != null? mark: "Марка"}' />
+                tools:text="@string/mark_"/>
 
             <TextView
                 style="@style/TextMicro.Bold"
@@ -63,7 +62,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="2"
                 android:gravity="center"
-                tools:text='@{diameter != null? diameter: "Диаметр"}' />
+                tools:text="@string/diameter_" />
 
             <TextView
                 style="@style/TextMicro.Bold"
@@ -72,7 +71,7 @@
                 android:layout_weight="2"
                 android:layout_gravity="center"
                 android:gravity="center"
-                tools:text='@{packing != null? packing: "Упаковка"}' />
+                tools:text="@string/packing_" />
 
             <TextView
                 style="@style/TextMicro.Bold"
@@ -81,7 +80,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="2"
                 android:gravity="center"
-                tools:text='@{mass != null? mass: "Масса"}' />
+                tools:text="@string/mass_" />
         </LinearLayout>
 
         <View

@@ -7,5 +7,6 @@ interface Constants {
         const val PREFS = "PREFS"
         const val ID = "ID"
         const val IS_PACKAGE = "ISPACKAGE"
+        const val EMPTY_STRING = ""
     }
 }
