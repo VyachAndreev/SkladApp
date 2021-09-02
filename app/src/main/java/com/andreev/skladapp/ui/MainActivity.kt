@@ -1,6 +1,5 @@
 package com.andreev.skladapp.ui
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -20,8 +19,6 @@ import com.andreev.skladapp.stored_data.UserStoredData
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui.sign_in.SignInFragment
 import com.andreev.skladapp.ui.utils.ResourceProvider
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -32,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainBinding
     val visible by lazy { View.VISIBLE }
     val gone by lazy { View.GONE }
-    var progressBar: ProgressBar? = null
+    private var progressBar: ProgressBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

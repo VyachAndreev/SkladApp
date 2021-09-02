@@ -1,11 +1,9 @@
 package com.andreev.skladapp
 
 import android.app.Application
-import android.content.Context
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.di.DaggerApplicationComponent
 import com.andreev.skladapp.di.modules.SettingsModule
-import com.xwray.groupie.BuildConfig
 import timber.log.Timber
 
 class SkladApplication: Application() {
