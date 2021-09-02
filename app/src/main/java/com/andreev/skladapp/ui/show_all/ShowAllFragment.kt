@@ -94,11 +94,19 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
                     if (pos == 0) {
                         isTable = false
                         tablePositions.value = arrayOf()
-                        getPositions()
+                        if (filterData != null) {
+                            filter(filterData!!)
+                        } else {
+                            getPositions()
+                        }
                     } else {
                         isTable = true
                         positions.value = arrayOf()
-                        getTable()
+                        if (filterData != null) {
+                            filterTable(filterData!!)
+                        } else {
+                            getTable()
+                        }
                     }
                 }
                 spinnerAdapter?.notifyDataSetChanged()
@@ -122,8 +130,7 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
                         )
                     }
                 }
-                else -> {
-                }
+                else -> {}
             }
         }
 
