@@ -13,14 +13,11 @@ import androidx.fragment.app.Fragment
 import com.andreev.skladapp.SkladApplication
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui.MainActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 
 abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
     private val fm by lazy { childFragmentManager }
     protected lateinit var viewBinding: T
-    protected val scopeMain = CoroutineScope(Dispatchers.Main)
 
     abstract fun getLayoutRes(): Int
 

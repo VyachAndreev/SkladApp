@@ -10,4 +10,9 @@ abstract class BaseViewModel: ViewModel() {
     protected val scopeMain = CoroutineScope(Dispatchers.Main)
 
     abstract fun injectDependencies(applicationComponent: ApplicationComponent)
+
+    override fun onCleared() {
+        super.onCleared()
+        scopeMain.cancel()
+    }
 }
