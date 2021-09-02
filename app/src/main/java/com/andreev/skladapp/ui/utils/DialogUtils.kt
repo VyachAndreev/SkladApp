@@ -10,20 +10,13 @@ import androidx.annotation.StyleRes
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andreev.skladapp.R
-import com.andreev.skladapp.data.HistoryPiece
 import com.andreev.skladapp.databinding.DialogFilterBinding
-import com.andreev.skladapp.databinding.DialogHistoryBinding
 import com.andreev.skladapp.databinding.DialogShipmentBinding
 import com.andreev.skladapp.network.repositories.ItemsRepository
 import com.andreev.skladapp.ui._adapter.MultiSelectionAdapter
 import com.andreev.skladapp.ui._item.FilterItem
-import com.andreev.skladapp.ui._item.TableItem
-import com.andreev.skladapp.ui._item.TextViewItem
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.GroupieViewHolder
 
 object DialogUtils {
-
     private fun baseDialog(view: View, @StyleRes dialogStyle: Int? = null): AlertDialog {
         val dialog: AlertDialog = if (dialogStyle != null) {
             AlertDialog.Builder(view.context, dialogStyle)
@@ -38,37 +31,6 @@ object DialogUtils {
             window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
     }
-
-//    fun showHistoryDialog(
-//        context: Context?,
-//        tablePieces: ArrayList<TablePiece>,
-//    ) {
-//        lateinit var dialog: AlertDialog
-//        val dialogBinding = DataBindingUtil.inflate<DialogHistoryBinding>(
-//            LayoutInflater.from(context),
-//            R.layout.dialog_history,
-//            null,
-//            false
-//        )
-//        var recyclerAdapter = GroupAdapter<GroupieViewHolder>()
-//        dialogBinding.recycler.apply {
-//            layoutManager = LinearLayoutManager(context)
-//            adapter = recyclerAdapter
-//        }
-//
-//        if (tablePieces.size > 0) {
-//            recyclerAdapter.addAll(tablePieces.map {
-//                TableItem(it)
-//            })
-//        } else {
-//            recyclerAdapter.add(TextViewItem("Данные отсутствуют"))
-//        }
-//
-//        dialog =
-//            baseDialog(dialogBinding.root)
-//
-//        dialog.show()
-//    }
 
     fun showFilterDialog(
         context: Context?,
@@ -118,24 +80,26 @@ object DialogUtils {
                 if (valueFrom != null) {
                     rangeSlider.valueFrom = valueFrom
                 }
-                rangeSlider.setValues(valueFrom, valueTo)
-                rangeSlider.stepSize = 0.1f
-                rangeSlider.addOnChangeListener { _, _, _ ->
-                    valueFrom = rangeSlider.values[0]
-                    valueTo = rangeSlider.values[1]
-                    fromEt.text = valueFrom.toString().substring(
-                        0, valueFrom.toString().indexOf(".") + 2
-                    )
-                    toEt.text = valueTo.toString().substring(
-                        0, valueFrom.toString().indexOf(".") + 2
-                    )
+
+                with(rangeSlider) {
+                    setValues(valueFrom, valueTo)
+                    stepSize = 0.1f
+                    addOnChangeListener { _, _, _ ->
+                        valueFrom = values[0]
+                        valueTo = values[1]
+                        fromEt.text = valueFrom.toString().substring(
+                            0, valueFrom.toString().indexOf(".") + 2
+                        )
+                        toEt.text = valueTo.toString().substring(
+                            0, valueFrom.toString().indexOf(".") + 2
+                        )
+                    }
                 }
             }
             packingRecycler.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = packingAdapter
             }
-
 
             filterBtn.setOnClickListener {
                 onFilterPressed(
@@ -162,7 +126,6 @@ object DialogUtils {
         dialog = baseDialog(dialogBinding.root)
 
         dialog.show()
-
     }
 
     fun showShipDialog(
