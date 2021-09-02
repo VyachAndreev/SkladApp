@@ -36,7 +36,7 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         inflateView(layoutInflater)
         return viewBinding.root
@@ -63,7 +63,7 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
         @IdRes containerId: Int, fragment: Fragment,
         addToStack: Boolean,
         extras: Bundle? = null,
-        replace: Boolean = false
+        replace: Boolean = false,
     ) {
         (activity as? MainActivity)?.apply {
             this.launchFragment(containerId, fragment, addToStack, extras, replace)
@@ -117,9 +117,7 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
         (activity as? MainActivity)?.openUrl(url)
     }
 
-    open fun onBackPressed(
-        @IdRes containerId: Int
-    ): Boolean {
+    open fun onBackPressed(@IdRes containerId: Int): Boolean {
         Timber.i("onBackPressed")
         return if (fm.backStackEntryCount == 0) {
             Timber.i("stack is empty")
