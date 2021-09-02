@@ -15,30 +15,30 @@ class TableItem(
     val mass0: String? = null,
     val mass1: String? = null,
 ): BindableItem<ItemTableBinding>() {
+    override fun getLayout(): Int = R.layout.item_table
+
     override fun bind(viewBinding: ItemTableBinding, position: Int) {
         if (number != "null") {
             viewBinding.number = number
         } else {
             viewBinding.tvNumber.visibility = View.GONE
         }
-        if (mPosition != null) {
-            viewBinding.mark = mPosition.mark
-            viewBinding.diameter = mPosition.diameter
-            viewBinding.packing = mPosition.packing
-            viewBinding.mass0 = mPosition.mass?.get(0).toString()
-            viewBinding.mass1 = mPosition.mass?.get(1).toString()
-        } else {
-            viewBinding.mark = mark
-            viewBinding.diameter = diameter
-            viewBinding.packing = packing
-            viewBinding.mass0 = mass0
-            viewBinding.mass1 = mass1
+        with(viewBinding) {
+            if (mPosition != null) {
+                mark = mPosition.mark
+                diameter = mPosition.diameter
+                packing = mPosition.packing
+                mass0 = mPosition.mass?.get(0).toString()
+                mass1 = mPosition.mass?.get(1).toString()
+            } else {
+                mark = this@TableItem.mark
+                diameter = this@TableItem.diameter
+                packing = this@TableItem.packing
+                mass0 = this@TableItem.mass0
+                mass1 = this@TableItem.mass1
+            }
         }
     }
 
-    override fun getLayout(): Int = R.layout.item_table
-
-    override fun initializeViewBinding(view: View): ItemTableBinding =
-        ItemTableBinding.bind(view)
-
+    override fun initializeViewBinding(view: View): ItemTableBinding = ItemTableBinding.bind(view)
 }
