@@ -14,6 +14,13 @@ class UserStoredData(private val sharedPreferences: SharedPreferences) {
         Timber.i("initialization")
     }
 
+    private fun getUser() {
+        Timber.i("getting User")
+        val login = sharedPreferences.getString(Constants.LOGIN, null)
+        val password = sharedPreferences.getString(Constants.PASSWORD, null)
+        user = login?.let { password?.let { User(it, password)} }
+    }
+
     fun saveUser(user: User) {
         Timber.i("saving user")
         this.user = user
@@ -29,13 +36,5 @@ class UserStoredData(private val sharedPreferences: SharedPreferences) {
             .remove(Constants.LOGIN)
             .remove(Constants.PASSWORD)
             .apply()
-    }
-
-
-    private fun getUser() {
-        Timber.i("getting User")
-        val login = sharedPreferences.getString(Constants.LOGIN, null)
-        val password = sharedPreferences.getString(Constants.PASSWORD, null)
-        user = login?.let { password?.let { User(it, password)} }
     }
 }
