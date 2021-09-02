@@ -6,6 +6,7 @@ import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.network.repositories.ItemsRepository
 import com.andreev.skladapp.stored_data.UserStoredData
 import com.andreev.skladapp.ui._base.BaseViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -15,7 +16,6 @@ import javax.inject.Inject
 class InformationViewModel : BaseViewModel() {
     @Inject
     lateinit var itemsRepository: ItemsRepository
-
     @Inject
     lateinit var userStoredData: UserStoredData
 
@@ -27,7 +27,7 @@ class InformationViewModel : BaseViewModel() {
     }
 
     fun getPosition(id: Long?) {
-        Timber.i("position ID is $id")
+        Timber.i("position id: $id")
         scopeMain.launch {
             val response = withContext(Dispatchers.IO) {
                 userStoredData.user?.let { itemsRepository.getPosition(id.toString(), it) }
@@ -53,15 +53,13 @@ class InformationViewModel : BaseViewModel() {
     }
 
     fun departure(triple: Triple<String, String, String>) {
-        scopeMain.launch {
-            val response = withContext(Dispatchers.IO) {
-                userStoredData.user?.let {
-                    item.value?.id?.let { it1 ->
-                        itemsRepository.departure(it1, triple.first, triple.second, triple.third, it)
-                    }
+        CoroutineScope(Dispatchers.IO).launch {
+            userStoredData.user?.let {
+                item.value?.id?.let { it1 ->
+                    itemsRepository.departure(it1, triple.first, triple.second, triple.third, it)
                 }
             }
-            departureResponse.value = departureResponse.value + "1"
+            departureResponse.postValue(departureResponse.value + "1")
         }
     }
 }
