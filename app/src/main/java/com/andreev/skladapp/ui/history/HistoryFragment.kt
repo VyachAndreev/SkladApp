@@ -16,9 +16,11 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
 class HistoryFragment : BaseFragment<FragmentSearchBinding>() {
-    lateinit var viewModel: HistoryViewModel
-    override fun getLayoutRes(): Int = R.layout.fragment_search
+    private lateinit var viewModel: HistoryViewModel
+
     private val adapter = GroupAdapter<GroupieViewHolder>()
+
+    override fun getLayoutRes(): Int = R.layout.fragment_search
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
         viewModel = ViewModelProviders.of(this).get(HistoryViewModel::class.java)
@@ -28,43 +30,49 @@ class HistoryFragment : BaseFragment<FragmentSearchBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (parentFragment as HubFragment).viewModel.curMenuItem.value = this
         adapter.setHasStableIds(true)
-        viewBinding.linear.visibility = View.GONE
-        viewBinding.recycler.apply {
-            adapter = this@HistoryFragment.adapter
-            layoutManager = LinearLayoutManager(context)
+        with(viewBinding) {
+            linear.visibility = View.GONE
+            recycler.apply {
+                adapter = this@HistoryFragment.adapter
+                layoutManager = LinearLayoutManager(context)
+            }
+            with(swipeLayout) {
+                setColorSchemeColors(resources.getColor(R.color.blue_3B4))
+                setOnRefreshListener {
+                    this@HistoryFragment.viewModel.getHistory()
+                }
+            }
         }
         viewModel.historyPiecesData.observe(this, historyObserver)
         showLoading()
         viewModel.getHistory()
-        viewBinding.swipeLayout.setColorSchemeColors(resources.getColor(R.color.blue_3B4))
-        viewBinding.swipeLayout.setOnRefreshListener {
-            viewModel.getHistory()
-        }
     }
 
-    val historyObserver = Observer<Array<HistoryPiece>> {
-        adapter.clear()
-        adapter.add(
-            ShipmentItem(
-                number = "Номер отгрузки",
-                mark = "Номер счета",
-                diameter = "Агент",
-                packing = "Дата",
-                mass = "Масса",
-                )
-        )
-        it.reverse()
-        adapter.addAll(
-            it.map { piece ->
+    private val historyObserver = Observer<Array<HistoryPiece>> { pieces ->
+        with (adapter) {
+            clear()
+            add(
                 ShipmentItem(
-                    number = piece.id.toString(),
-                    mark = piece.bill,
-                    diameter = piece.contrAgent,
-                    packing = piece.date,
-                    mass = piece.mass,
+                    number = "Номер отгрузки",
+                    mark = "Номер счета",
+                    diameter = "Агент",
+                    packing = "Дата",
+                    mass = "Масса",
                 )
-            }
-        )
+            )
+            pieces.reverse()
+            addAll(
+                pieces.map { piece ->
+                    ShipmentItem(
+                        number = piece.id.toString(),
+                        mark = piece.bill,
+                        diameter = piece.contrAgent,
+                        packing = piece.date,
+                        mass = piece.mass,
+                    )
+                }
+            )
+        }
         hideLoading()
         viewBinding.swipeLayout.isRefreshing = false
     }

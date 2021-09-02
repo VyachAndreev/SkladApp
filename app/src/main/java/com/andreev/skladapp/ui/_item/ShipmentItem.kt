@@ -13,7 +13,7 @@ class ShipmentItem(
     private val diameter: String? = null,
     private val packing: String? = null,
     private val mass: String? = null,
-): BindableItem<ItemShipmentHistoryBinding>() {
+) : BindableItem<ItemShipmentHistoryBinding>() {
     override fun getLayout(): Int = R.layout.item_shipment_history
 
     override fun bind(viewBinding: ItemShipmentHistoryBinding, position: Int) {
@@ -23,10 +23,12 @@ class ShipmentItem(
             viewBinding.tvNumber.visibility = View.GONE
         }
         if (mPosition != null) {
-            viewBinding.mark = mPosition.mark
-            viewBinding.diameter = mPosition.diameter
-            viewBinding.packing = mPosition.packing
-            viewBinding.mass = mPosition.mass.toString()
+            with(viewBinding) {
+                mark = mPosition.mark
+                diameter = mPosition.diameter
+                packing = mPosition.packing
+                mass = mPosition.mass.toString()
+            }
         } else {
             viewBinding.mark = mark
             viewBinding.diameter = diameter
