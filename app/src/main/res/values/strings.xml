@@ -13,6 +13,7 @@
 
     <!-- Toasts -->
     <string name="toast.error_message">Произошла ошибка</string>
+    <string name="toast.incorrect_credentials">Введены неверные данные</string>
 
     <!-- History Dialog -->
     <string name="history_dialog.history">История</string>

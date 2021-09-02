@@ -11,7 +11,7 @@ import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui.hub.HubFragment
 import timber.log.Timber
 
-class SignInFragment: BaseFragment<FragmentSignInBinding>(), Observer<String> {
+class SignInFragment : BaseFragment<FragmentSignInBinding>() {
     lateinit var viewModel: SignInViewModel
 
     override fun getLayoutRes(): Int = R.layout.fragment_sign_in
@@ -22,19 +22,22 @@ class SignInFragment: BaseFragment<FragmentSignInBinding>(), Observer<String> {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewBinding.viewModel = viewModel
-        viewBinding.btnSignIn.setOnClickListener {
-            hideKeyBoard()
-            signInUser()
+        with(viewBinding) {
+            viewModel = this@SignInFragment.viewModel
+            btnSignIn.setOnClickListener {
+                hideKeyBoard()
+                signInUser()
+            }
         }
 
-        viewModel.login.observe(this, this)
-        viewModel.password.observe(this, this)
-        viewModel.isLoginSuccessful.observe(this, loginObserver)
+        with(viewModel) {
+            login.observe(this@SignInFragment, textObserver)
+            password.observe(this@SignInFragment, textObserver)
+            isLoginSuccessful.observe(this@SignInFragment, loginObserver)
+        }
     }
 
-    override fun onChanged(string: String?) {
-        Timber.i("changed")
+    private val textObserver = Observer<String> {
         viewModel.checkSingInAbility()
     }
 
@@ -47,7 +50,7 @@ class SignInFragment: BaseFragment<FragmentSignInBinding>(), Observer<String> {
                 replace = true,
             )
         } else {
-            showToast("Введены неправильные данные")
+            showToast(getString(R.string.toast_incorrect_credentials))
         }
         hideLoading()
     }
