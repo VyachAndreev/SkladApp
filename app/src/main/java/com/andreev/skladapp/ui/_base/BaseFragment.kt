@@ -18,7 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 
 abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
-    protected val fm by lazy { childFragmentManager }
+    private val fm by lazy { childFragmentManager }
     protected lateinit var viewBinding: T
     protected val scopeMain = CoroutineScope(Dispatchers.Main)
 
