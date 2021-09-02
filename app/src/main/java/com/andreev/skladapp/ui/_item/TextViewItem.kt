@@ -14,5 +14,4 @@ class TextViewItem(private val text: String) : BindableItem<ItemTextViewBinding>
 
     override fun initializeViewBinding(view: View): ItemTextViewBinding =
         ItemTextViewBinding.bind(view)
-
 }
