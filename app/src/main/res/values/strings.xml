@@ -11,6 +11,9 @@
     <string name="drawer.get">Приемка</string>
     <string name="drawer.exit">Выйти</string>
 
+    <!-- Toasts -->
+    <string name="toast.error_message">Произошла ошибка</string>
+
     <!-- History Dialog -->
     <string name="history_dialog.history">История</string>
     <string name="history_dialog.number">№</string>

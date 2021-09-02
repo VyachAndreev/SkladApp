@@ -19,6 +19,7 @@ import com.andreev.skladapp.databinding.ActivityMainBinding
 import com.andreev.skladapp.stored_data.UserStoredData
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui.sign_in.SignInFragment
+import com.andreev.skladapp.ui.utils.ResourceProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
@@ -33,9 +34,9 @@ class MainActivity : AppCompatActivity() {
     var progressBar: ProgressBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Timber.i("123")
         super.onCreate(savedInstanceState)
         (application as SkladApplication).appComponent.inject(this)
+        ResourceProvider.setContext(this)
         setContentView(R.layout.activity_main)
         viewBinding = DataBindingUtil.setContentView(
             this,
@@ -109,4 +110,8 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(applicationContext, getText(text), Toast.LENGTH_SHORT).show()
     }
 
+    override fun onDestroy() {
+        ResourceProvider.clearContext()
+        super.onDestroy()
+    }
 }

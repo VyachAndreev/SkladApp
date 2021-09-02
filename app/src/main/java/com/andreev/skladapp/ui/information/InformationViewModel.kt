@@ -53,7 +53,7 @@ class InformationViewModel : BaseViewModel() {
     }
 
     fun departure(triple: Triple<String, String, String>) {
-        CoroutineScope(Dispatchers.IO).launch {
+        scopeIO.launch {
             userStoredData.user?.let {
                 item.value?.id?.let { it1 ->
                     itemsRepository.departure(it1, triple.first, triple.second, triple.third, it)

@@ -7,12 +7,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 
 abstract class BaseViewModel: ViewModel() {
-    protected val scopeMain = CoroutineScope(Dispatchers.Main)
+    protected val scopeMain by lazy { CoroutineScope(Dispatchers.Main) }
+    protected val scopeIO by lazy { CoroutineScope(Dispatchers.IO)}
 
     abstract fun injectDependencies(applicationComponent: ApplicationComponent)
 
     override fun onCleared() {
         super.onCleared()
         scopeMain.cancel()
+        scopeIO.cancel()
     }
 }

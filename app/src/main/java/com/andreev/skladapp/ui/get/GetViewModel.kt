@@ -20,7 +20,7 @@ class GetViewModel : BaseViewModel() {
     }
 
     fun get(text: String) {
-        CoroutineScope(Dispatchers.IO).launch {
+        scopeIO.launch {
             userStoredData.user?.let { nullRepository.get(text, it) }
         }
     }

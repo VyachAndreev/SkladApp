@@ -19,14 +19,14 @@ import com.xwray.groupie.GroupieViewHolder
 import timber.log.Timber
 
 class ShipFragment : BaseFragment<FragmentShipmentBinding>() {
-    private lateinit var viewModel: ShipmentViewModel
+    private lateinit var viewModel: ShipViewModel
     private val adapter by lazy { GroupAdapter<GroupieViewHolder>() }
     var isPrevLayout = true
 
     override fun getLayoutRes(): Int = R.layout.fragment_shipment
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
-        viewModel = ViewModelProviders.of(this).get(ShipmentViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(ShipViewModel::class.java)
         viewModel.injectDependencies(applicationComponent)
     }
 
