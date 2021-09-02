@@ -1,43 +1,46 @@
 package com.andreev.skladapp.ui._adapter
 
+import android.util.ArraySet
 import com.andreev.skladapp.ui._item.FilterItem
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.item_filter.view.*
 
 class MultiSelectionAdapter : GroupAdapter<GroupieViewHolder>() {
-    private var selectedItems = HashSet<Int>()
+    private var selectedItems = ArraySet<Int>()
 
     override fun onBindViewHolder(
         holder: GroupieViewHolder,
         position: Int,
-        payloads: MutableList<Any>
+        payloads: MutableList<Any>,
     ) {
         super.onBindViewHolder(holder, position, payloads)
         if (getItem(position) is FilterItem) {
-            holder.itemView.checkbox.isChecked = selectedItems.contains(position)
-            holder.itemView.checkbox.setOnClickListener {
-                if (selectedItems.contains(position)) {
-                    selectedItems.remove(position)
-                } else {
-                    selectedItems.add(position)
+            with(holder.itemView.checkbox) {
+                isChecked = selectedItems.contains(position)
+                setOnClickListener {
+                    with(selectedItems) {
+                        if (contains(position)) {
+                            remove(position)
+                        } else {
+                            add(position)
+                        }
+                    }
                 }
             }
         }
     }
 
     fun clearSelectedItems() {
-        selectedItems.clear()
-        notifyDataSetChanged()
+        selectedItems.forEach {
+            selectedItems.remove(it)
+            notifyItemChanged(it)
+        }
     }
 
-    fun getSelectedNames(): ArrayList<String> {
-        val names = arrayListOf<String>()
-        names.addAll(
-            selectedItems.map {
-                (getItem(it) as FilterItem).name
-            }
-        )
-        return names
+    fun getSelectedNames(): List<String> {
+        return arrayListOf<String>().apply {
+            addAll(selectedItems.map { (getItem(it) as FilterItem).name })
+        }
     }
 }
