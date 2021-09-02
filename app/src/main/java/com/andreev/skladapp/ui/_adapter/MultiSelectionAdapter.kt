@@ -38,7 +38,7 @@ class MultiSelectionAdapter : GroupAdapter<GroupieViewHolder>() {
         }
     }
 
-    fun getSelectedNames(): List<String> {
+    fun getSelectedNames(): ArrayList<String> {
         return arrayListOf<String>().apply {
             addAll(selectedItems.map { (getItem(it) as FilterItem).name })
         }
