@@ -15,7 +15,6 @@ import javax.inject.Inject
 open class SearchViewModel: BaseViewModel() {
     @Inject
     lateinit var itemsRepository: ItemsRepository
-
     @Inject
     lateinit var userStoredData: UserStoredData
 
@@ -28,6 +27,10 @@ open class SearchViewModel: BaseViewModel() {
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
         applicationComponent.inject(this)
+    }
+
+    protected open suspend fun loadPositions(): Array<Position>? {
+        return userStoredData.user?.let { itemsRepository.getPositions(lastSearched, it) }
     }
 
     open fun getHints(tag: String?) {
@@ -65,9 +68,4 @@ open class SearchViewModel: BaseViewModel() {
             }
         }
     }
-
-    protected open suspend fun loadPositions(): Array<Position>? {
-        return userStoredData.user?.let { itemsRepository.getPositions(lastSearched, it) }
-    }
-
 }
