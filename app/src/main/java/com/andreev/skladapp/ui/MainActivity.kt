@@ -29,8 +29,9 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var userData: UserStoredData
 
-    lateinit var viewBinding: ActivityMainBinding
-    val scopeMain = CoroutineScope(Dispatchers.Main)
+    private lateinit var viewBinding: ActivityMainBinding
+    val visible by lazy { View.VISIBLE }
+    val gone by lazy { View.GONE }
     var progressBar: ProgressBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -94,8 +95,9 @@ class MainActivity : AppCompatActivity() {
 
     fun openUrl(url: String) {
         Timber.i(url)
-        if (!url.startsWith("http://")) {
-            openUrl("http://$url")
+        val start = getString(R.string.util_url_start)
+        if (!url.startsWith(start)) {
+            openUrl("$start$url")
             return
         }
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))

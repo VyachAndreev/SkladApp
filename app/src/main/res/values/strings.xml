@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">SkladApp</string>
 
+    <!-- Util -->
+    <string name="util.url_start">http://</string>
     <!--Drawer-->
     <string name="drawer.show_all">Посмотреть все</string>
     <string name="drawer.search">Поиск</string>
