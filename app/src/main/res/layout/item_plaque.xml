@@ -207,8 +207,8 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="14dp"
             android:layout_marginBottom="25dp"
-            android:visibility="@{isShipping? View.VISIBLE : View.GONE}"
-            android:text="@string/plaque.mass" />
+            android:text="@string/plaque.mass"
+            android:visibility="@{isShipping? View.VISIBLE : View.GONE}" />
 
         <EditText
             android:id="@+id/weight_et"

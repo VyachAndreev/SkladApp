@@ -84,6 +84,8 @@
     <string name="get">Приемка</string>
 
     <!-- Item Plaque -->
+    <string name="pallet">Поддон</string>
+    <string name="plaque">Позиция</string>
     <string name="plaque.position">Позиция</string>
     <string name="plaque.mark">Марка: </string>
     <string name="plaque.diameter">Диаметр: </string>
@@ -96,6 +98,7 @@
 
     <!-- Item Nothing Found -->
     <string name="item.nothing_found">Ничего не найдено</string>
+    <string name="item.no_positions">В поддоне нет позиций</string>
 
     <!-- Item History -->
     <string name="history.shipment_number">Номер отгрузки</string>

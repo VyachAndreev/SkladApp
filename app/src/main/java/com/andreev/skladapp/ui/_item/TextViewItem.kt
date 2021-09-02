@@ -1,6 +1,7 @@
 package com.andreev.skladapp.ui._item
 
 import android.view.View
+import androidx.annotation.StringRes
 import com.andreev.skladapp.R
 import com.andreev.skladapp.databinding.ItemTextViewBinding
 import com.xwray.groupie.viewbinding.BindableItem

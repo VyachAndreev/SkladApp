@@ -17,6 +17,8 @@ import timber.log.Timber
 
 abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
     protected val fm by lazy { childFragmentManager }
+    protected val visible by lazy { View.VISIBLE }
+    protected val gone by lazy { View.GONE }
     protected lateinit var viewBinding: T
 
     abstract fun getLayoutRes(): Int

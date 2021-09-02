@@ -13,7 +13,6 @@ class HubViewModel : BaseViewModel() {
     lateinit var userStoredData: UserStoredData
 
     var curMenuItem = MutableLiveData<Fragment>()
-
     var user =  MutableLiveData<User>()
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {

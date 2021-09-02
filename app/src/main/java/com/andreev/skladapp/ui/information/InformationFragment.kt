@@ -21,8 +21,8 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class InformationFragment : BaseFragment<FragmentInformationBinding>() {
+    private lateinit var viewModel: InformationViewModel
     private var adapter = GroupAdapter<GroupieViewHolder>()
-    lateinit var viewModel: InformationViewModel
     private var isPackage: Boolean? = null
     private var id: Long? = null
 
@@ -39,46 +39,44 @@ class InformationFragment : BaseFragment<FragmentInformationBinding>() {
             id = it.getLong(Constants.ID)
             Timber.i("$arguments")
         }
-
-        viewModel.item.observe(this, itemListener)
-        viewModel.departureResponse.observe(this, departureObserver)
-
-        viewBinding.shipBtn.setOnClickListener {
-            val weight = viewModel.item.value?.mass
-            DialogUtils.showShipDialog(context, weight) {
-                showLoading()
-                viewModel.departure(it)
+        with(viewModel) {
+            item.observe(this@InformationFragment, itemListener)
+            departureResponse.observe(this@InformationFragment, departureObserver)
+            viewBinding.shipBtn.setOnClickListener {
+                val weight = item.value?.mass
+                DialogUtils.showShipDialog(context, weight) {
+                    showLoading()
+                    departure(it)
+                }
             }
-        }
-
-        showLoading()
-
-        isPackage?.let {
-            if (!it) {
-                setPositionLayout()
-                viewModel.getPosition(id)
-            } else {
-                setPackageLayout()
-                viewModel.getPackage(id)
+            showLoading()
+            isPackage?.let {
+                if (!it) {
+                    setPositionLayout()
+                    getPosition(id)
+                } else {
+                    setPackageLayout()
+                    getPackage(id)
+                }
             }
         }
     }
 
     private fun setPositionLayout() {
-        viewBinding.apply {
-            showPositions.visibility = View.GONE
-        }
+        viewBinding.showPositions.visibility = gone
     }
 
     private fun setPackageLayout() {
-        viewBinding.apply {
-            layoutButtons.visibility = View.GONE
+        with(viewBinding) {
+            layoutButtons.visibility = gone
             initRecycler()
             showPositions.setOnClickListener {
-                if (recycler.visibility == View.VISIBLE) {
-                    recycler.visibility = View.GONE
-                } else {
-                    recycler.visibility = View.VISIBLE
+                with(recycler) {
+                    visibility = if (visibility == visible) {
+                        gone
+                    } else {
+                        visible
+                    }
                 }
             }
         }
@@ -95,27 +93,16 @@ class InformationFragment : BaseFragment<FragmentInformationBinding>() {
         hideLoading()
         with(viewBinding) {
             position = viewModel.item.value
-            if (viewBinding.position?.status != "Departured" && !isPackage!!) {
-                layoutButtons.visibility = View.VISIBLE
+            if (viewBinding.position?.status != DEPARTURED && !isPackage!!) {
+                layoutButtons.visibility = visible
             }
         }
         isPackage?.let {
             if (it) {
                 if (viewModel.item.value?.positionsList?.size!! > 0) {
-                    viewModel.item.value?.positionsList?.map { position ->
-                        PlaqueItem(
-                            position
-                        )
-                    }?.let { it1 ->
-                        adapter.addAll(
-                            it1
-                        )
-                    }
-                } else {
-                    adapter.add(
-                        TextViewItem("В поддоне нет позиций")
-                    )
-                }
+                    viewModel.item.value?.positionsList?.map { position -> PlaqueItem(position) }
+                        ?.let { plaque -> adapter.addAll(plaque) }
+                } else { adapter.add(TextViewItem(getString(R.string.item_no_positions))) }
             }
         }
     }
@@ -123,11 +110,17 @@ class InformationFragment : BaseFragment<FragmentInformationBinding>() {
     private val departureObserver = Observer<String> {
         viewBinding.layoutButtons.visibility = View.GONE
         isPackage?.let {
-            if (!it) {
-                viewModel.getPosition(id)
-            } else {
-                viewModel.getPackage(id)
+            with(viewModel) {
+                if (!it) {
+                    getPosition(id)
+                } else {
+                    getPackage(id)
+                }
             }
         }
+    }
+
+    companion object {
+        private const val DEPARTURED = "Departured"
     }
 }
