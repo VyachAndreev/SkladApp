@@ -27,8 +27,8 @@ import timber.log.Timber
 
 open class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     protected lateinit var viewModel: SearchViewModel
-    private val hintAdapter: GroupAdapter<GroupieViewHolder> by lazy { GroupAdapter() }
-    protected val itemsAdapter: GroupAdapter<GroupieViewHolder> by lazy { GroupAdapter() }
+    private val hintAdapter by lazy { GroupAdapter<GroupieViewHolder>() }
+    protected val itemsAdapter by lazy { GroupAdapter<GroupieViewHolder>() }
     private var isKeyBoardVisible = true
 
     override fun getLayoutRes(): Int = R.layout.fragment_search

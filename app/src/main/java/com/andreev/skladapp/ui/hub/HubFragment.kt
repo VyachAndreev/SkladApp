@@ -1,7 +1,6 @@
 package com.andreev.skladapp.ui.hub
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.core.view.GravityCompat
@@ -18,7 +17,7 @@ import com.andreev.skladapp.ui.get.GetFragment
 import com.andreev.skladapp.ui.history.HistoryFragment
 import com.andreev.skladapp.ui.search.SearchFragment
 import com.andreev.skladapp.ui.search_plav.SearchPlavFragment
-import com.andreev.skladapp.ui.shipment.ShipmentFragment
+import com.andreev.skladapp.ui.shipment.ShipFragment
 import com.andreev.skladapp.ui.show_all.ShowAllFragment
 import com.andreev.skladapp.ui.sign_in.SignInFragment
 import com.andreev.skladapp.ui.unite.UniteFragment
@@ -72,7 +71,7 @@ class HubFragment : BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
                 closeDrawer()
             }
             shipDi.setOnClickListener {
-                launchChildFragment(ShipmentFragment())
+                launchChildFragment(ShipFragment())
                 closeDrawer()
             }
             historyDi.setOnClickListener {
@@ -94,8 +93,8 @@ class HubFragment : BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
                 false
             } else {
                 val last = fm.fragments.last()
-                if (last is ShipmentFragment && !last.isPred) {
-                    last.setPredLayout()
+                if (last is ShipFragment && !last.isPrevLayout) {
+                    last.setPrevLayout()
                     return false
                 }
                 return super.onBackPressed(containerId)
@@ -118,7 +117,7 @@ class HubFragment : BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
             is UniteFragment -> {
                 updateToolbar(R.string.unite)
             }
-            is ShipmentFragment -> {
+            is ShipFragment -> {
                 updateToolbar(R.string.ship)
             }
             is HistoryFragment -> {

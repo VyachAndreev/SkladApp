@@ -1,8 +1,6 @@
 package com.andreev.skladapp.ui.shipment
 
-import android.graphics.Rect
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -20,14 +18,12 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import timber.log.Timber
 
-class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
-    lateinit var viewModel: ShipmentViewModel
+class ShipFragment : BaseFragment<FragmentShipmentBinding>() {
+    private lateinit var viewModel: ShipmentViewModel
+    private val adapter by lazy { GroupAdapter<GroupieViewHolder>() }
+    var isPrevLayout = true
 
     override fun getLayoutRes(): Int = R.layout.fragment_shipment
-
-    val adapter = GroupAdapter<GroupieViewHolder>()
-
-    var isPred = true
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
         viewModel = ViewModelProviders.of(this).get(ShipmentViewModel::class.java)
@@ -35,30 +31,35 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         (parentFragment as HubFragment).viewModel.curMenuItem.value = this
 
         with(viewBinding.recycler) {
             layoutManager = LinearLayoutManager(context)
-            adapter = this@ShipmentFragment.adapter
+            adapter = this@ShipFragment.adapter
         }
 
-        viewModel.positions.observe(this, positionsObserver)
-        viewModel.confirmResponse.observe(this, confirmObserver)
-        viewModel.toastText.observe(this, toastObserver)
+        setListeners()
 
+        with(viewModel) {
+            positions.observe(this@ShipFragment, positionsObserver)
+            confirmResponse.observe(this@ShipFragment, confirmObserver)
+            toastText.observe(this@ShipFragment, toastObserver)
+        }
+    }
+
+    private fun setListeners() {
         with(viewBinding) {
             scrollView.setOnScrollChangeListener { _, _, _, _, _ ->
                 Timber.i("scroll changed")
-                if (!isPred) {
+                if (!isPrevLayout) {
                     Timber.i("post")
-                        if (btnShip.isVisible(relative)) {
-                            Timber.i("visible")
-                            fbtn.visibility = View.GONE
-                        } else {
-                            Timber.i("not visible")
-                            fbtn.visibility = View.VISIBLE
-                        }
+                    if (btnShip.isVisible(relative)) {
+                        Timber.i("visible")
+                        fbtn.visibility = gone
+                    } else {
+                        Timber.i("not visible")
+                        fbtn.visibility = visible
+                    }
                 }
             }
             fbtn.setOnClickListener {
@@ -67,7 +68,7 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
             btnShip.setOnClickListener {
                 hideKeyBoard()
                 showLoading()
-                if (isPred) {
+                if (isPrevLayout) {
                     viewModel.departure(
                         shipEt.text.toString(),
                         exceptEt.text.toString(),
@@ -93,19 +94,16 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
     private val confirmObserver =
         Observer<ItemsRepository.ConfirmResponse> {
             hideLoading()
-            setPredLayout()
+            setPrevLayout()
         }
 
     private val positionsObserver = Observer<Array<Position>> { positions ->
-        adapter.clear()
-        adapter.addAll(
-            positions.map {
-                Timber.i("position: $it")
-                PlaqueItem(it, true)
-            }
-        )
+        with(adapter) {
+            clear()
+            addAll(positions.map { PlaqueItem(it, true) })
+        }
         hideLoading()
-        if (isPred) {
+        if (isPrevLayout) {
             setPostLayout()
         }
     }
@@ -115,27 +113,29 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
     }
 
     fun setPostLayout() {
-        isPred = false
+        isPrevLayout = false
         with(viewBinding) {
             tvUpper.setText(R.string.ship_contr_agent)
             tvLower.setText(R.string.ship_bill)
-            recycler.visibility = View.VISIBLE
+            recycler.visibility = visible
         }
         clearET()
     }
 
-    fun setPredLayout() {
-        isPred = true
+    fun setPrevLayout() {
+        isPrevLayout = true
         with(viewBinding) {
             tvUpper.setText(R.string.ship_ship_semi)
             tvLower.setText(R.string.ship_except_semi)
-            recycler.visibility = View.GONE
+            recycler.visibility = gone
         }
         clearET()
     }
 
     private fun clearET() {
-        viewBinding.exceptEt.text.clear()
-        viewBinding.shipEt.text.clear()
+        with(viewBinding) {
+            exceptEt.text.clear()
+            shipEt.text.clear()
+        }
     }
 }
