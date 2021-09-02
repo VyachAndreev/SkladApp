@@ -15,7 +15,6 @@ import javax.inject.Inject
 class HistoryViewModel: BaseViewModel() {
     @Inject
     lateinit var itemsRepository: ItemsRepository
-
     @Inject
     lateinit var userStoredData: UserStoredData
 
@@ -36,5 +35,4 @@ class HistoryViewModel: BaseViewModel() {
             }
         }
     }
-
 }
