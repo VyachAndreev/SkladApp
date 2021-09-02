@@ -5,19 +5,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.andreev.skladapp.R
 
-class SelectionAdapter<T>(private val cntxt: Context, resource: Int, arrayList: List<T>)
-    : ArrayAdapter<T>(cntxt, resource, arrayList) {
-
+class SelectionAdapter<T>(private val _context: Context, resource: Int, list: List<T>)
+    : ArrayAdapter<T>(_context, resource, list)
+{
     var selectedItem = 0
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         val v = super.getDropDownView(position, convertView, parent)
         if (position == selectedItem) {
-            val textView = v.findViewById<TextView>(R.id.text_view)
-            textView.setBackgroundColor(cntxt.resources.getColor(R.color.blue_3B4))
-            textView.setTextColor(cntxt.resources.getColor(R.color.white))
+            with(v.findViewById<TextView>(R.id.text_view)) {
+                this.setBackgroundColor(ContextCompat.getColor(_context, R.color.blue_3B4))
+                this.setTextColor(ContextCompat.getColor(_context, R.color.white))
+            }
         }
         return v
     }
