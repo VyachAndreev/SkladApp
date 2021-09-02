@@ -4,7 +4,6 @@ import com.andreev.skladapp.data.User
 import com.andreev.skladapp.network.FuelNetworkService
 
 class UserRepository : FuelNetworkService() {
-
     suspend fun login(user: User) : String? {
         return get(
             AUTH,
@@ -14,6 +13,6 @@ class UserRepository : FuelNetworkService() {
     }
 
     companion object {
-        const val AUTH = "authTest"
+        private const val AUTH = "authTest"
     }
 }

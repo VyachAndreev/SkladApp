@@ -8,7 +8,6 @@ import com.andreev.skladapp.network.FuelNetworkService
 import timber.log.Timber
 
 class ItemsRepository : FuelNetworkService(){
-
     suspend fun getHints(tag: String?, user: User): Array<String>? {
         return get(TAGS_PATH + tag, Array<String>::class.java, user = user)
     }
@@ -192,22 +191,22 @@ class ItemsRepository : FuelNetworkService(){
     }
 
     companion object {
-        const val TAGS_PATH = "api/search/tag/"
-        const val SEARCH_PATH = "api/search/"
-        const val TAGS_PLAV_PATH = "api/search/plavka/tags?plav="
-        const val SEARCH_PLAV_PATH = "api/search/plavka?plav="
-        const val POSITION_PATH = "api/position/"
-        const val PACKAGE_PATH = "api/package?id="
-        const val ALL_POSIOTIONS = "api/positions"
-        const val MARKS = "api/position/marks"
-        const val DIAMETER = "api/position/diameter"
-        const val FILTER = "api/filter"
-        const val HISTORY = "api/history/all"
-        const val TABLE = "api/adaptiveTable"
-        const val ADAPTIVE_TABLE = "api/filter/adaptiveTable"
-        const val PACKS = "api/packings"
-        const val DEPARTURE = "api/position/departure"
-        const val CONFIRM = "api/departureConfirmation"
+        private const val TAGS_PATH = "api/search/tag/"
+        private const val SEARCH_PATH = "api/search/"
+        private const val TAGS_PLAV_PATH = "api/search/plavka/tags?plav="
+        private const val SEARCH_PLAV_PATH = "api/search/plavka?plav="
+        private const val POSITION_PATH = "api/position/"
+        private const val PACKAGE_PATH = "api/package?id="
+        private const val ALL_POSIOTIONS = "api/positions"
+        private const val MARKS = "api/position/marks"
+        private const val DIAMETER = "api/position/diameter"
+        private const val FILTER = "api/filter"
+        private const val HISTORY = "api/history/all"
+        private const val TABLE = "api/adaptiveTable"
+        private const val ADAPTIVE_TABLE = "api/filter/adaptiveTable"
+        private const val PACKS = "api/packings"
+        private const val DEPARTURE = "api/position/departure"
+        private const val CONFIRM = "api/departureConfirmation"
     }
 }
 

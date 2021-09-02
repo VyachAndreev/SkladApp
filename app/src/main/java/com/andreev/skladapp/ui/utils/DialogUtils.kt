@@ -10,7 +10,7 @@ import androidx.annotation.StyleRes
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andreev.skladapp.R
-import com.andreev.skladapp.data.TablePiece
+import com.andreev.skladapp.data.HistoryPiece
 import com.andreev.skladapp.databinding.DialogFilterBinding
 import com.andreev.skladapp.databinding.DialogHistoryBinding
 import com.andreev.skladapp.databinding.DialogShipmentBinding

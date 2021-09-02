@@ -1,11 +1,9 @@
 package com.andreev.skladapp.network.repositories
 
-import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.data.User
 import com.andreev.skladapp.network.FuelNetworkService
 
 class NullRepository : FuelNetworkService() {
-
     suspend fun unite(text: String?, user: User) : String? {
         return post(
             UNITE + text,
@@ -14,7 +12,7 @@ class NullRepository : FuelNetworkService() {
         )
     }
 
-    data class GetParameters(val getToStockValues: String)
+    private data class GetParameters(val getToStockValues: String)
 
     suspend fun get(text: String, user: User) : String? {
         return postWithJson(
@@ -26,7 +24,7 @@ class NullRepository : FuelNetworkService() {
     }
 
     companion object {
-        const val UNITE = "api/union?ids="
-        const val GET = "api/union?ids="
+        private const val UNITE = "api/union?ids="
+        private const val GET = "api/union?ids="
     }
 }
