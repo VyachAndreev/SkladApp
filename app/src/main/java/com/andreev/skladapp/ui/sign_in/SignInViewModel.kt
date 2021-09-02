@@ -16,12 +16,10 @@ import javax.inject.Inject
 class SignInViewModel: BaseViewModel() {
     @Inject
     lateinit var userRepository: UserRepository
-
     @Inject
     lateinit var userStoredData: UserStoredData
 
     val isLoginSuccessful = MutableLiveData<Boolean>()
-
     val login = MutableLiveData<String>()
     val password = MutableLiveData<String>()
     val isSignInAvailable = MutableLiveData<Boolean>()
@@ -53,5 +51,4 @@ class SignInViewModel: BaseViewModel() {
             isLoginSuccessful.value = response != null
         }
     }
-
 }
