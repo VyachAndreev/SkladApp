@@ -4,7 +4,7 @@ import android.graphics.Rect
 import android.view.View
 import android.widget.RelativeLayout
 
-object Extentions {
+object Extensions {
     fun View?.isVisible(layout: RelativeLayout): Boolean {
         if (this == null) {
             return false

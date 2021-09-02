@@ -13,7 +13,7 @@ import com.andreev.skladapp.network.repositories.ItemsRepository
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.PlaqueItem
 import com.andreev.skladapp.ui.hub.HubFragment
-import com.andreev.skladapp.ui.utils.Extentions.isVisible
+import com.andreev.skladapp.ui.utils.Extensions.isVisible
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import timber.log.Timber
