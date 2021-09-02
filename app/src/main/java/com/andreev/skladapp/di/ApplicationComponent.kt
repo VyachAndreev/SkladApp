@@ -19,7 +19,6 @@ import javax.inject.Singleton
 @Component(modules = [SettingsModule::class, RepositoryModule::class])
 @Singleton
 interface ApplicationComponent {
-
     fun inject(mainActivity: MainActivity)
 
     fun inject(hubViewModel: HubViewModel)
