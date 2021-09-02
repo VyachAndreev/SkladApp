@@ -1,6 +1,5 @@
 package com.andreev.skladapp.network
 
-import android.widget.Toast
 import com.andreev.skladapp.data.User
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.FuelManager
@@ -10,7 +9,6 @@ import com.github.kittinunf.fuel.coroutines.awaitStringResult
 import com.google.gson.Gson
 import org.json.JSONObject
 import timber.log.Timber
-import javax.inject.Inject
 
 abstract class FuelNetworkService {
     private val BASE_URL = "http://ferro-trade.ru/"
@@ -30,7 +28,6 @@ abstract class FuelNetworkService {
             |path: $path
         """.trimMargin())
         Timber.i("login is '${user.login}' password is '${user.password}'")
-        val a = path == "authTest" && clazz == String::class.java
         try {
             return Fuel.get(path, parameters)
                 .authentication()
@@ -42,8 +39,8 @@ abstract class FuelNetworkService {
                         |jsonResponse is $jsonResponse"""
                             .trimMargin()
                     )
-                    if (a) {
-                    return@fold "" as T
+                    if (path == "authTest" && clazz == String::class.java) {
+                        return@fold "" as T
                     }
                     return@fold gson.fromJson(jsonResponse, clazz)
                 }, { error ->
