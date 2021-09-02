@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/drawer"
@@ -27,43 +26,43 @@
             android:id="@+id/show_all_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:d_title="@string/see_all" />
+            app:d_title="@string/drawer.show_all" />
 
         <com.andreev.skladapp.ui.drawer.DrawerItem
             android:id="@+id/search_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:d_title="@string/search" />
+            app:d_title="@string/drawer.search" />
 
         <com.andreev.skladapp.ui.drawer.DrawerItem
             android:id="@+id/plav_search_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:d_title="@string/search_plav" />
+            app:d_title="@string/drawer.search_plav" />
 
         <com.andreev.skladapp.ui.drawer.DrawerItem
             android:id="@+id/unite_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:d_title="@string/unite" />
+            app:d_title="@string/drawer.unite" />
 
         <com.andreev.skladapp.ui.drawer.DrawerItem
             android:id="@+id/shipment_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:d_title="@string/ship" />
+            app:d_title="@string/drawer.ship" />
 
         <com.andreev.skladapp.ui.drawer.DrawerItem
             android:id="@+id/shipment_history_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:d_title="@string/shipment_history" />
+            app:d_title="@string/drawer.shipment_history" />
 
         <com.andreev.skladapp.ui.drawer.DrawerItem
             android:id="@+id/acceptance_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:d_title="@string/get" />
+            app:d_title="@string/drawer.get" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -75,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 app:d_dividerBottom="false"
-                app:d_title="@string/exit" />
+                app:d_title="@string/drawer.exit" />
         </FrameLayout>
 
     </LinearLayout>

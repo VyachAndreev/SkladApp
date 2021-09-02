@@ -19,7 +19,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="13dp"
                 android:gravity="center"
-                android:text="@string/filter"
+                android:text="@string/filter.filter"
                 tools:text="Фильтр" />
 
             <TextView
@@ -29,7 +29,7 @@
                 android:layout_marginStart="33dp"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="@string/mark"
+                android:text="@string/filter.mark"
                 tools:text="Марка:" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -57,7 +57,7 @@
                 android:layout_marginStart="33dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="@string/diameter"
+                android:text="@string/filter.diameter"
                 tools:text="Диаметр:" />
 
             <com.google.android.material.slider.RangeSlider
@@ -81,7 +81,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="33dp"
                     android:gravity="center"
-                    android:text="@string/from"
+                    android:text="@string/filter.from"
                     tools:text="От" />
 
                 <TextView
@@ -102,7 +102,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="6dp"
                     android:gravity="center"
-                    android:text="@string/to"
+                    android:text="@string/filter.to"
                     tools:text="до" />
 
                 <TextView
@@ -132,7 +132,7 @@
                 android:layout_marginStart="33dp"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="@string/packing"
+                android:text="@string/filter.packing"
                 tools:text="Упаковка:" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -161,7 +161,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:background="@drawable/bg_button_filter"
-                    android:text="@string/to_filter"
+                    android:text="@string/filter.to_filter"
                     android:textAllCaps="false" />
 
                 <Button
@@ -173,7 +173,7 @@
                     android:layout_marginStart="13dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_button_filter"
-                    android:text="@string/clear_filter"
+                    android:text="@string/filter.clear_filter"
                     android:textAllCaps="false" />
             </LinearLayout>
 

@@ -117,8 +117,8 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
     fun setPostLayout() {
         isPred = false
         with(viewBinding) {
-            tvUpper.setText(R.string.contr_agent)
-            tvLower.setText(R.string.bill)
+            tvUpper.setText(R.string.ship_contr_agent)
+            tvLower.setText(R.string.ship_bill)
             recycler.visibility = View.VISIBLE
         }
         clearET()
@@ -127,8 +127,8 @@ class ShipmentFragment : BaseFragment<FragmentShipmentBinding>() {
     fun setPredLayout() {
         isPred = true
         with(viewBinding) {
-            tvUpper.setText(R.string.ship_semi)
-            tvLower.setText(R.string.except_semi)
+            tvUpper.setText(R.string.ship_ship_semi)
+            tvLower.setText(R.string.ship_except_semi)
             recycler.visibility = View.GONE
         }
         clearET()

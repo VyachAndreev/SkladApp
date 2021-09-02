@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -36,9 +35,9 @@
                 android:layout_weight="1"
                 android:layout_height="40dp"
                 android:layout_marginStart="17dp"
-                android:autofillHints="@string/search_hint"
+                android:autofillHints="@string/search.search_hint"
                 android:background="@drawable/bg_edit_text"
-                android:hint="@string/search_hint"
+                android:hint="@string/ship.search_hint"
                 android:inputType="text"
                 android:singleLine="true"
                 android:nextFocusRight="@id/search_btn"
@@ -54,7 +53,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/bg_rounded_btn_gray"
-                android:contentDescription="@string/search"
+                android:contentDescription="@string/search.search"
                 android:src="@drawable/ic_search" />
         </LinearLayout>
 

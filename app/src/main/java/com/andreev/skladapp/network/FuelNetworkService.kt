@@ -25,7 +25,7 @@ abstract class FuelNetworkService {
         user: User,
     ): T? {
         Timber.i("""GET call:
-            |path: $path
+            |url: $BASE_URL$path
         """.trimMargin())
         Timber.i("login is '${user.login}' password is '${user.password}'")
         try {
@@ -35,7 +35,7 @@ abstract class FuelNetworkService {
                 .awaitStringResult()
                 .fold({ jsonResponse ->
                     Timber.i(
-                        """GET $path
+                        """GET $BASE_URL$path
                         |jsonResponse is $jsonResponse"""
                             .trimMargin()
                     )
@@ -50,7 +50,6 @@ abstract class FuelNetworkService {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
         return null
     }
 
@@ -62,7 +61,7 @@ abstract class FuelNetworkService {
         user: User,
     ): T? {
         Timber.i("""POST call:
-            |path: $path
+            |url: $BASE_URL$path
             |parameters are $parameters
         """.trimMargin())
         Timber.i("login is '${user.login}' password is '${user.password}'")
@@ -73,7 +72,7 @@ abstract class FuelNetworkService {
                 .awaitStringResult()
                 .fold({ jsonResponse ->
                     Timber.i(
-                        """POST $path
+                        """POST $BASE_URL$path
                         |jsonResponse is $jsonResponse"""
                             .trimMargin()
                     )
@@ -95,7 +94,7 @@ abstract class FuelNetworkService {
         user: User,
     ): T? {
         Timber.i("""POST call:
-            |path: $path
+            |url: $BASE_URL$path
             |parameters are $parameters
         """.trimMargin())
         Timber.i("login is '${user.login}' password is '${user.password}'")
@@ -107,7 +106,7 @@ abstract class FuelNetworkService {
                 .awaitStringResult()
                 .fold({ jsonResponse ->
                     Timber.i(
-                        """POST $path
+                        """POST $BASE_URL$path
                         |jsonResponse is $jsonResponse"""
                             .trimMargin()
                     )

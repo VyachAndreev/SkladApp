@@ -22,8 +22,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="19dp"
+                android:text="@string/show_all.open_filter"
                 app:drawableBottomCompat="@drawable/dashed_line"
-                android:text="@string/open_filter"
                 tools:text="Открыть фильтр" />
 
             <TextView
@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="36dp"
+                android:text="@string/show_all.type"
                 tools:text="Вид:" />
 
             <androidx.appcompat.widget.AppCompatSpinner

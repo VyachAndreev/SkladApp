@@ -2,6 +2,7 @@ package com.andreev.skladapp.ui.history
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,7 +38,7 @@ class HistoryFragment : BaseFragment<FragmentSearchBinding>() {
                 layoutManager = LinearLayoutManager(context)
             }
             with(swipeLayout) {
-                setColorSchemeColors(resources.getColor(R.color.blue_3B4))
+                setColorSchemeColors(ContextCompat.getColor(context, R.color.blue_3B4))
                 setOnRefreshListener {
                     this@HistoryFragment.viewModel.getHistory()
                 }
@@ -53,11 +54,11 @@ class HistoryFragment : BaseFragment<FragmentSearchBinding>() {
             clear()
             add(
                 ShipmentItem(
-                    number = "Номер отгрузки",
-                    mark = "Номер счета",
-                    diameter = "Агент",
-                    packing = "Дата",
-                    mass = "Масса",
+                    number = getString(R.string.history_shipment_number),
+                    mark = getString(R.string.history_bill_number),
+                    diameter = getString(R.string.history_agent),
+                    packing = getString(R.string.history_date),
+                    mass = getString(R.string.history_mass),
                 )
             )
             pieces.reverse()

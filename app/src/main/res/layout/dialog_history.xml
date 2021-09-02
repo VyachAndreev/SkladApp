@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="19dp"
-            android:text="@string/history" />
+            android:text="@string/history_dialog.history" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/number" />
+                android:text="@string/history_dialog.number" />
 
             <TextView
                 style="@style/TextLSmall.Bold"
@@ -39,7 +39,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
-                android:text="@string/type" />
+                android:text="@string/history_dialog.type" />
 
             <TextView
                 style="@style/TextLSmall.Bold"
@@ -48,7 +48,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
-                android:text="@string/date" />
+                android:text="@string/history_dialog.date" />
 
             <TextView
                 style="@style/TextLSmall.Bold"
@@ -57,7 +57,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
-                android:text="@string/place" />
+                android:text="@string/history_dialog.place" />
 
         </LinearLayout>
 

@@ -122,11 +122,8 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
     override fun onChanged(fragment: Fragment?) {
         Timber.i(fragment?.tag)
         when (fragment) {
-            is UniteFragment -> {
-                updateToolbar(R.string.unite)
-            }
-            is GetFragment -> {
-                updateToolbar(R.string.get)
+            is ShowAllFragment -> {
+                updateToolbar(R.string.show_all)
             }
             is SearchPlavFragment -> {
                 updateToolbar(R.string.search_plav)
@@ -134,14 +131,17 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
             is SearchFragment -> {
                 updateToolbar(R.string.search)
             }
-            is ShowAllFragment -> {
-                updateToolbar(R.string.see_all)
-            }
-            is HistoryFragment -> {
-                updateToolbar(R.string.shipment_history)
+            is UniteFragment -> {
+                updateToolbar(R.string.unite)
             }
             is ShipmentFragment -> {
                 updateToolbar(R.string.ship)
+            }
+            is HistoryFragment -> {
+                updateToolbar(R.string.history)
+            }
+            is GetFragment -> {
+                updateToolbar(R.string.get)
             }
         }
     }
@@ -152,9 +152,7 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
         toolbarBinding.tvToolbarTitle.setText(titleId)
     }
 
-    private fun updateToolbar(
-        title: String
-    ) {
+    private fun updateToolbar(title: String    ) {
         toolbarBinding.tvToolbarTitle.text = title
     }
 
@@ -166,7 +164,7 @@ class HubFragment: BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
         hideLoading()
     }
 
-    fun logout() {
+    private fun logout() {
         viewModel.logout()
         launchFragment(R.id.fragment_container, SignInFragment(), false)
     }

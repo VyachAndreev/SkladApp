@@ -45,15 +45,15 @@
             android:layout_below="@id/type_tv"
             android:layout_marginStart="28dp"
             android:layout_marginTop="18dp"
-            android:text="@string/mark" />
+            android:text="@string/plaque.mark" />
 
         <TextView
             style="@style/TextNormal"
-            android:layout_toEndOf="@id/mark_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/type_tv"
             android:layout_marginTop="18dp"
+            android:layout_toEndOf="@id/mark_tv"
             android:text='@{position.mark}'
             tools:text="Позиция" />
 
@@ -65,7 +65,7 @@
             android:layout_below="@id/mark_tv"
             android:layout_marginStart="28dp"
             android:layout_marginTop="14dp"
-            android:text="@string/diameter" />
+            android:text="@string/plaque.diameter" />
 
         <TextView
             style="@style/TextNormal"
@@ -85,7 +85,7 @@
             android:layout_below="@id/diameter_tv"
             android:layout_marginStart="28dp"
             android:layout_marginTop="14dp"
-            android:text="@string/packing" />
+            android:text="@string/plaque.packing" />
 
         <TextView
             style="@style/TextNormal"
@@ -105,7 +105,7 @@
             android:layout_below="@id/packing_tv"
             android:layout_marginStart="28dp"
             android:layout_marginTop="14dp"
-            android:text="@string/party"/>
+            android:text="@string/plaque.party"/>
 
         <TextView
             style="@style/TextNormal"
@@ -125,7 +125,7 @@
             android:layout_below="@id/party_tv"
             android:layout_marginStart="28dp"
             android:layout_marginTop="14dp"
-            android:text="@string/plav" />
+            android:text="@string/plaque.plav" />
 
         <TextView
             style="@style/TextNormal"
@@ -145,7 +145,7 @@
             android:layout_below="@id/plav_tv"
             android:layout_marginStart="28dp"
             android:layout_marginTop="14dp"
-            android:text="@string/mass" />
+            android:text="@string/plaque.mass" />
 
         <TextView
             style="@style/TextNormal"
@@ -165,7 +165,7 @@
             android:layout_below="@id/mass_tv"
             android:layout_marginStart="28dp"
             android:layout_marginTop="14dp"
-            android:text="@string/comment" />
+            android:text="@string/plaque.comment" />
 
         <TextView
             style="@style/TextNormal"
@@ -186,7 +186,7 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="14dp"
             android:layout_marginBottom="25dp"
-            android:text="@string/status" />
+            android:text="@string/plaque.status" />
 
         <TextView
             style="@style/TextNormal"
@@ -208,7 +208,7 @@
             android:layout_marginTop="14dp"
             android:layout_marginBottom="25dp"
             android:visibility="@{isShipping? View.VISIBLE : View.GONE}"
-            android:text="@string/mass" />
+            android:text="@string/plaque.mass" />
 
         <EditText
             android:id="@+id/weight_et"
@@ -220,7 +220,7 @@
             android:layout_marginTop="14dp"
             android:inputType="numberDecimal"
             android:singleLine="true"
-            android:hint="@string/mass_"
+            android:hint="@string/plaque.status"
             android:text = "@{position.mass}"
             android:visibility="@{isShipping? View.VISIBLE : View.GONE}"
             tools:text="Позиция" />

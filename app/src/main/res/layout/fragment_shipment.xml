@@ -47,7 +47,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="@string/ship_semi"
+                        android:text="@string/ship.ship_semi"
                         android:textColor="@color/white" />
 
                     <EditText
@@ -57,9 +57,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginTop="10dp"
-                        android:autofillHints="@string/search_hint"
+                        android:autofillHints="@string/ship.search_hint"
                         android:background="@drawable/bg_edit_text"
-                        android:hint="@string/search_hint"
+                        android:hint="@string/ship.search_hint"
                         android:inputType="text"
                         android:maxLines="1"
                         android:paddingHorizontal="8dp"
@@ -72,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="@string/except_semi"
+                        android:text="@string/ship.except_semi"
                         android:textColor="@color/white" />
 
                     <EditText
@@ -82,9 +82,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginVertical="10dp"
-                        android:autofillHints="@string/search_hint"
+                        android:autofillHints="@string/ship.search_hint"
                         android:background="@drawable/bg_edit_text"
-                        android:hint="@string/search_hint"
+                        android:hint="@string/ship.search_hint"
                         android:inputType="text"
                         android:maxLines="1"
                         android:paddingHorizontal="8dp"
@@ -101,7 +101,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
-                    android:text="@string/ship"
+                    android:text="@string/ship.ship"
                     android:textAllCaps="false" />
 
                 <androidx.recyclerview.widget.RecyclerView

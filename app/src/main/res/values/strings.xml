@@ -2,73 +2,106 @@
     <string name="app_name">SkladApp</string>
 
     <!--Drawer-->
-    <string name="see_all">Посмотреть все</string>
-    <string name="search_plav">Поиск по плавке</string>
-    <string name="unite">Объединить</string>
-    <string name="shipment_history">История отгрузок</string>
-    <string name="get">Приёмка</string>
-    <string name="exit">Выйти</string>
+    <string name="drawer.show_all">Посмотреть все</string>
+    <string name="drawer.search">Поиск</string>
+    <string name="drawer.search_plav">Поиск по плавке</string>
+    <string name="drawer.unite">Объединить</string>
+    <string name="drawer.ship">Отгрузить</string>
+    <string name="drawer.shipment_history">История отгрузок</string>
+    <string name="drawer.get">Приёмка</string>
+    <string name="drawer.exit">Выйти</string>
 
     <!-- History Dialog -->
-    <string name="history">История</string>
-    <string name="number">№</string>
-    <string name="type">Тип</string>
-    <string name="date">Дата</string>
-    <string name="place">Место</string>
+    <string name="history_dialog.history">История</string>
+    <string name="history_dialog.number">№</string>
+    <string name="history_dialog.type">Тип</string>
+    <string name="history_dialog.date">Дата</string>
+    <string name="history_dialog.place">Место</string>
 
     <!-- Filter Dialog -->
-    <string name="filter">Фильтр</string>
-    <string name="from">От</string>
-    <string name="to">до</string>
-    <string name="to_filter">Отфильтровать</string>
-    <string name="clear_filter">Очистить фильтр</string>
+    <string name="filter.filter">Фильтр</string>
+    <string name="filter.from">От</string>
+    <string name="filter.to">до</string>
+    <string name="filter.to_filter">Отфильтровать</string>
+    <string name="filter.clear_filter">Очистить фильтр</string>
+    <string name="filter.mark">Марка:</string>
+    <string name="filter.diameter">Диаметр:</string>
+    <string name="filter.packing">Упаковка:</string>
 
     <!-- Ship Dialog -->
-    <string name="weight_of_ship">Вес отгрузки</string>
-    <string name="contr_agent">Контр. агент</string>
-    <string name="bill">Счет</string>
+    <string name="ship_dialog.weight_of_ship">Вес отгрузки</string>
+    <string name="ship_dialog.contr_agent">Контр. агент</string>
+    <string name="ship_dialog.bill">Счет</string>
+    <string name="ship_dialog.search_hint">Введите информацию</string>
+    <string name="ship_dialog.ship">Отгрузить</string>
 
     <!-- Fragment Sign In -->
-    <string name="auth">Авторизация</string>
-    <string name="login">Логин</string>
-    <string name="password">Пароль</string>
-    <string name="sign_in">Войти</string>
+    <string name="sign_in.auth">Авторизация</string>
+    <string name="sign_in.login">Логин</string>
+    <string name="sign_in.password">Пароль</string>
+    <string name="sign_in.sign_in">Войти</string>
+
+    <!-- Fragment Show All -->
+    <string name="show_all">Посмотреть все</string>
+    <string name="show_all.open_filter">Открыть фильтр</string>
+    <string name="show_all.type">Вид: </string>
 
     <!-- Fragment Search -->
     <string name="search">Поиск</string>
-    <string name="search_hint">Введите информацию</string>
+    <string name="search.search">Поиск</string>
+    <string name="search.search_hint">Введите информацию</string>
 
-    <!-- Fragment Shipment -->
-    <string name="except">Исключить</string>
+    <!-- Search Plav -->
+    <string name="search_plav">Поиск по плавке</string>
 
-    <!-- Fragment Show All -->
-    <string name="manufacturer">Производитель: </string>
-    <string name="print_code">Распечатать штрих-код</string>
-    <string name="print_positions">Распечатать все позиции</string>
-    <string name="show_positions">Показать позиции</string>
+    <!-- Fragment Info -->
+    <string name="info.ship">Отгрузить</string>
+    <string name="info.mark">Марка</string>
+    <string name="info.diameter">Диаметр</string>
+    <string name="info.packing">Упаковка</string>
+    <string name="info.party">Партия</string>
+    <string name="info.mass">Вес</string>
+    <string name="info.status">Статус</string>
+    <string name="info.manufacturer">Производитель</string>
+    <string name="info.show_positions">Показать позиции</string>
+
+    <!-- Unite -->
+    <string name="unite">Объединить</string>
+
+    <!-- Fragment Ship -->
     <string name="ship">Отгрузить</string>
-    <string name="open_filter">Открыть фильтр</string>
-    <string name="ship_semi">Отгрузить:</string>
-    <string name="except_semi">Исключить:</string>
+    <string name="ship.ship_semi">Отгрузить:</string>
+    <string name="ship.except_semi">Исключить:</string>
+    <string name="ship.search_hint">Введите информацию</string>
+    <string name="ship.contr_agent">Контр. агент</string>
+    <string name="ship.bill">Счет:</string>
+    <string name="ship.ship">Отгрузить</string>
+
+    <!-- Fragment History -->
+    <string name="history">История отгрузок</string>
+
+    <!-- Fragment Get -->
+    <string name="get">Приемка</string>
 
     <!-- Item Plaque -->
-    <string name="position">Позиция</string>
-    <string name="mark">Марка: </string>
-    <string name="diameter">Диаметр: </string>
-    <string name="packing">Упаковка: </string>
-    <string name="party">Партия: </string>
-    <string name="plav">Плавка: </string>
-    <string name="mass">Вес: </string>
-    <string name="comment">Комментарий: </string>
-    <string name="status">Статус: </string>
-
-    <!-- Item Shipment History -->
-    <string name="mark_">Марка</string>
-    <string name="diameter_">Диаметр</string>
-    <string name="packing_">Упаковка</string>
-    <string name="mass_">Масса</string>
+    <string name="plaque.position">Позиция</string>
+    <string name="plaque.mark">Марка: </string>
+    <string name="plaque.diameter">Диаметр: </string>
+    <string name="plaque.packing">Упаковка: </string>
+    <string name="plaque.party">Партия: </string>
+    <string name="plaque.plav">Плавка: </string>
+    <string name="plaque.mass">Вес: </string>
+    <string name="plaque.comment">Комментарий: </string>
+    <string name="plaque.status">Статус: </string>
 
     <!-- Item Nothing Found -->
-    <string name="nothing_found">Ничего не найдено</string>
+    <string name="item.nothing_found">Ничего не найдено</string>
+
+    <!-- Item History -->
+    <string name="history.shipment_number">Номер отгрузки</string>
+    <string name="history.bill_number">Номер счета</string>
+    <string name="history.agent">Агент</string>
+    <string name="history.date">Дата</string>
+    <string name="history.mass">Масса</string>
 
 </resources>
