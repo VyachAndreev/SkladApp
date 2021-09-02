@@ -9,10 +9,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class UniteViewModel: BaseViewModel() {
+class UniteViewModel : BaseViewModel() {
     @Inject
     lateinit var nullRepository: NullRepository
-
     @Inject
     lateinit var userStoredData: UserStoredData
 
@@ -21,10 +20,8 @@ class UniteViewModel: BaseViewModel() {
     }
 
     fun unite(text: String) {
-        scopeMain.launch {
-            val response = withContext(Dispatchers.IO) {
-                userStoredData.user?.let { nullRepository.unite(text, it) }
-            }
+        scopeIO.launch {
+            userStoredData.user?.let { nullRepository.unite(text, it) }
         }
     }
 }
