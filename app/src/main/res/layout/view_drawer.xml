@@ -47,19 +47,19 @@
             app:d_title="@string/drawer.unite" />
 
         <com.andreev.skladapp.ui.drawer.DrawerItem
-            android:id="@+id/shipment_di"
+            android:id="@+id/ship_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:d_title="@string/drawer.ship" />
 
         <com.andreev.skladapp.ui.drawer.DrawerItem
-            android:id="@+id/shipment_history_di"
+            android:id="@+id/history_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:d_title="@string/drawer.shipment_history" />
 
         <com.andreev.skladapp.ui.drawer.DrawerItem
-            android:id="@+id/acceptance_di"
+            android:id="@+id/get_di"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:d_title="@string/drawer.get" />

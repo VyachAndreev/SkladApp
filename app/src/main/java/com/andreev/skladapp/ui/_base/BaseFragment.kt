@@ -16,7 +16,7 @@ import com.andreev.skladapp.ui.MainActivity
 import timber.log.Timber
 
 abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
-    private val fm by lazy { childFragmentManager }
+    protected val fm by lazy { childFragmentManager }
     protected lateinit var viewBinding: T
 
     abstract fun getLayoutRes(): Int

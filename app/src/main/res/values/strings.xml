@@ -8,7 +8,7 @@
     <string name="drawer.unite">Объединить</string>
     <string name="drawer.ship">Отгрузить</string>
     <string name="drawer.shipment_history">История отгрузок</string>
-    <string name="drawer.get">Приёмка</string>
+    <string name="drawer.get">Приемка</string>
     <string name="drawer.exit">Выйти</string>
 
     <!-- History Dialog -->
