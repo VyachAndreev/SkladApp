@@ -67,6 +67,12 @@
 
     <!-- Search Plav -->
     <string name="search_plav">Поиск по плавке</string>
+    <string name="search_plav.number">#</string>
+    <string name="search_plav.mark">Марка</string>
+    <string name="search_plav.diameter">Диаметр</string>
+    <string name="search_plav.packing">Упаковка</string>
+    <string name="search_plav.mass0">Солнечногорск</string>
+    <string name="search_plav.mass1">Белорецк</string>
 
     <!-- Fragment Info -->
     <string name="info.ship">Отгрузить</string>

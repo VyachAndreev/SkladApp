@@ -28,7 +28,7 @@ import timber.log.Timber
 open class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     protected lateinit var viewModel: SearchViewModel
     private val hintAdapter by lazy { GroupAdapter<GroupieViewHolder>() }
-    protected val itemsAdapter by lazy { GroupAdapter<GroupieViewHolder>() }
+    private val itemsAdapter by lazy { GroupAdapter<GroupieViewHolder>() }
     private var isKeyBoardVisible = true
 
     override fun getLayoutRes(): Int = R.layout.fragment_search
@@ -42,7 +42,7 @@ open class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         (parentFragment as HubFragment).viewModel.curMenuItem.value = this
         with(viewBinding) {
             root.setOnClickListener {
-                recyclerHints.visibility = View.GONE
+                recyclerHints.visibility = gone
             }
             hideLoading()
             viewModel = this@SearchFragment.viewModel
@@ -92,7 +92,10 @@ open class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     val args = Bundle()
                     item.pos.id?.let { args.putLong(Constants.ID, it) }
                     Timber.i(item.pos.type)
-                    args.putBoolean(Constants.IS_PACKAGE, item.pos.type == "PACKAGE")
+                    args.putBoolean(
+                        Constants.IS_PACKAGE,
+                        item.pos.type == getString(R.string.pallet)
+                    )
                     (parentFragment as HubFragment).apply {
                         launchChildFragment(
                             InformationFragment(),
@@ -156,31 +159,25 @@ open class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     private val hintsObserver = Observer<Array<String>> { hints ->
-        if (isKeyBoardVisible) {
-            viewBinding.recyclerHints.visibility = View.VISIBLE
+        viewBinding.recyclerHints.visibility = if (isKeyBoardVisible) {
+            visible
         } else {
-            viewBinding.recyclerHints.visibility = View.GONE
+            gone
         }
-        hintAdapter.clear()
-        hintAdapter.addAll(
-            hints.map {
-                HintItem(it)
-            }
-        )
+        with(hintAdapter) {
+            clear()
+            addAll(hints.map { HintItem(it) })
+        }
     }
 
-    protected open val positionsObserver = Observer<Array<Position>> { positions ->
+    private val positionsObserver = Observer<Array<Position>> { positions ->
         hideLoading()
         viewBinding.swipeLayout.isRefreshing = false
         itemsAdapter.clear()
         if (positions.isNotEmpty()) {
-            itemsAdapter.addAll(
-                positions.map {
-                    PlaqueItem(it)
-                }
-            )
+            itemsAdapter.addAll(positions.map { PlaqueItem(it) })
         } else {
-            itemsAdapter.add(TextViewItem("Ничего не найдено"))
+            itemsAdapter.add(TextViewItem(getString(R.string.item_nothing_found)))
         }
     }
 }

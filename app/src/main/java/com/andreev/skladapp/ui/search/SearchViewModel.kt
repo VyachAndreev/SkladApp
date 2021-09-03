@@ -23,13 +23,13 @@ open class SearchViewModel: BaseViewModel() {
     val positions = MutableLiveData<Array<Position>>()
     var searchedSize = 0
 
-    protected var lastSearched :String? = String()
+    private var lastSearched :String? = String()
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
         applicationComponent.inject(this)
     }
 
-    protected open suspend fun loadPositions(): Array<Position>? {
+    private suspend fun loadPositions(): Array<Position>? {
         return userStoredData.user?.let { itemsRepository.getPositions(lastSearched, it) }
     }
 

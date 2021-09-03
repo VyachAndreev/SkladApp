@@ -44,10 +44,10 @@ class ItemsRepository : FuelNetworkService(){
     }
 
 
-    suspend fun getPlavPositions(text: String?, user: User): Array<Position>? {
+    suspend fun getPlavPositions(text: String?, user: User): Array<MockPosition>? {
         return post(
             SEARCH_PLAV_PATH + text,
-            Array<Position>::class.java,
+            Array<MockPosition>::class.java,
             user = user
         )
     }
