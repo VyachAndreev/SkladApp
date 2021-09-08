@@ -5,11 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.andreev.skladapp.R
 import com.andreev.skladapp.SkladApplication
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui.MainActivity
@@ -123,6 +127,17 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
 
     protected fun openUrl(url: String) {
         (activity as? MainActivity)?.openUrl(url)
+    }
+
+    protected fun setSwipeLayoutListener(
+        layout: SwipeRefreshLayout,
+        @ColorInt colorScheme: Int? = context?.let { ContextCompat.getColor(it, R.color.blue_3B4) },
+        onRefresh: () -> Unit,
+    ) {
+        with(layout) {
+            if (colorScheme != null) { setColorSchemeColors(colorScheme) }
+            setOnRefreshListener { onRefresh() }
+        }
     }
 
     open fun onBackPressed(@IdRes containerId: Int): Boolean {
