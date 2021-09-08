@@ -3,14 +3,12 @@ package com.andreev.skladapp.ui.sign_in
 import androidx.lifecycle.MutableLiveData
 import com.andreev.skladapp.data.User
 import com.andreev.skladapp.di.ApplicationComponent
-import com.andreev.skladapp.network.FuelNetworkService
 import com.andreev.skladapp.network.repositories.UserRepository
 import com.andreev.skladapp.stored_data.UserStoredData
 import com.andreev.skladapp.ui._base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import javax.inject.Inject
 
 class SignInViewModel: BaseViewModel() {
@@ -37,7 +35,6 @@ class SignInViewModel: BaseViewModel() {
         val password = password.value ?: ""
         isSignInAvailable.value =
             login.isNotEmpty() && password.isNotEmpty()
-        Timber.i("${isSignInAvailable.value}")
     }
 
     fun signUser(){

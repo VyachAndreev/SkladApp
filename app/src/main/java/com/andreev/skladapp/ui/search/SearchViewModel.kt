@@ -9,7 +9,6 @@ import com.andreev.skladapp.ui._base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import javax.inject.Inject
 
 open class SearchViewModel: BaseViewModel() {
@@ -52,7 +51,6 @@ open class SearchViewModel: BaseViewModel() {
             }
             if (response != null) {
                 positions.value = response
-                Timber.i("${positions.value}")
             }
         }
     }
@@ -64,7 +62,6 @@ open class SearchViewModel: BaseViewModel() {
             }
             if (response != null) {
                 positions.value = response
-                Timber.i("${positions.value}")
             }
         }
     }
