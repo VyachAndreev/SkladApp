@@ -13,12 +13,16 @@ import androidx.fragment.app.Fragment
 import com.andreev.skladapp.SkladApplication
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui.MainActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import timber.log.Timber
 
 abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
     protected val fm by lazy { childFragmentManager }
     protected val visible by lazy { (activity as MainActivity).visible }
     protected val gone by lazy { (activity as MainActivity).gone }
+    protected val scopeMain by lazy { CoroutineScope(Dispatchers.Main) }
     protected lateinit var viewBinding: T
 
     abstract fun getLayoutRes(): Int
@@ -39,6 +43,11 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
     ): View? {
         inflateView(layoutInflater)
         return viewBinding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        scopeMain.cancel()
     }
 
     private fun inflateView(layoutInflater: LayoutInflater) {
