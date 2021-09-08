@@ -37,11 +37,8 @@ class HistoryFragment : BaseFragment<FragmentSearchBinding>() {
                 adapter = this@HistoryFragment.adapter
                 layoutManager = LinearLayoutManager(context)
             }
-            with(swipeLayout) {
-                setColorSchemeColors(ContextCompat.getColor(context, R.color.blue_3B4))
-                setOnRefreshListener {
-                    this@HistoryFragment.viewModel.getHistory()
-                }
+            setSwipeLayoutListener(swipeLayout) {
+                this@HistoryFragment.viewModel.getHistory()
             }
         }
         viewModel.historyPiecesData.observe(this, historyObserver)
@@ -75,6 +72,5 @@ class HistoryFragment : BaseFragment<FragmentSearchBinding>() {
             )
         }
         hideLoading()
-        viewBinding.swipeLayout.isRefreshing = false
     }
 }
