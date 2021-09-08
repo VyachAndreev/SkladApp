@@ -159,22 +159,19 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
                 onItemSelectedListener = listener
             }
 
-            with(swipeLayout) {
-                setColorSchemeColors(ContextCompat.getColor(context, R.color.blue_3B4))
-                setOnRefreshListener {
-                    with(this@ShowAllFragment.viewModel) {
-                        if (filterData != null) {
-                            if (isTable) {
-                                filterTable(filterData!!)
-                            } else {
-                                filter(filterData!!)
-                            }
+            setSwipeLayoutListener(swipeLayout) {
+                with(this@ShowAllFragment.viewModel) {
+                    if (filterData != null) {
+                        if (isTable) {
+                            filterTable(filterData!!)
                         } else {
-                            if (isTable) {
-                                getTable()
-                            } else {
-                                getPositions()
-                            }
+                            filter(filterData!!)
+                        }
+                    } else {
+                        if (isTable) {
+                            getTable()
+                        } else {
+                            getPositions()
                         }
                     }
                 }
@@ -185,7 +182,6 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
 
     private val positionObserver = Observer<Array<Position>> { positions ->
         if (!isTable) {
-            viewBinding.swipeLayout.isRefreshing = false
             hideLoading()
             adapter.clear()
             if (positions.isNotEmpty()) {
@@ -202,7 +198,6 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
 
     private val tablePositionObserver = Observer<Array<MockPosition>> { positions ->
         if (isTable) {
-            viewBinding.swipeLayout.isRefreshing = false
             hideLoading()
             with(adapter) {
                 clear()
