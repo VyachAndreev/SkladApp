@@ -61,7 +61,6 @@ open class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             scopeMain.launch {
                 positions.onEach { positions ->
                     hideLoading()
-                    viewBinding.swipeLayout.isRefreshing = false
                     itemsAdapter.clear()
                     if (positions.isNotEmpty()) {
                         itemsAdapter.addAll(
@@ -163,13 +162,8 @@ open class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 isKeyBoardVisible = true
             }
 
-            with(swipeLayout) {
-                setColorSchemeColors(
-                    ContextCompat.getColor(context, R.color.blue_3B4)
-                )
-                setOnRefreshListener {
-                    this@SearchFragment.viewModel.refreshPositions()
-                }
+            setSwipeLayoutListener(swipeLayout) {
+                this@SearchFragment.viewModel.refreshPositions()
             }
         }
     }

@@ -145,13 +145,8 @@ class SearchPlavFragment: BaseFragment<FragmentSearchPlavBinding>() {
                 isKeyBoardVisible = true
             }
 
-            with(swipeLayout) {
-                setColorSchemeColors(
-                    ContextCompat.getColor(context, R.color.blue_3B4)
-                )
-                setOnRefreshListener {
-                    this@SearchPlavFragment.viewModel.refreshPositions()
-                }
+            setSwipeLayoutListener(swipeLayout) {
+                this@SearchPlavFragment.viewModel.refreshPositions()
             }
         }
     }
@@ -174,7 +169,6 @@ class SearchPlavFragment: BaseFragment<FragmentSearchPlavBinding>() {
 
     private val positionsObserver = Observer<Array<MockPosition>> { positions ->
         hideLoading()
-        viewBinding.swipeLayout.isRefreshing = false
         itemsAdapter.clear()
         if (positions.isNotEmpty()) {
             itemsAdapter.add(
