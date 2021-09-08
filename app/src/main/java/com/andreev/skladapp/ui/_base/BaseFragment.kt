@@ -28,7 +28,7 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
     protected val gone by lazy { (activity as MainActivity).gone }
     protected val scopeMain by lazy { CoroutineScope(Dispatchers.Main) }
     protected lateinit var viewBinding: T
-    protected var swipeLayout: SwipeRefreshLayout? = null
+    private var _swipeLayout: SwipeRefreshLayout? = null
 
     abstract fun getLayoutRes(): Int
 
@@ -116,7 +116,7 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
 
     protected fun hideLoading() {
         (activity as? MainActivity)?.hideLoading()
-        swipeLayout?.let {
+        _swipeLayout?.let {
             it.isRefreshing = false
         }
     }
@@ -139,7 +139,7 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
         onRefresh: () -> Unit,
     ) {
         with(layout) {
-            swipeLayout = this
+            _swipeLayout = this
             if (colorScheme != null) { setColorSchemeColors(colorScheme) }
             setOnRefreshListener { onRefresh() }
         }
