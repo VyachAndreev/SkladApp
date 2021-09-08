@@ -22,19 +22,8 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        with(viewBinding) {
-            viewModel = this@SignInFragment.viewModel
-            btnSignIn.setOnClickListener {
-                hideKeyBoard()
-                signInUser()
-            }
-        }
-
-        with(viewModel) {
-            login.observe(this@SignInFragment, textObserver)
-            password.observe(this@SignInFragment, textObserver)
-            isLoginSuccessful.observe(this@SignInFragment, loginObserver)
-        }
+        super.onViewCreated(view, savedInstanceState)
+        viewBinding.viewModel = viewModel
     }
 
     private val textObserver = Observer<String> {
@@ -58,5 +47,20 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
     private fun signInUser() {
         showLoading()
         viewModel.signUser()
+    }
+
+    override fun setListeners() {
+        viewBinding.btnSignIn.setOnClickListener {
+            hideKeyBoard()
+            signInUser()
+        }
+    }
+
+    override fun setObservers() {
+        with(viewModel) {
+            login.observe(this@SignInFragment, textObserver)
+            password.observe(this@SignInFragment, textObserver)
+            isLoginSuccessful.observe(this@SignInFragment, loginObserver)
+        }
     }
 }

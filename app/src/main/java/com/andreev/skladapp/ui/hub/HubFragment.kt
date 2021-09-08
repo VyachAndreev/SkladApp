@@ -36,7 +36,7 @@ class HubFragment : BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Timber.i("onViewCreated")
+        super.onViewCreated(view, savedInstanceState)
         viewModel.curMenuItem.observe(this, this)
         toolbarBinding = viewBinding.toolbar.viewBinding
         viewBinding.toolbar.setUpDrawer(
@@ -51,39 +51,6 @@ class HubFragment : BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
             replace = true,
         )
         updateToolbar(R.string.search)
-        with(viewBinding.viewDrawer) {
-            cross.setOnClickListener { closeDrawer() }
-            showAllDi.setOnClickListener {
-                launchChildFragment(ShowAllFragment())
-                closeDrawer()
-            }
-            searchDi.setOnClickListener {
-                launchChildFragment(SearchFragment())
-                closeDrawer()
-            }
-            plavSearchDi.setOnClickListener {
-                launchChildFragment(SearchPlavFragment())
-                closeDrawer()
-            }
-
-            uniteDi.setOnClickListener {
-                launchChildFragment(UniteFragment())
-                closeDrawer()
-            }
-            shipDi.setOnClickListener {
-                launchChildFragment(ShipFragment())
-                closeDrawer()
-            }
-            historyDi.setOnClickListener {
-                launchChildFragment(HistoryFragment())
-                closeDrawer()
-            }
-            getDi.setOnClickListener {
-                launchChildFragment(GetFragment())
-                closeDrawer()
-            }
-            logoutDi.setOnClickListener { logout() }
-        }
     }
 
     override fun onBackPressed(containerId: Int): Boolean {
@@ -173,5 +140,45 @@ class HubFragment : BaseFragment<FragmentHubBinding>(), Observer<Fragment> {
         } else {
             viewBinding.drawerLayout.closeDrawer(GravityCompat.START)
         }
+    }
+
+    override fun setListeners() {
+        with(viewBinding.viewDrawer) {
+            cross.setOnClickListener { closeDrawer() }
+            showAllDi.setOnClickListener {
+                launchChildFragment(ShowAllFragment())
+                closeDrawer()
+            }
+            searchDi.setOnClickListener {
+                launchChildFragment(SearchFragment())
+                closeDrawer()
+            }
+            plavSearchDi.setOnClickListener {
+                launchChildFragment(SearchPlavFragment())
+                closeDrawer()
+            }
+
+            uniteDi.setOnClickListener {
+                launchChildFragment(UniteFragment())
+                closeDrawer()
+            }
+            shipDi.setOnClickListener {
+                launchChildFragment(ShipFragment())
+                closeDrawer()
+            }
+            historyDi.setOnClickListener {
+                launchChildFragment(HistoryFragment())
+                closeDrawer()
+            }
+            getDi.setOnClickListener {
+                launchChildFragment(GetFragment())
+                closeDrawer()
+            }
+            logoutDi.setOnClickListener { logout() }
+        }
+    }
+
+    override fun setObservers() {
+        // No observers
     }
 }

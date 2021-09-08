@@ -17,6 +17,7 @@ import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.databinding.FragmentSearchBinding
 import com.andreev.skladapp.databinding.FragmentSearchPlavBinding
 import com.andreev.skladapp.di.ApplicationComponent
+import com.andreev.skladapp.ui._base.BaseChildFragment
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.*
 import com.andreev.skladapp.ui.hub.HubFragment
@@ -27,7 +28,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import timber.log.Timber
 
-class SearchPlavFragment: BaseFragment<FragmentSearchPlavBinding>() {
+class SearchPlavFragment: BaseChildFragment<FragmentSearchPlavBinding>() {
     private lateinit var viewModel: SearchPlavViewModel
     private val hintAdapter by lazy { GroupAdapter<GroupieViewHolder>() }
     private val itemsAdapter by lazy { GroupAdapter<GroupieViewHolder>() }
@@ -41,7 +42,7 @@ class SearchPlavFragment: BaseFragment<FragmentSearchPlavBinding>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        (parentFragment as HubFragment).viewModel.curMenuItem.value = this
+        super.onViewCreated(view, savedInstanceState)
         with(viewBinding) {
             root.setOnClickListener {
                 recyclerHints.visibility = gone
@@ -51,14 +52,6 @@ class SearchPlavFragment: BaseFragment<FragmentSearchPlavBinding>() {
 
             initHintRecycler()
             initItemsRecycler()
-        }
-
-        setListeners()
-
-        with(viewModel) {
-            searchedText.observe(this@SearchPlavFragment, searchObserver)
-            hints.observe(this@SearchPlavFragment, hintsObserver)
-            positions.observe(this@SearchPlavFragment, positionsObserver)
         }
     }
 
@@ -116,7 +109,7 @@ class SearchPlavFragment: BaseFragment<FragmentSearchPlavBinding>() {
         }
     }
 
-    private fun setListeners() {
+    override fun setListeners() {
         with(viewBinding) {
             searchBtn.setOnClickListener {
                 hideKeyBoard()
@@ -148,6 +141,14 @@ class SearchPlavFragment: BaseFragment<FragmentSearchPlavBinding>() {
             setSwipeLayoutListener(swipeLayout) {
                 this@SearchPlavFragment.viewModel.refreshPositions()
             }
+        }
+    }
+
+    override fun setObservers() {
+        with(viewModel) {
+            searchedText.observe(this@SearchPlavFragment, searchObserver)
+            hints.observe(this@SearchPlavFragment, hintsObserver)
+            positions.observe(this@SearchPlavFragment, positionsObserver)
         }
     }
 

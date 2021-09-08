@@ -10,13 +10,14 @@ import com.andreev.skladapp.R
 import com.andreev.skladapp.data.HistoryPiece
 import com.andreev.skladapp.databinding.FragmentSearchBinding
 import com.andreev.skladapp.di.ApplicationComponent
+import com.andreev.skladapp.ui._base.BaseChildFragment
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.ShipmentItem
 import com.andreev.skladapp.ui.hub.HubFragment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
-class HistoryFragment : BaseFragment<FragmentSearchBinding>() {
+class HistoryFragment : BaseChildFragment<FragmentSearchBinding>() {
     private lateinit var viewModel: HistoryViewModel
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
@@ -29,7 +30,7 @@ class HistoryFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        (parentFragment as HubFragment).viewModel.curMenuItem.value = this
+        super.onViewCreated(view, savedInstanceState)
         adapter.setHasStableIds(true)
         with(viewBinding) {
             linear.visibility = View.GONE
@@ -37,13 +38,19 @@ class HistoryFragment : BaseFragment<FragmentSearchBinding>() {
                 adapter = this@HistoryFragment.adapter
                 layoutManager = LinearLayoutManager(context)
             }
-            setSwipeLayoutListener(swipeLayout) {
-                this@HistoryFragment.viewModel.getHistory()
-            }
         }
-        viewModel.historyPiecesData.observe(this, historyObserver)
         showLoading()
         viewModel.getHistory()
+    }
+
+    override fun setListeners() {
+        setSwipeLayoutListener(viewBinding.swipeLayout) {
+            this@HistoryFragment.viewModel.getHistory()
+        }
+    }
+
+    override fun setObservers() {
+        viewModel.historyPiecesData.observe(this, historyObserver)
     }
 
     private val historyObserver = Observer<Array<HistoryPiece>> { pieces ->

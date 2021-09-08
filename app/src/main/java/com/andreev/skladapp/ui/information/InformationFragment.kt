@@ -10,6 +10,7 @@ import com.andreev.skladapp.R
 import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.databinding.FragmentInformationBinding
 import com.andreev.skladapp.di.ApplicationComponent
+import com.andreev.skladapp.ui._base.BaseChildFragment
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.PlaqueItem
 import com.andreev.skladapp.ui._item.TextViewItem
@@ -18,7 +19,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import timber.log.Timber
 
-class InformationFragment : BaseFragment<FragmentInformationBinding>() {
+class InformationFragment : BaseChildFragment<FragmentInformationBinding>() {
     private lateinit var viewModel: InformationViewModel
     private var adapter = GroupAdapter<GroupieViewHolder>()
     private var isPackage: Boolean? = null
@@ -32,21 +33,13 @@ class InformationFragment : BaseFragment<FragmentInformationBinding>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         arguments?.let {
             isPackage = it.getBoolean(Constants.IS_PACKAGE)
             id = it.getLong(Constants.ID)
             Timber.i("$arguments")
         }
         with(viewModel) {
-            item.observe(this@InformationFragment, itemObserver)
-            departureResponse.observe(this@InformationFragment, departureObserver)
-            viewBinding.shipBtn.setOnClickListener {
-                val weight = item.value?.mass
-                DialogUtils.showShipDialog(context, weight) {
-                    showLoading()
-                    departure(it)
-                }
-            }
             showLoading()
             isPackage?.let {
                 if (!it) {
@@ -115,6 +108,25 @@ class InformationFragment : BaseFragment<FragmentInformationBinding>() {
                     getPackage(id)
                 }
             }
+        }
+    }
+
+    override fun setListeners() {
+        with(viewModel) {
+            viewBinding.shipBtn.setOnClickListener {
+                val weight = item.value?.mass
+                DialogUtils.showShipDialog(context, weight) {
+                    showLoading()
+                    departure(it)
+                }
+            }
+        }
+    }
+
+    override fun setObservers() {
+        with(viewModel) {
+            item.observe(this@InformationFragment, itemObserver)
+            departureResponse.observe(this@InformationFragment, departureObserver)
         }
     }
 

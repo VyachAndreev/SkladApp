@@ -14,6 +14,7 @@ import com.andreev.skladapp.Constants
 import com.andreev.skladapp.R
 import com.andreev.skladapp.databinding.FragmentSearchBinding
 import com.andreev.skladapp.di.ApplicationComponent
+import com.andreev.skladapp.ui._base.BaseChildFragment
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.HintItem
 import com.andreev.skladapp.ui._item.PlaqueItem
@@ -29,7 +30,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-open class SearchFragment : BaseFragment<FragmentSearchBinding>() {
+open class SearchFragment : BaseChildFragment<FragmentSearchBinding>() {
     protected lateinit var viewModel: SearchViewModel
     private val hintAdapter by lazy { GroupAdapter<GroupieViewHolder>() }
     private val itemsAdapter by lazy { GroupAdapter<GroupieViewHolder>() }
@@ -43,7 +44,7 @@ open class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        (parentFragment as HubFragment).viewModel.curMenuItem.value = this
+        super.onViewCreated(view, savedInstanceState)
         with(viewBinding) {
             root.setOnClickListener {
                 recyclerHints.visibility = gone
@@ -53,29 +54,6 @@ open class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
             initHintRecycler()
             initItemsRecycler()
-        }
-
-        setListeners()
-
-        with(viewModel) {
-            scopeMain.launch {
-                positions.onEach { positions ->
-                    hideLoading()
-                    itemsAdapter.clear()
-                    if (positions.isNotEmpty()) {
-                        itemsAdapter.addAll(
-                            withContext(Dispatchers.IO) {
-                                positions.map { PlaqueItem(it) }
-                            }
-                        )
-                    } else {
-                        itemsAdapter.add(TextViewItem(getString(R.string.item_nothing_found)))
-                    }
-                }.collect()
-            }
-            searchedText.observe(this@SearchFragment, searchObserver)
-            hints.observe(this@SearchFragment, hintsObserver)
-
         }
     }
 
@@ -133,7 +111,7 @@ open class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         }
     }
 
-    private fun setListeners() {
+    override fun setListeners() {
         with(viewBinding) {
             searchBtn.setOnClickListener {
                 hideKeyBoard()
@@ -165,6 +143,29 @@ open class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             setSwipeLayoutListener(swipeLayout) {
                 this@SearchFragment.viewModel.refreshPositions()
             }
+        }
+    }
+
+    override fun setObservers() {
+        with(viewModel) {
+            scopeMain.launch {
+                positions.onEach { positions ->
+                    hideLoading()
+                    itemsAdapter.clear()
+                    if (positions.isNotEmpty()) {
+                        itemsAdapter.addAll(
+                            withContext(Dispatchers.IO) {
+                                positions.map { PlaqueItem(it) }
+                            }
+                        )
+                    } else {
+                        itemsAdapter.add(TextViewItem(getString(R.string.item_nothing_found)))
+                    }
+                }.collect()
+            }
+            searchedText.observe(this@SearchFragment, searchObserver)
+            hints.observe(this@SearchFragment, hintsObserver)
+
         }
     }
 

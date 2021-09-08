@@ -6,10 +6,11 @@ import androidx.lifecycle.ViewModelProviders
 import com.andreev.skladapp.R
 import com.andreev.skladapp.databinding.FragmentSearchBinding
 import com.andreev.skladapp.di.ApplicationComponent
+import com.andreev.skladapp.ui._base.BaseChildFragment
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui.hub.HubFragment
 
-class UniteFragment: BaseFragment<FragmentSearchBinding>() {
+class UniteFragment: BaseChildFragment<FragmentSearchBinding>() {
     private lateinit var viewModel: UniteViewModel
 
     override fun getLayoutRes(): Int = R.layout.fragment_search
@@ -20,12 +21,17 @@ class UniteFragment: BaseFragment<FragmentSearchBinding>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        (parentFragment as HubFragment).viewModel.curMenuItem.value = this
-        with(viewBinding.searchBtn) {
-            setImageResource(R.drawable.ic_arrow_right)
-            setOnClickListener {
-                viewModel.unite(viewBinding.searchEt.text.toString())
-            }
+        super.onViewCreated(view, savedInstanceState)
+        viewBinding.searchBtn.setImageResource(R.drawable.ic_arrow_right)
+    }
+
+    override fun setListeners() {
+        viewBinding.searchBtn.setOnClickListener {
+            viewModel.unite(viewBinding.searchEt.text.toString())
         }
+    }
+
+    override fun setObservers() {
+        // No observers
     }
 }

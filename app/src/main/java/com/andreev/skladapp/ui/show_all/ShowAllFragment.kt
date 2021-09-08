@@ -15,6 +15,7 @@ import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.databinding.FragmentShowAllBinding
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui._adapter.SelectionAdapter
+import com.andreev.skladapp.ui._base.BaseChildFragment
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.PlaqueItem
 import com.andreev.skladapp.ui._item.TableItem
@@ -27,7 +28,7 @@ import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_information.*
 import timber.log.Timber
 
-class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
+class ShowAllFragment : BaseChildFragment<FragmentShowAllBinding>() {
     private val adapter by lazy { GroupAdapter<GroupieViewHolder>() }
     private val spinnerAdapter by lazy {
         context?.let {
@@ -50,20 +51,16 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        (parentFragment as HubFragment).viewModel.curMenuItem.value = this
+        super.onViewCreated(view, savedInstanceState)
 
         initRecycler()
         showLoading()
-        viewModel.apply {
-            positions.observe(this@ShowAllFragment, positionObserver)
-            tablePositions.observe(this@ShowAllFragment, tablePositionObserver)
+        with(viewModel) {
             getPositions()
             getMarks()
             getDiameter()
             getPackings()
         }
-
-        setListeners()
     }
 
     private inner class SpinnerInteractionListener : AdapterView.OnItemSelectedListener,
@@ -114,7 +111,17 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
         }
     }
 
-    private fun setListeners() {
+    private fun initRecycler() {
+        with(viewBinding) {
+            spinner.adapter = spinnerAdapter
+            with(recycler) {
+                adapter = this@ShowAllFragment.adapter
+                layoutManager = LinearLayoutManager(context)
+            }
+        }
+    }
+
+    override fun setListeners() {
         adapter.setOnItemClickListener { item, _ ->
             when (item) {
                 is PlaqueItem -> {
@@ -179,6 +186,13 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
         }
     }
 
+    override fun setObservers() {
+        with(viewModel) {
+            positions.observe(this@ShowAllFragment, positionObserver)
+            tablePositions.observe(this@ShowAllFragment, tablePositionObserver)
+        }
+    }
+
 
     private val positionObserver = Observer<Array<Position>> { positions ->
         if (!isTable) {
@@ -207,16 +221,6 @@ class ShowAllFragment : BaseFragment<FragmentShowAllBinding>() {
                 } else {
                     add(TextViewItem(getString(R.string.item_nothing_found)))
                 }
-            }
-        }
-    }
-
-    private fun initRecycler() {
-        with(viewBinding) {
-            spinner.adapter = spinnerAdapter
-            with(recycler) {
-                adapter = this@ShowAllFragment.adapter
-                layoutManager = LinearLayoutManager(context)
             }
         }
     }

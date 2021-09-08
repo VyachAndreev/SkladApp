@@ -10,6 +10,7 @@ import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.databinding.FragmentShipmentBinding
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.network.repositories.ItemsRepository
+import com.andreev.skladapp.ui._base.BaseChildFragment
 import com.andreev.skladapp.ui._base.BaseFragment
 import com.andreev.skladapp.ui._item.PlaqueItem
 import com.andreev.skladapp.ui.hub.HubFragment
@@ -18,7 +19,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import timber.log.Timber
 
-class ShipFragment : BaseFragment<FragmentShipmentBinding>() {
+class ShipFragment : BaseChildFragment<FragmentShipmentBinding>() {
     private lateinit var viewModel: ShipViewModel
     private val adapter by lazy { GroupAdapter<GroupieViewHolder>() }
     var isPrevLayout = true
@@ -31,23 +32,42 @@ class ShipFragment : BaseFragment<FragmentShipmentBinding>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        (parentFragment as HubFragment).viewModel.curMenuItem.value = this
+        super.onViewCreated(view, savedInstanceState)
 
         with(viewBinding.recycler) {
             layoutManager = LinearLayoutManager(context)
             adapter = this@ShipFragment.adapter
         }
+    }
 
-        setListeners()
-
-        with(viewModel) {
-            positions.observe(this@ShipFragment, positionsObserver)
-            confirmResponse.observe(this@ShipFragment, confirmObserver)
-            toastText.observe(this@ShipFragment, toastObserver)
+    private fun clearET() {
+        with(viewBinding) {
+            exceptEt.text.clear()
+            shipEt.text.clear()
         }
     }
 
-    private fun setListeners() {
+    fun setPostLayout() {
+        isPrevLayout = false
+        with(viewBinding) {
+            tvUpper.setText(R.string.ship_contr_agent)
+            tvLower.setText(R.string.ship_bill)
+            recycler.visibility = visible
+        }
+        clearET()
+    }
+
+    fun setPrevLayout() {
+        isPrevLayout = true
+        with(viewBinding) {
+            tvUpper.setText(R.string.ship_ship_semi)
+            tvLower.setText(R.string.ship_except_semi)
+            recycler.visibility = gone
+        }
+        clearET()
+    }
+
+    override fun setListeners() {
         with(viewBinding) {
             scrollView.setOnScrollChangeListener { _, _, _, _, _ ->
                 Timber.i("scroll changed")
@@ -91,6 +111,13 @@ class ShipFragment : BaseFragment<FragmentShipmentBinding>() {
         }
     }
 
+    override fun setObservers() {with(viewModel) {
+            positions.observe(this@ShipFragment, positionsObserver)
+            confirmResponse.observe(this@ShipFragment, confirmObserver)
+            toastText.observe(this@ShipFragment, toastObserver)
+        }
+    }
+
     private val confirmObserver =
         Observer<ItemsRepository.ConfirmResponse> {
             hideLoading()
@@ -110,32 +137,5 @@ class ShipFragment : BaseFragment<FragmentShipmentBinding>() {
 
     private val toastObserver = Observer<String> {
         showToast(it)
-    }
-
-    fun setPostLayout() {
-        isPrevLayout = false
-        with(viewBinding) {
-            tvUpper.setText(R.string.ship_contr_agent)
-            tvLower.setText(R.string.ship_bill)
-            recycler.visibility = visible
-        }
-        clearET()
-    }
-
-    fun setPrevLayout() {
-        isPrevLayout = true
-        with(viewBinding) {
-            tvUpper.setText(R.string.ship_ship_semi)
-            tvLower.setText(R.string.ship_except_semi)
-            recycler.visibility = gone
-        }
-        clearET()
-    }
-
-    private fun clearET() {
-        with(viewBinding) {
-            exceptEt.text.clear()
-            shipEt.text.clear()
-        }
     }
 }

@@ -34,6 +34,10 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
     abstract fun injectDependencies(applicationComponent: ApplicationComponent)
 
+    protected abstract fun setListeners()
+
+    protected abstract fun setObservers()
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity?.application as? SkladApplication)?.let {
@@ -47,6 +51,8 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         inflateView(layoutInflater)
+        setListeners()
+        setObservers()
         return viewBinding.root
     }
 
