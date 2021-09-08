@@ -7,6 +7,8 @@ import com.andreev.skladapp.network.repositories.ItemsRepository
 import com.andreev.skladapp.stored_data.UserStoredData
 import com.andreev.skladapp.ui._base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -19,7 +21,9 @@ open class SearchViewModel: BaseViewModel() {
 
     val searchedText = MutableLiveData<String>()
     val hints = MutableLiveData<Array<String>>()
-    val positions = MutableLiveData<Array<Position>>()
+    private val _positions = MutableStateFlow(arrayOf<Position>())
+    val positions: StateFlow<Array<Position>> = _positions
+//    val positions = MutableLiveData<Array<Position>>()
     var searchedSize = 0
 
     private var lastSearched :String? = String()
@@ -50,7 +54,7 @@ open class SearchViewModel: BaseViewModel() {
                 loadPositions()
             }
             if (response != null) {
-                positions.value = response
+                _positions.value = response
             }
         }
     }
@@ -61,7 +65,7 @@ open class SearchViewModel: BaseViewModel() {
                 loadPositions()
             }
             if (response != null) {
-                positions.value = response
+                _positions.value = response
             }
         }
     }

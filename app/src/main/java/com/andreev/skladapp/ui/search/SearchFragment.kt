@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andreev.skladapp.Constants
 import com.andreev.skladapp.R
-import com.andreev.skladapp.data.Position
 import com.andreev.skladapp.databinding.FragmentSearchBinding
 import com.andreev.skladapp.di.ApplicationComponent
 import com.andreev.skladapp.ui._base.BaseFragment
@@ -23,6 +22,11 @@ import com.andreev.skladapp.ui.hub.HubFragment
 import com.andreev.skladapp.ui.information.InformationFragment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 open class SearchFragment : BaseFragment<FragmentSearchBinding>() {
@@ -54,9 +58,25 @@ open class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         setListeners()
 
         with(viewModel) {
+            scopeMain.launch {
+                positions.onEach { positions ->
+                    hideLoading()
+                    viewBinding.swipeLayout.isRefreshing = false
+                    itemsAdapter.clear()
+                    if (positions.isNotEmpty()) {
+                        itemsAdapter.addAll(
+                            withContext(Dispatchers.IO) {
+                                positions.map { PlaqueItem(it) }
+                            }
+                        )
+                    } else {
+                        itemsAdapter.add(TextViewItem(getString(R.string.item_nothing_found)))
+                    }
+                }.collect()
+            }
             searchedText.observe(this@SearchFragment, searchObserver)
             hints.observe(this@SearchFragment, hintsObserver)
-            positions.observe(this@SearchFragment, positionsObserver)
+
         }
     }
 
@@ -167,17 +187,6 @@ open class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         with(hintAdapter) {
             clear()
             addAll(hints.map { HintItem(it) })
-        }
-    }
-
-    private val positionsObserver = Observer<Array<Position>> { positions ->
-        hideLoading()
-        viewBinding.swipeLayout.isRefreshing = false
-        itemsAdapter.clear()
-        if (positions.isNotEmpty()) {
-            itemsAdapter.addAll(positions.map { PlaqueItem(it) })
-        } else {
-            itemsAdapter.add(TextViewItem(getString(R.string.item_nothing_found)))
         }
     }
 }
