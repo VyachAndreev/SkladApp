@@ -22,7 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import timber.log.Timber
 
-abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     protected val fm by lazy { childFragmentManager }
     protected val visible by lazy { (activity as MainActivity).visible }
     protected val gone by lazy { (activity as MainActivity).gone }
@@ -135,12 +135,14 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
 
     protected fun setSwipeLayoutListener(
         layout: SwipeRefreshLayout,
-        @ColorInt colorScheme: Int? = context?.let { ContextCompat.getColor(it, R.color.blue_3B4) },
+        @ColorInt colorScheme: Int? = context?.let { ContextCompat.getColor(it, swipeLayoutColor) },
         onRefresh: () -> Unit,
     ) {
         with(layout) {
             _swipeLayout = this
-            if (colorScheme != null) { setColorSchemeColors(colorScheme) }
+            if (colorScheme != null) {
+                setColorSchemeColors(colorScheme)
+            }
             setOnRefreshListener { onRefresh() }
         }
     }
@@ -155,5 +157,9 @@ abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
             popChildFragment(containerId)
             false
         }
+    }
+
+    private companion object {
+        const val swipeLayoutColor = R.color.blue_3B4
     }
 }
